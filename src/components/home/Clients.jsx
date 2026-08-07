@@ -3,11 +3,8 @@ import { useSite } from "../../lib/SiteContext";
 const LOGOS = [
   "https://framerusercontent.com/images/KAjd8f5TRi5rJGgRvp9pV3IQ4UQ.png?width=480&height=197",
   "https://framerusercontent.com/images/GVtCa2XzR9RiLZWL5gPLCmJmw.png?width=2206&height=1434",
-  "https://framerusercontent.com/images/DH5dCDHN6vS78fNtyp5uMfKo3qs.png?width=1563&height=1563",
-  "https://framerusercontent.com/images/xQm9IYwU7WyVjKHHaWTRFB4XnU.png?width=3464&height=3464",
   "https://framerusercontent.com/images/nPWVU8jqTjivz3LbV1oDprTzcR0.png?width=326&height=320",
   "https://framerusercontent.com/images/HefBCJNpVLw4jh4IopVhmt80.png?width=826&height=283",
-  "https://framerusercontent.com/images/PmZDQA9z6E8UlxIGgbHSC2VKjnw.png?width=420&height=420",
   "https://framerusercontent.com/images/xup5drWRz2JNLuwhiDNwVO5nk.png?width=200&height=200",
 ];
 
