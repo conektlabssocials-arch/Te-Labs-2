@@ -8,9 +8,11 @@ const LOGOS = [
   "https://framerusercontent.com/images/xup5drWRz2JNLuwhiDNwVO5nk.png?width=200&height=200",
 ];
 
+// Keep each half of the marquee wider than the viewport so it never exposes a gap.
+const LOOP_LOGOS = [...LOGOS, ...LOGOS];
+
 export default function Clients() {
   const { t } = useSite();
-  const items = [...LOGOS, ...LOGOS];
 
   return (
     <div style={{ padding: "0 0 84px" }}>
@@ -37,39 +39,52 @@ export default function Clients() {
           style={{
             display: "flex",
             alignItems: "center",
-            gap: 1,
             width: "max-content",
             animation: "teDrift 36s linear infinite",
           }}
         >
-          {items.map((src, i) => (
+          {["original", "repeat"].map((copy) => (
             <div
-              key={`${src}-${i}`}
-              className="te-lift"
+              key={copy}
+              aria-hidden={copy === "repeat" ? "true" : undefined}
               style={{
-                width: "clamp(140px, 18vw, 220px)",
-                height: 104,
-                padding: "18px 26px",
-                boxSizing: "border-box",
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "center",
-                background: "#F4F0FA",
-                borderRadius: 10,
-                marginRight: 10,
+                flex: "0 0 auto",
+                gap: 10,
+                paddingRight: 10,
               }}
             >
-              <img
-                src={src}
-                alt={`Client ${(i % LOGOS.length) + 1}`}
-                loading="lazy"
-                style={{
-                  display: "block",
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "contain",
-                }}
-              />
+              {LOOP_LOGOS.map((src, i) => (
+                <div
+                  key={`${copy}-${i}`}
+                  className="te-lift"
+                  style={{
+                    flex: "0 0 auto",
+                    width: "clamp(140px, 18vw, 220px)",
+                    height: 104,
+                    padding: "18px 26px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    background: "#F4F0FA",
+                    borderRadius: 10,
+                  }}
+                >
+                  <img
+                    src={src}
+                    alt={copy === "original" && i < LOGOS.length ? `Client ${i + 1}` : ""}
+                    loading="lazy"
+                    draggable="false"
+                    style={{
+                      display: "block",
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "contain",
+                    }}
+                  />
+                </div>
+              ))}
             </div>
           ))}
         </div>
