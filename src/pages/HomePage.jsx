@@ -23,14 +23,6 @@ const CLIENTS = [
     alt: 'Client 2',
   },
   {
-    src: 'https://framerusercontent.com/images/DH5dCDHN6vS78fNtyp5uMfKo3qs.png?width=1563&height=1563',
-    alt: 'Client 3',
-  },
-  {
-    src: 'https://framerusercontent.com/images/xQm9IYwU7WyVjKHHaWTRFB4XnU.png?width=3464&height=3464',
-    alt: 'Client 4',
-  },
-  {
     src: 'https://framerusercontent.com/images/nPWVU8jqTjivz3LbV1oDprTzcR0.png?width=326&height=320',
     alt: 'Client 5',
   },
@@ -38,10 +30,7 @@ const CLIENTS = [
     src: 'https://framerusercontent.com/images/HefBCJNpVLw4jh4IopVhmt80.png?width=826&height=283',
     alt: 'Client 7',
   },
-  {
-    src: 'https://framerusercontent.com/images/PmZDQA9z6E8UlxIGgbHSC2VKjnw.png?width=420&height=420',
-    alt: 'Client 11',
-  },
+  
   {
     src: 'https://framerusercontent.com/images/xup5drWRz2JNLuwhiDNwVO5nk.png?width=200&height=200',
     alt: 'Client 12',

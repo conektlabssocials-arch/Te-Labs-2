@@ -1,5 +1,5 @@
 export default function ClientsMarquee({ clients }) {
-  const loop = [...clients, ...clients]
+  const loop = [...clients, ...clients, ...clients, ...clients, ...clients, ...clients]
   return (
     <div
       style={{
