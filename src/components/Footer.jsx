@@ -1,4 +1,4 @@
-import { LogoMark } from './Media'
+import { Logo } from './Media'
 
 export default function Footer({ t, go }) {
   return (
@@ -14,12 +14,7 @@ export default function Footer({ t, go }) {
         }}
       >
         <div style={{ maxWidth: 340 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <LogoMark size={38} />
-            <span style={{ font: '400 26px Anton, sans-serif', letterSpacing: '.08em' }}>
-              TE LABS
-            </span>
-          </div>
+          <Logo height={30} />
           <div
             style={{
               marginTop: 10,

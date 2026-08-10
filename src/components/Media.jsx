@@ -1,21 +1,24 @@
 import { forwardRef, useEffect, useRef, useState } from 'react'
 
-export const LOGO_ICON = '/assets/telabs-icon-dark.png'
+export const LOGO_WORDMARK = '/assets/telabs-wordmark.webp'
 
-// The mark carries its own dark rounded plate, so it needs no frame around it.
-// alt is empty by design: every use sits beside the "TE LABS" wordmark, and a
-// second reading of the name would only clutter the accessible name.
-export function LogoMark({ size = 34, style }) {
+// Intrinsic size of the trimmed wordmark. Width is derived from height so the
+// browser reserves the correct box up front and the nav never reflows on load.
+const LOGO_W = 1061
+const LOGO_H = 190
+
+// The image now carries the brand name on its own, so it needs a real alt.
+export function Logo({ height = 26, style }) {
   return (
     <img
-      src={LOGO_ICON}
-      alt=""
-      width={size}
-      height={size}
+      src={LOGO_WORDMARK}
+      alt="TE LABS"
+      width={Math.round((height * LOGO_W) / LOGO_H)}
+      height={height}
       style={{
-        width: size,
-        height: size,
-        flex: `0 0 ${size}px`,
+        height,
+        width: 'auto',
+        flex: '0 0 auto',
         display: 'block',
         ...style,
       }}

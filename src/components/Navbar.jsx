@@ -1,4 +1,4 @@
-import { LogoMark } from './Media'
+import { Logo } from './Media'
 
 export default function Navbar({ t, nav }) {
   const { go, setLang, ink, enBg, enFg, frBg, frFg } = nav
@@ -19,8 +19,7 @@ export default function Navbar({ t, nav }) {
           color: 'inherit',
         }}
       >
-        <LogoMark size={34} />
-        <span style={{ font: '400 20px Anton, sans-serif', letterSpacing: '.1em' }}>TE LABS</span>
+        <Logo height={26} />
       </button>
 
       <nav className="te-nav-links" aria-label="Primary">
