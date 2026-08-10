@@ -349,10 +349,26 @@ export default function WorkPage({ t, helpers }) {
         </h1>
       </section>
 
-      {show("social") ? (
+      {show("video") ? (
         <section className="te-work-pad-x" style={{ paddingTop: "clamp(40px, 6vw, 60px)" }}>
           <SectionHeader
             n="01"
+            title={t.tVideo}
+            count={countLabel(Math.min(7, VIDEO_WORK.length), VIDEO_WORK.length)}
+            expanded={expanded === "video"}
+            hovered={hovered === "video"}
+            onOpen={() => openWork("video")}
+            onHover={() => setHovered("video")}
+            onLeave={() => setHovered(null)}
+          />
+          <VideoGrid items={VIDEO_WORK} showAll={expanded === "video"} />
+        </section>
+      ) : null}
+
+      {show("social") ? (
+        <section className="te-work-pad-x" style={{ paddingTop: "clamp(40px, 6vw, 60px)" }}>
+          <SectionHeader
+            n="02"
             title={t.tSocial}
             count={countLabel(Math.min(4, SOCIAL_WORK.length), SOCIAL_WORK.length)}
             expanded={expanded === "social"}
@@ -371,9 +387,9 @@ export default function WorkPage({ t, helpers }) {
       ) : null}
 
       {show("web") ? (
-        <section className="te-work-pad-x" style={{ paddingTop: "clamp(40px, 6vw, 60px)" }}>
+        <section className="te-work-pad-x" style={{ paddingTop: 60, paddingBottom: 84 }}>
           <SectionHeader
-            n="02"
+            n="03"
             title={t.tWeb}
             count={countLabel(Math.min(3, WEB_WORK.length), WEB_WORK.length)}
             expanded={expanded === "web"}
@@ -388,22 +404,6 @@ export default function WorkPage({ t, helpers }) {
               <WebGrid items={WEB_WORK.slice(3)} />
             </div>
           ) : null}
-        </section>
-      ) : null}
-
-      {show("video") ? (
-        <section className="te-work-pad-x" style={{ paddingTop: 60, paddingBottom: 84 }}>
-          <SectionHeader
-            n="03"
-            title={t.tVideo}
-            count={countLabel(Math.min(7, VIDEO_WORK.length), VIDEO_WORK.length)}
-            expanded={expanded === "video"}
-            hovered={hovered === "video"}
-            onOpen={() => openWork("video")}
-            onHover={() => setHovered("video")}
-            onLeave={() => setHovered(null)}
-          />
-          <VideoGrid items={VIDEO_WORK} showAll={expanded === "video"} />
         </section>
       ) : null}
     </div>
