@@ -1,0 +1,476 @@
+:root {
+  color-scheme: dark;
+  --bg: #0b0710;
+  --ink: #f4f0fa;
+  --muted: #bfb2d4;
+  --line: #241933;
+  --line-strong: #2a1e3a;
+  --panel: #150c20;
+  --accent: #8b2ff8;
+  --gold: #e8be7c;
+  --lilac: #c6a0ff;
+  --soft: #dccbff;
+  --dim: #9c8cb4;
+  --faint: #6e5c86;
+  --nav: #a99bbe;
+  --pad-x: clamp(16px, 4vw, 40px);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'JetBrains Mono', monospace;
+  overflow-x: hidden;
+}
+
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--gold);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  max-width: 100%;
+}
+
+button {
+  color: inherit;
+}
+
+@keyframes teDrift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes teBlink {
+  0%,
+  60% {
+    opacity: 1;
+  }
+  61%,
+  100% {
+    opacity: 0.15;
+  }
+}
+
+.te-marquee:hover {
+  animation-play-state: paused;
+}
+
+.te-lift {
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.te-lift:hover {
+  background: var(--panel);
+  transform: translateY(-4px);
+}
+
+.te-faq-btn:hover,
+.te-jump:hover {
+  background: var(--panel);
+}
+
+.te-jump:hover {
+  border-color: var(--gold);
+}
+
+.te-talk-cta:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* ——— Layout helpers ——— */
+.te-nav {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px 20px;
+  padding: 14px var(--pad-x);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  background: rgba(11, 7, 16, 0.94);
+  backdrop-filter: blur(10px);
+  z-index: 20;
+}
+
+.te-nav-links {
+  display: flex;
+  justify-content: center;
+  gap: clamp(14px, 2vw, 28px);
+  flex-wrap: wrap;
+  font: 500 clamp(10px, 1.1vw, 12px) 'JetBrains Mono', monospace;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.te-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.te-nav-cta-label-short {
+  display: none;
+}
+
+.te-hero {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+}
+
+.te-hero-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  align-items: center;
+  min-height: clamp(520px, 82vh, 780px);
+  pointer-events: none;
+}
+
+.te-hero-copy {
+  padding: clamp(40px, 8vw, 76px) var(--pad-x);
+  pointer-events: auto;
+  max-width: 720px;
+}
+
+.te-hero-stage {
+  position: relative;
+  min-height: clamp(280px, 48vh, 720px);
+  pointer-events: none;
+}
+
+.te-hero-hint {
+  position: absolute;
+  left: var(--pad-x);
+  right: var(--pad-x);
+  bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font: 500 10px 'JetBrains Mono', monospace;
+  letter-spacing: 0.2em;
+  color: #8b7ba3;
+  pointer-events: auto;
+}
+
+.te-section-pad {
+  padding-left: var(--pad-x);
+  padding-right: var(--pad-x);
+}
+
+.te-process-row {
+  background: #0b0710;
+  display: grid;
+  grid-template-columns: 60px minmax(120px, 200px) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(14px, 2vw, 28px);
+  padding: clamp(18px, 2.4vw, 26px);
+}
+
+.te-reel-card {
+  position: relative;
+  width: min(380px, 78vw);
+  flex: 0 0 auto;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--line-strong);
+}
+
+.te-faq-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 30px;
+  flex-wrap: wrap;
+  border: 1px solid var(--line-strong);
+  border-top: 0;
+  padding: 22px 28px;
+  background: #0d0814;
+}
+
+.te-work-head {
+  display: flex;
+  align-items: center;
+  gap: 12px 18px;
+  width: 100%;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  padding: 0 0 18px;
+  margin-bottom: 26px;
+  cursor: pointer;
+  text-align: left;
+  flex-wrap: wrap;
+}
+
+.te-work-rule {
+  flex: 1 1 80px;
+  height: 1px;
+  background: var(--line);
+  min-width: 40px;
+}
+
+/* ——— Work page ——— */
+.te-work-pad-x {
+  padding-left: var(--pad-x);
+  padding-right: var(--pad-x);
+  padding-bottom: var(--pad-x)
+}
+
+.te-work-press {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.te-work-press:focus-visible,
+.te-work-lift:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.te-work-lift {
+  display: block;
+  color: inherit;
+  transition: transform 0.32s cubic-bezier(0.22, 0.7, 0.25, 1);
+}
+
+.te-work-lift:hover {
+  transform: translateY(-4px);
+}
+
+.te-social-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.te-web-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+/* The film collage. Each row is five columns wide, and a stack of three
+   landscape films stands about as tall as one portrait beside it, so the
+   row settles level without any fixed heights. */
+.te-video-collage {
+  display: grid;
+  gap: 14px;
+}
+
+.te-video-collage-row {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-items: start;
+  gap: 14px;
+}
+
+.te-video-collage-stack {
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+}
+
+/* A lone square sits far shorter than its neighbours — centre it in the row. */
+.te-video-collage-square {
+  align-self: center;
+  min-width: 0;
+}
+
+.te-final {
+  background: var(--accent);
+  padding: clamp(36px, 6vw, 60px) var(--pad-x);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(20px, 3vw, 50px);
+}
+
+.te-final-btn {
+  background: #0b0710;
+  color: #fff;
+  border: 0;
+  padding: clamp(18px, 3vw, 26px) clamp(22px, 4vw, 40px);
+  cursor: pointer;
+  font: 700 clamp(13px, 2.2vw, 16px) 'JetBrains Mono', monospace;
+  letter-spacing: 0.16em;
+  white-space: nowrap;
+}
+
+.te-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--line-strong);
+  border-bottom: 1px solid var(--line);
+}
+
+.te-stat-cell {
+  background: #0b0710;
+  padding: clamp(18px, 3vw, 26px) clamp(16px, 3vw, 40px);
+}
+
+@media (max-width: 960px) {
+  .te-nav {
+    grid-template-columns: 1fr auto;
+  }
+
+  .te-nav-links {
+    grid-column: 1 / -1;
+    order: 3;
+    justify-content: flex-start;
+    gap: 14px 18px;
+    padding-top: 4px;
+    border-top: 1px solid transparent;
+  }
+
+  .te-hero-grid {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .te-hero-stage {
+    order: -1;
+    min-height: clamp(260px, 52vw, 420px);
+  }
+
+  .te-hero-copy {
+    padding-top: 28px;
+    padding-bottom: 40px;
+  }
+
+  .te-hero tower-3d,
+  .te-hero .te-tower {
+    opacity: 0.9;
+  }
+
+  .te-video-collage-row,
+  .te-social-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .te-web-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .te-nav-cta-label {
+    display: none;
+  }
+
+  .te-nav-cta-label-short {
+    display: inline;
+  }
+
+  .te-process-row {
+    grid-template-columns: 40px minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .te-process-row > p {
+    grid-column: 1 / -1;
+  }
+
+  .te-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .te-work-rule {
+    display: none;
+  }
+
+  .te-faq-btn {
+    gap: 16px !important;
+    padding: 20px 18px !important;
+  }
+
+  .te-faq-row {
+    padding: 18px;
+  }
+
+  .te-final-btn {
+    width: 100%;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .te-hero-copy h1 {
+    font-size: clamp(34px, 12vw, 58px) !important;
+  }
+
+  .te-video-collage-row,
+  .te-social-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .te-web-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .te-nav-links {
+    gap: 12px 14px;
+    letter-spacing: 0.12em;
+  }
+
+  .te-hero-hint span:last-child {
+    white-space: normal;
+  }
+}
+
+@media (hover: none) {
+  .te-marquee:hover {
+    animation-play-state: running;
+  }
+
+  .te-lift:hover {
+    transform: none;
+    background: #0b0710;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .te-marquee {
+    animation: none !important;
+  }
+}
