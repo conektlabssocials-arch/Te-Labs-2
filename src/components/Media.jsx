@@ -37,6 +37,12 @@ export function Logo({ height = 26, style }) {
  */
 export function AutoVideo({ src, title, width, style }) {
   const ref = useRef(null)
+  const [isPlaying, setIsPlaying] = useState(false)
+  const poster = videoPoster(src, width)
+
+  useEffect(() => {
+    setIsPlaying(false)
+  }, [src])
 
   useEffect(() => {
     const el = ref.current
@@ -50,27 +56,33 @@ export function AutoVideo({ src, title, width, style }) {
     )
     io.observe(el)
     return () => io.disconnect()
-  }, [])
+  }, [src])
 
   return (
-    <video
-      ref={ref}
-      src={videoSrc(src, width)}
-      poster={videoPoster(src, width)}
-      aria-label={title}
-      playsInline
-      preload="none"
-      loop
-      muted
-      style={{
-        display: 'block',
-        width: '100%',
-        height: '100%',
-        objectFit: 'cover',
-        background: '#050308',
-        ...style,
-      }}
-    />
+    <div className="te-auto-video" style={style}>
+      <video
+        ref={ref}
+        src={videoSrc(src, width)}
+        poster={poster}
+        aria-label={title}
+        playsInline
+        preload="none"
+        loop
+        muted
+        onPlaying={() => setIsPlaying(true)}
+        onWaiting={() => setIsPlaying(false)}
+        onError={() => setIsPlaying(false)}
+      />
+      <div
+        className={`te-video-loading${isPlaying ? ' te-video-loading--hidden' : ''}`}
+        aria-hidden="true"
+      >
+        {poster ? <img src={poster} alt="" loading="lazy" decoding="async" /> : null}
+        <span className="te-video-loading__label">
+          <i /> Loading video
+        </span>
+      </div>
+    </div>
   )
 }
 
