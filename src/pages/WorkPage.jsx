@@ -195,15 +195,19 @@ function WebGrid({ items }) {
   );
 }
 
-function VideoCard({ item }) {
+function VideoCard({ item, fill = false }) {
   if (!item) return null;
 
   return (
-    <div style={{ width: "100%", minWidth: 0 }}>
+    <div
+      className={`te-video-card${fill ? " te-video-card--fill" : ""}`}
+      style={{ "--video-aspect": `${item.width}/${item.height}` }}
+    >
       <div
+        className="te-video-card__media"
         style={{
           position: "relative",
-          aspectRatio: `${item.width}/${item.height}`,
+          aspectRatio: fill ? undefined : `${item.width}/${item.height}`,
           border: "1px solid #2A1E3A",
           background: "#050308",
         }}
@@ -218,49 +222,54 @@ function VideoCard({ item }) {
   );
 }
 
-function LandscapeStack({ items }) {
+function VideoStack({ items, className = "" }) {
   return (
-    <div className="te-video-collage-stack">
+    <div className={`te-video-collage-stack ${className}`.trim()}>
       {items.map((item) => (
-        <VideoCard key={item.id} item={item} />
+        <VideoCard key={item.id} item={item} fill={className !== ""} />
       ))}
     </div>
   );
 }
 
 function VideoGrid({ items, showAll = false }) {
-  const landscapes = items.filter((item) => item.width > item.height);
-  const portraits = items.filter((item) => item.height > item.width);
-  const squares = items.filter((item) => item.width === item.height);
+  const byId = new Map(items.map((item) => [item.id, item]));
+  const videos = (...ids) => ids.map((id) => byId.get(id)).filter(Boolean);
 
   return (
     <div className="te-video-collage">
-      <div className="te-video-collage-row">
-        <VideoCard item={portraits[0]} />
-        <VideoCard item={portraits[1]} />
-        <LandscapeStack items={landscapes.slice(0, 3)} />
-        <VideoCard item={portraits[2]} />
-        <VideoCard item={portraits[3]} />
+      <div className="te-video-collage-row te-video-collage-row--featured">
+        <VideoCard item={byId.get("v1")} />
+        <VideoStack
+          className="te-video-collage-stack--feature-bottom"
+          items={videos("v3", "v25")}
+        />
+        <VideoStack
+          className="te-video-collage-stack--feature-top"
+          items={videos("v26", "v4")}
+        />
+        <VideoCard item={byId.get("v9")} />
       </div>
 
       {showAll ? (
         <>
           <div className="te-video-collage-row">
-            <VideoCard item={portraits[4]} />
-            <LandscapeStack items={landscapes.slice(3, 6)} />
-            <div className="te-video-collage-square">
-              <VideoCard item={squares[0]} />
-            </div>
-            <LandscapeStack items={landscapes.slice(6, 9)} />
-            <VideoCard item={portraits[5]} />
+            <VideoCard item={byId.get("v14")} />
+            <VideoStack items={videos("v5", "v6", "v7")} />
+            <VideoStack
+              className="te-video-collage-stack--mixed"
+              items={videos("v8", "v11")}
+            />
+            <VideoStack items={videos("v10", "v12", "v16")} />
+            <VideoCard item={byId.get("v15")} />
           </div>
 
           <div className="te-video-collage-row">
-            <VideoCard item={portraits[6]} />
-            <VideoCard item={portraits[7]} />
-            <LandscapeStack items={landscapes.slice(9, 12)} />
-            <VideoCard item={portraits[8]} />
-            <VideoCard item={portraits[9]} />
+            <VideoCard item={byId.get("v17")} />
+            <VideoCard item={byId.get("v23")} />
+            <VideoStack items={videos("v19", "v20", "v21")} />
+            <VideoCard item={byId.get("v24")} />
+            <VideoCard item={byId.get("v27")} />
           </div>
         </>
       ) : null}
@@ -337,7 +346,7 @@ export default function WorkPage({ t, helpers }) {
           <SectionHeader
             n="01"
             title={t.tVideo}
-            count={countLabel(Math.min(7, VIDEO_WORK.length), VIDEO_WORK.length)}
+            count={countLabel(Math.min(6, VIDEO_WORK.length), VIDEO_WORK.length)}
             expanded={expanded === "video"}
             hovered={hovered === "video"}
             onOpen={() => openWork("video")}

@@ -287,9 +287,9 @@ button {
   gap: 14px;
 }
 
-/* The film collage. Each row is five columns wide, and a stack of three
-   landscape films stands about as tall as one portrait beside it, so the
-   row settles level without any fixed heights. */
+/* The film collage follows the alternating portrait/landscape composition
+   used in the art direction. The featured row is four tracks wide; its two
+   centre tracks are 1.5x wider and split 1:2 / 2:1 around v25 and v26. */
 .te-video-collage {
   display: grid;
   gap: 14px;
@@ -302,16 +302,62 @@ button {
   gap: 14px;
 }
 
+.te-video-collage-row--featured {
+  grid-template-columns: 1fr 1.5fr 1.5fr 1fr;
+  align-items: stretch;
+  height: 30vw;
+  overflow: hidden;
+}
+
+.te-video-collage-row--featured > .te-video-card,
+.te-video-collage-row--featured > .te-video-card > .te-video-card__media {
+  height: 100%;
+  min-height: 0;
+}
+
+.te-video-collage-row--featured > .te-video-card > .te-video-card__media {
+  aspect-ratio: auto !important;
+}
+
+.te-video-card {
+  width: 100%;
+  min-width: 0;
+}
+
+.te-video-card__media {
+  overflow: hidden;
+}
+
+.te-video-card--fill,
+.te-video-card--fill > .te-video-card__media {
+  height: 100%;
+  min-height: 0;
+}
+
+.te-video-card--fill {
+  overflow: hidden;
+}
+
 .te-video-collage-stack {
   display: grid;
   gap: 14px;
   min-width: 0;
 }
 
-/* A lone square sits far shorter than its neighbours — centre it in the row. */
-.te-video-collage-square {
-  align-self: center;
-  min-width: 0;
+.te-video-collage-stack--feature-bottom {
+  grid-template-rows: minmax(0, 1fr) minmax(0, 2fr);
+  height: 100%;
+  min-height: 0;
+}
+
+.te-video-collage-stack--feature-top {
+  grid-template-rows: minmax(0, 2fr) minmax(0, 1fr);
+  height: 100%;
+  min-height: 0;
+}
+
+.te-video-collage-stack--mixed {
+  grid-template-rows: 1fr 2fr;
 }
 
 .te-final {
@@ -387,6 +433,10 @@ button {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
+  .te-video-collage-row--featured {
+    grid-template-columns: 1fr 1.5fr 1.5fr 1fr;
+  }
+
   .te-web-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -440,6 +490,35 @@ button {
   .te-video-collage-row,
   .te-social-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .te-video-collage-row--featured {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    height: auto;
+    overflow: visible;
+  }
+
+  .te-video-collage-row--featured > .te-video-card,
+  .te-video-collage-row--featured > .te-video-card > .te-video-card__media {
+    height: auto;
+  }
+
+  .te-video-collage-row--featured > .te-video-card > .te-video-card__media {
+    aspect-ratio: var(--video-aspect) !important;
+  }
+
+  .te-video-collage-row--featured .te-video-collage-stack {
+    display: contents;
+  }
+
+  .te-video-collage-row--featured .te-video-card--fill,
+  .te-video-collage-row--featured .te-video-card--fill > .te-video-card__media {
+    height: auto;
+  }
+
+  .te-video-collage-row--featured .te-video-card--fill > .te-video-card__media {
+    aspect-ratio: var(--video-aspect);
   }
 
   .te-web-grid {
