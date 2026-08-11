@@ -1,3 +1,20 @@
+/**
+ * Cloudinary re-encodes on delivery, so we never ship the master.
+ * No grid shows a film wider than ~380 CSS px, and 540 keeps that 1.5x
+ * oversampled — the originals run 25-39 MB, these land around 5-7 MB.
+ * Anything hosted elsewhere (the Framer reels) passes through untouched.
+ */
+const CLD = '/video/upload/';
+
+export const videoSrc = (src, width = 540) =>
+  src && src.includes(CLD) ? src.replace(CLD, `${CLD}w_${width},q_auto/`) : src;
+
+/** A still of the first frame, so a tile paints before a byte of video moves. */
+export const videoPoster = (src, width = 540) =>
+  src && src.includes(CLD)
+    ? src.replace(CLD, `${CLD}w_${width},q_auto,so_0/`).replace(/\.mp4$/, '.jpg')
+    : undefined;
+
 /** Portfolio items — swap `src` when you have real stills / films. */
 export const SOCIAL_WORK = [
   { id: 's1', title: 'Maison Lumière', videoSrc: 'https://framerusercontent.com/assets/e0TRcv0MravqhUJet44NouVkos.mp4' },

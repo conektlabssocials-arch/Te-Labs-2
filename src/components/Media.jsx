@@ -1,4 +1,5 @@
 import { forwardRef, useEffect, useRef, useState } from 'react'
+import { videoPoster, videoSrc } from '../data/work'
 
 export const LOGO_WORDMARK = '/assets/telabs-wordmark.webp'
 
@@ -20,6 +21,53 @@ export function Logo({ height = 26, style }) {
         width: 'auto',
         flex: '0 0 auto',
         display: 'block',
+        ...style,
+      }}
+    />
+  )
+}
+
+/**
+ * A muted looping film that only streams while it is on screen.
+ *
+ * preload="none" plus the poster means an off-screen tile costs one small JPEG
+ * and nothing else. Without the observer the work grid opens 23 downloads at
+ * once and mobile Safari, which allows only a handful of inline decoders,
+ * stalls most of them on a black frame.
+ */
+export function AutoVideo({ src, title, width, style }) {
+  const ref = useRef(null)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) el.play().catch(() => {})
+        else el.pause()
+      },
+      { rootMargin: '200px' },
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+
+  return (
+    <video
+      ref={ref}
+      src={videoSrc(src, width)}
+      poster={videoPoster(src, width)}
+      aria-label={title}
+      playsInline
+      preload="none"
+      loop
+      muted
+      style={{
+        display: 'block',
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover',
+        background: '#050308',
         ...style,
       }}
     />

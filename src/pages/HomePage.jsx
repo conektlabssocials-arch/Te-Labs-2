@@ -1,17 +1,10 @@
-import { Tower3D, Mini3D, CountStat, SectionLabel } from '../components/Media'
+import { Tower3D, Mini3D, CountStat, SectionLabel, AutoVideo } from '../components/Media'
 import ClientsMarquee from '../components/ClientsMarquee'
 import Faq from '../components/Faq'
 import { REEL_SLOTS } from '../data/work'
 
 // How many films ride the marquee before it repeats.
 const REEL_COUNT = 6
-
-// Cloudinary renders a still of the first frame on request, so a card shows
-// something the instant it scrolls in rather than a black box.
-const posterFor = (src) =>
-  src && src.includes('/video/upload/')
-    ? src.replace('/video/upload/', '/video/upload/so_0/').replace(/\.mp4$/, '.jpg')
-    : undefined
 
 const CLIENTS = [
   {
@@ -396,23 +389,7 @@ export default function HomePage({ t, go, faq, setFaq }) {
           >
             {marquee.map((item, i) => (
               <div key={`${item.id}-${i}`} className="te-reel-card">
-                <video
-                  src={item.videoSrc}
-                  aria-label={item.label}
-                  poster={posterFor(item.videoSrc)}
-                  playsInline
-                  preload="metadata"
-                  loop
-                  muted
-                  autoPlay
-                  style={{
-                    display: 'block',
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    background: '#050308',
-                  }}
-                />
+                <AutoVideo src={item.videoSrc} title={item.label} />
               </div>
             ))}
           </div>

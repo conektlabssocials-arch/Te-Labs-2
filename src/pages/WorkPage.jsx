@@ -1,4 +1,4 @@
-import { ImageSlot } from '../components/Media'
+import { AutoVideo, ImageSlot } from '../components/Media'
 import { SOCIAL_WORK, VIDEO_WORK, WEB_WORK } from '../data/work'
 
 function SectionHeader({ n, title, count, expanded, hovered, onOpen, onHover, onLeave }) {
@@ -71,24 +71,7 @@ function SectionHeader({ n, title, count, expanded, hovered, onOpen, onHover, on
 }
 
 function ProjectVideo({ src, title }) {
-  return (
-    <video
-      src={src}
-      aria-label={title}
-      playsInline
-      preload="metadata"
-      loop
-      muted
-      autoPlay
-      style={{
-        display: "block",
-        width: "100%",
-        height: "100%",
-        objectFit: "cover",
-        background: "#050308",
-      }}
-    />
-  );
+  return <AutoVideo src={src} title={title} />;
 }
 
 function ProjectImage({ src, alt, placeholder }) {
