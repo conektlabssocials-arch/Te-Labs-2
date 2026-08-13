@@ -375,7 +375,7 @@ button {
    ratio gives the portfolio a stable grid even when work.js items are removed. */
 .te-video-collage {
   display: grid;
-  gap: clamp(28px, 3vw, 42px);
+  gap: 14px;
 }
 
 .te-video-grid {
@@ -393,11 +393,6 @@ button {
 
 .te-video-card__media {
   overflow: hidden;
-}
-
-.te-video-card--square .te-auto-video > video,
-.te-video-card--square .te-video-loading > img {
-  object-fit: contain;
 }
 
 .te-final {
@@ -477,7 +472,7 @@ button {
   }
 
   .te-video-grid--portrait {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .te-web-grid {

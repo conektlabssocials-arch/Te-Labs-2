@@ -224,27 +224,42 @@ function VideoCard({ item, layout }) {
 }
 
 function VideoGrid({ items }) {
-  const landscape = items.filter((item) => item.width / item.height > 1.15);
   const portrait = items.filter((item) => item.width / item.height <= 1.15);
+  const topPortraits = portrait.slice(0, 4);
+  const bottomPortraits = portrait.length >= 8 ? portrait.slice(-4) : [];
+  const portraitFrameIds = new Set(
+    [...topPortraits, ...bottomPortraits].map((item) => item.id),
+  );
+  const middle = items.filter((item) => !portraitFrameIds.has(item.id));
 
   return (
     <div className="te-video-collage">
-      {landscape.length ? (
+      {topPortraits.length ? (
+        <div
+          className="te-video-grid te-video-grid--portrait"
+          style={{ "--video-columns": 4 }}
+        >
+          {topPortraits.map((item) => (
+            <VideoCard key={item.id} item={item} layout="portrait" />
+          ))}
+        </div>
+      ) : null}
+      {middle.length ? (
         <div
           className="te-video-grid te-video-grid--landscape"
-          style={{ "--video-columns": Math.min(3, landscape.length) }}
+          style={{ "--video-columns": Math.min(4, middle.length) }}
         >
-          {landscape.map((item) => (
+          {middle.map((item) => (
             <VideoCard key={item.id} item={item} layout="landscape" />
           ))}
         </div>
       ) : null}
-      {portrait.length ? (
+      {bottomPortraits.length ? (
         <div
           className="te-video-grid te-video-grid--portrait"
-          style={{ "--video-columns": Math.min(4, portrait.length) }}
+          style={{ "--video-columns": 4 }}
         >
-          {portrait.map((item) => (
+          {bottomPortraits.map((item) => (
             <VideoCard key={item.id} item={item} layout="portrait" />
           ))}
         </div>
