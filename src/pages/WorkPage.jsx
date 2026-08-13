@@ -195,20 +195,20 @@ function WebGrid({ items }) {
   );
 }
 
-function VideoCard({ item, layout }) {
+function VideoCard({ item, layout, className = "", fill = false }) {
   const aspect = item.width / item.height;
   const orientation = aspect > 1.15 ? "landscape" : aspect < 0.85 ? "portrait" : "square";
   const displayAspect = layout === "landscape" ? "16/9" : "9/16";
 
   return (
     <div
-      className={`te-video-card te-video-card--${orientation}`}
+      className={`te-video-card te-video-card--${orientation} ${className}`.trim()}
     >
       <div
         className="te-video-card__media"
         style={{
           position: "relative",
-          aspectRatio: displayAspect,
+          ...(!fill ? { aspectRatio: displayAspect } : {}),
           border: "1px solid #2A1E3A",
           background: "#050308",
         }}
@@ -223,44 +223,71 @@ function VideoCard({ item, layout }) {
   );
 }
 
-function VideoGrid({ items }) {
-  const portrait = items.filter((item) => item.width / item.height <= 1.15);
-  const topPortraits = portrait.slice(0, 4);
-  const bottomPortraits = portrait.length >= 8 ? portrait.slice(-4) : [];
-  const portraitFrameIds = new Set(
-    [...topPortraits, ...bottomPortraits].map((item) => item.id),
+function VideoFeature({ portraits, landscapes }) {
+  return (
+    <div className="te-video-feature-grid">
+      <VideoCard
+        item={portraits[0]}
+        layout="portrait"
+        className="te-video-feature__portrait-a"
+        fill
+      />
+      <VideoCard
+        item={landscapes[0]}
+        layout="landscape"
+        className="te-video-feature__landscape-a"
+        fill
+      />
+      <VideoCard
+        item={landscapes[1]}
+        layout="landscape"
+        className="te-video-feature__landscape-b"
+        fill
+      />
+      <VideoCard
+        item={portraits[1]}
+        layout="portrait"
+        className="te-video-feature__portrait-b"
+        fill
+      />
+    </div>
   );
-  const middle = items.filter((item) => !portraitFrameIds.has(item.id));
+}
+
+function VideoGrid({ items }) {
+  const portraits = items.filter((item) => item.width / item.height <= 1.15);
+  const landscapes = items.filter((item) => item.width / item.height > 1.15);
+  const featureCount = Math.min(
+    2,
+    Math.floor(portraits.length / 2),
+    Math.floor(landscapes.length / 2),
+  );
+  const features = Array.from({ length: featureCount }, (_, index) => ({
+    portraits: portraits.slice(index * 2, index * 2 + 2),
+    landscapes: landscapes.slice(index * 2, index * 2 + 2),
+  }));
+  const featuredIds = new Set(
+    features.flatMap((feature) => [...feature.portraits, ...feature.landscapes])
+      .map((item) => item.id),
+  );
+  const remaining = items.filter((item) => !featuredIds.has(item.id));
 
   return (
     <div className="te-video-collage">
-      {topPortraits.length ? (
-        <div
-          className="te-video-grid te-video-grid--portrait"
-          style={{ "--video-columns": 4 }}
-        >
-          {topPortraits.map((item) => (
-            <VideoCard key={item.id} item={item} layout="portrait" />
-          ))}
-        </div>
-      ) : null}
-      {middle.length ? (
+      {features.map((feature) => (
+        <VideoFeature
+          key={feature.portraits.map((item) => item.id).join("-")}
+          portraits={feature.portraits}
+          landscapes={feature.landscapes}
+        />
+      ))}
+      {remaining.length ? (
         <div
           className="te-video-grid te-video-grid--landscape"
-          style={{ "--video-columns": Math.min(4, middle.length) }}
+          style={{ "--video-columns": Math.min(4, remaining.length) }}
         >
-          {middle.map((item) => (
+          {remaining.map((item) => (
             <VideoCard key={item.id} item={item} layout="landscape" />
-          ))}
-        </div>
-      ) : null}
-      {bottomPortraits.length ? (
-        <div
-          className="te-video-grid te-video-grid--portrait"
-          style={{ "--video-columns": 4 }}
-        >
-          {bottomPortraits.map((item) => (
-            <VideoCard key={item.id} item={item} layout="portrait" />
           ))}
         </div>
       ) : null}

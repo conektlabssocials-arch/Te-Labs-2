@@ -18,7 +18,7 @@ export const videoPoster = (src, width = 540) =>
 /** Portfolio items — swap `src` when you have real stills / films. */
 export const SOCIAL_WORK = [
   { id: 's1', title: 'Maison Lumière', videoSrc: 'https://framerusercontent.com/assets/e0TRcv0MravqhUJet44NouVkos.mp4' },
-  { id: 's2', title: 'Royal Rits', videoSrc: 'https://framerusercontent.com/assets/LT8LknkT9i2BLeB4XOlnpegHM.mp4' },
+  { id: 's2', title: 'Royal Ritz', videoSrc: 'https://framerusercontent.com/assets/LT8LknkT9i2BLeB4XOlnpegHM.mp4' },
   { id: 's3', title: 'King Ice Cream', videoSrc: 'https://framerusercontent.com/assets/QEULegvNbUOj5xGRC0qTE3JDKXo.mp4' },
   { id: 's4', title: 'Manoj jewellers', videoSrc: 'https://framerusercontent.com/assets/G1q7RAi5BwMr4QsLOKkqWKKKY.mp4' },
   { id: 's5', title: 'Smash Guys', videoSrc: 'https://framerusercontent.com/assets/i0GGrfKLXHnL3qTeex3GHcN0FyI.mp4' },
@@ -38,19 +38,20 @@ export const WEB_WORK = [
 
 export const VIDEO_WORK = [
   {
-    id: 'v1',
-    label: 'WhatsApp Video 01',
-    videoSrc: 'https://res.cloudinary.com/do1w46bzr/video/upload/v1785830356/WhatsApp_Video_2026-07-01_at_6.33.30_PM_zkjvem.mp4',
+    id: 'v24',
+    label: 'IMG 4782',
+    videoSrc: 'https://res.cloudinary.com/do1w46bzr/video/upload/v1785830261/IMG_4782_1_a1luo5.mp4',
     width: 1080,
     height: 1920,
   },
-  {
-    id: 'v9',
-    label: 'Smash Guys AI Reel',
-    videoSrc: 'https://res.cloudinary.com/do1w46bzr/video/upload/v1785830325/smash_guys_ai_reel_zgxlvt.mp4',
-    width: 1080,
-    height: 1920,
-  },
+  
+  // {
+  //   id: 'v9',
+  //   label: 'Smash Guys AI Reel',
+  //   videoSrc: 'https://res.cloudinary.com/do1w46bzr/video/upload/v1785830325/smash_guys_ai_reel_zgxlvt.mp4',
+  //   width: 1080,
+  //   height: 1920,
+  // },
   {
     id: 'v23',
     label: 'Arveen Perfume',
@@ -58,13 +59,7 @@ export const VIDEO_WORK = [
     width: 1080,
     height: 1920,
   },
-  {
-    id: 'v24',
-    label: 'IMG 4782',
-    videoSrc: 'https://res.cloudinary.com/do1w46bzr/video/upload/v1785830261/IMG_4782_1_a1luo5.mp4',
-    width: 1080,
-    height: 1920,
-  },
+  
   // {
     //   id: 'v3',
     //   label: 'Final Edit Video 02',
@@ -95,19 +90,20 @@ export const VIDEO_WORK = [
     height: 1080,
   },
   {
+    id: 'v1',
+    label: 'WhatsApp Video 01',
+    videoSrc: 'https://res.cloudinary.com/do1w46bzr/video/upload/v1785830356/WhatsApp_Video_2026-07-01_at_6.33.30_PM_zkjvem.mp4',
+    width: 1080,
+    height: 1920,
+  },
+  {
     id: 'v26',
     label: 'IMG 4782',
     videoSrc: 'https://res.cloudinary.com/do1w46bzr/video/upload/v1786082361/2nd_Trial_gf8mn5.mp4',
     width: 1920,
     height: 1080,
   },
-  {
-    id: 'v6',
-    label: 'WhatsApp Video 02',
-    videoSrc: 'https://res.cloudinary.com/do1w46bzr/video/upload/v1785830327/WhatsApp_Video_2026-07-01_at_6.34.09_PM_lbg50q.mp4',
-    width: 864,
-    height: 496,
-  },
+  
   {
     id: 'v7',
     label: 'WhatsApp Video 03',
@@ -122,13 +118,22 @@ export const VIDEO_WORK = [
     width: 1024,
     height: 576,
   },
+
   {
-    id: 'v10',
-    label: 'IMG 1384',
-    videoSrc: 'https://res.cloudinary.com/do1w46bzr/video/upload/v1785830322/IMG_1384_ryy0ls.mp4',
-    width: 1920,
-    height: 1080,
+    id: 'v6',
+    label: 'WhatsApp Video 02',
+    videoSrc: 'https://res.cloudinary.com/do1w46bzr/video/upload/v1785830327/WhatsApp_Video_2026-07-01_at_6.34.09_PM_lbg50q.mp4',
+    width: 864,
+    height: 496,
   },
+  
+  // {
+  //   id: 'v10',
+  //   label: 'IMG 1384',
+  //   videoSrc: 'https://res.cloudinary.com/do1w46bzr/video/upload/v1785830322/IMG_1384_ryy0ls.mp4',
+  //   width: 1920,
+  //   height: 1080,
+  // },
   {
     id: 'v11',
     label: 'Video 938',
@@ -185,13 +190,13 @@ export const VIDEO_WORK = [
 //     width: 1080,
 //     height: 1920,
 //   },
-  {
-    id: 'v19',
-    label: 'Big Mishra AI Reel',
-    videoSrc: 'https://res.cloudinary.com/do1w46bzr/video/upload/v1785830285/Big_Mishra_ai_reel_qcalzp.mp4',
-    width: 1920,
-    height: 1080,
-  },
+  // {
+  //   id: 'v19',
+  //   label: 'Big Mishra AI Reel',
+  //   videoSrc: 'https://res.cloudinary.com/do1w46bzr/video/upload/v1785830285/Big_Mishra_ai_reel_qcalzp.mp4',
+  //   width: 1920,
+  //   height: 1080,
+  // },
   {
     id: 'v20',
     label: 'Lakmé Ad',
@@ -214,13 +219,13 @@ export const VIDEO_WORK = [
 //     height: 1920,
 //   },
   
-  {
-    id: 'v27',
-    label: 'IMG 4782',
-    videoSrc: 'https://res.cloudinary.com/do1w46bzr/video/upload/v1785830325/smash_guys_ai_reel_zgxlvt.mp4',
-    width: 1080,
-    height: 1920,
-  },
+  // {
+  //   id: 'v27',
+  //   label: 'IMG 4782',
+  //   videoSrc: 'https://res.cloudinary.com/do1w46bzr/video/upload/v1785830325/smash_guys_ai_reel_zgxlvt.mp4',
+  //   width: 1080,
+  //   height: 1920,
+  // },
 ];
 
 export const REEL_SLOTS = VIDEO_WORK.filter((item) => item.width > item.height);

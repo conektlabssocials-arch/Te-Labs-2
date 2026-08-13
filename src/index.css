@@ -371,11 +371,46 @@ button {
   gap: 14px;
 }
 
-/* Active films are grouped by format. Keeping each band on one consistent
-   ratio gives the portfolio a stable grid even when work.js items are removed. */
+/* Portrait films frame two wide films in each feature row. The remaining
+   work continues as a four-column landscape grid. */
 .te-video-collage {
   display: grid;
   gap: 14px;
+}
+
+.te-video-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  grid-template-areas:
+    "portrait-a landscape-a landscape-a portrait-b"
+    "portrait-a landscape-b landscape-b portrait-b";
+  gap: 14px;
+  aspect-ratio: 2.4 / 1;
+}
+
+.te-video-feature-grid .te-video-card,
+.te-video-feature-grid .te-video-card__media {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+}
+
+.te-video-feature__portrait-a {
+  grid-area: portrait-a;
+}
+
+.te-video-feature__portrait-b {
+  grid-area: portrait-b;
+}
+
+.te-video-feature__landscape-a {
+  grid-area: landscape-a;
+}
+
+.te-video-feature__landscape-b {
+  grid-area: landscape-b;
 }
 
 .te-video-grid {
@@ -387,12 +422,9 @@ button {
   grid-template-columns: repeat(var(--video-columns), minmax(0, 1fr));
 }
 
-.te-video-grid--portrait {
-  grid-template-columns: repeat(var(--video-columns), minmax(0, 1fr));
-}
-
 .te-video-card__media {
   overflow: hidden;
+  border-radius: clamp(12px, 1.5vw, 20px);
 }
 
 .te-final {
@@ -467,11 +499,32 @@ button {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .te-video-grid--landscape {
+  .te-video-feature-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto;
+    grid-template-areas:
+      "portrait-a portrait-b"
+      "landscape-a landscape-a"
+      "landscape-b landscape-b";
+    aspect-ratio: auto;
   }
 
-  .te-video-grid--portrait {
+  .te-video-feature-grid .te-video-card,
+  .te-video-feature-grid .te-video-card__media {
+    height: auto;
+  }
+
+  .te-video-feature__portrait-a .te-video-card__media,
+  .te-video-feature__portrait-b .te-video-card__media {
+    aspect-ratio: 9 / 16;
+  }
+
+  .te-video-feature__landscape-a .te-video-card__media,
+  .te-video-feature__landscape-b .te-video-card__media {
+    aspect-ratio: 16 / 9;
+  }
+
+  .te-video-grid--landscape {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -531,10 +584,6 @@ button {
 
   .te-video-grid--landscape {
     grid-template-columns: minmax(0, 1fr);
-  }
-
-  .te-video-grid--portrait {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .te-web-grid {
