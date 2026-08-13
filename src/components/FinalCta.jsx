@@ -25,7 +25,7 @@ export default function FinalCta({ t, onContact }) {
         </p>
       </div>
       <button type="button" className="te-final-btn" onClick={onContact}>
-        {t.tCtaLong} →
+        {t.tFinalCta} →
       </button>
     </div>
   )

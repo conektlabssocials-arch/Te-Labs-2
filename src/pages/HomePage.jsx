@@ -143,7 +143,7 @@ export default function HomePage({ t, go, faq, setFaq }) {
                   letterSpacing: '.14em',
                 }}
               >
-                {t.tCtaLong} →
+                {t.tHeroCta} →
               </button>
               <button
                 type="button"

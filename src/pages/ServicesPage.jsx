@@ -62,7 +62,7 @@ export default function ServicesPage({ t, go, jump }) {
           </span>
           {[
             ['video', t.tVideo],
-            ['social', t.tSocial],
+            ['social', t.tSocialShort],
             ['web', t.tWeb],
           ].map(([id, label]) => (
             <button
@@ -90,7 +90,7 @@ export default function ServicesPage({ t, go, jump }) {
       <ServiceBlock
         id="social"
         index="02"
-        title={t.tSocial}
+        title={t.tSocialShort}
         body={t.tSocialLong}
         items={socialItems}
       />
@@ -114,7 +114,7 @@ export default function ServicesPage({ t, go, jump }) {
                 textTransform: 'uppercase',
               }}
             >
-              {t.tWeb}
+              {t.tWebSection}
             </h2>
             <span
               style={{
@@ -161,6 +161,23 @@ export default function ServicesPage({ t, go, jump }) {
             {t.tWebLong}
           </p>
           <ChipGrid items={webItems} />
+          <button
+            type="button"
+            className="te-jump"
+            onClick={() => go('work')}
+            style={{
+              marginTop: 28,
+              background: 'none',
+              border: '1px solid #4A2E70',
+              color: '#DCCBFF',
+              padding: '13px 18px',
+              cursor: 'pointer',
+              font: "700 11px 'JetBrains Mono', monospace",
+              letterSpacing: '.14em',
+            }}
+          >
+            {t.tSeeMotion} →
+          </button>
         </div>
       </div>
 
@@ -174,10 +191,10 @@ export default function ServicesPage({ t, go, jump }) {
             flex: '1 1 240px',
           }}
         >
-          {t.tFinalA} {t.tFinalB}
+          {t.tServicesFinalA} {t.tServicesFinalB}
         </div>
         <button type="button" className="te-final-btn" onClick={() => go('contact')}>
-          {t.tCtaLong} →
+          {t.tServicesFinalCta} →
         </button>
       </div>
     </div>

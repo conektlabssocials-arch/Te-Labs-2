@@ -34,7 +34,7 @@ export default function Footer({ t, go }) {
               font: "400 12px 'JetBrains Mono', monospace",
             }}
           >
-            <a href="mailto:bonjour@telabs.fr" style={{ color: '#E4DAF5' }}>
+            <a href="mailto:tahinaelisa@telabs.fr" style={{ color: '#E4DAF5' }}>
               {t.tEmail}
             </a>
             <a href="tel:+33613344339" style={{ color: '#9C8CB4' }}>
@@ -56,7 +56,7 @@ export default function Footer({ t, go }) {
               {t.tServices}
             </div>
             <button type="button" onClick={() => go('services')} style={linkBtn}>
-              {t.tSocial}
+              {t.tSocialShort}
             </button>
             <button type="button" onClick={() => go('services')} style={linkBtn}>
               {t.tWeb}

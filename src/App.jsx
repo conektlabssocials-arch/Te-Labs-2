@@ -133,7 +133,9 @@ export default function App() {
         <ContactPage t={t} form={form} setForm={setForm} send={send} />
       )}
 
-      {page !== 'contact' && <FinalCta t={t} onContact={() => go('contact')} />}
+      {page !== 'contact' && page !== 'services' && (
+        <FinalCta t={t} onContact={() => go('contact')} />
+      )}
 
       <Footer t={t} go={go} />
     </div>
