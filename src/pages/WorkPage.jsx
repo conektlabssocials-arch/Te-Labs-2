@@ -195,19 +195,20 @@ function WebGrid({ items }) {
   );
 }
 
-function VideoCard({ item, fill = false }) {
-  if (!item) return null;
+function VideoCard({ item, layout }) {
+  const aspect = item.width / item.height;
+  const orientation = aspect > 1.15 ? "landscape" : aspect < 0.85 ? "portrait" : "square";
+  const displayAspect = layout === "landscape" ? "16/9" : "9/16";
 
   return (
     <div
-      className={`te-video-card${fill ? " te-video-card--fill" : ""}`}
-      style={{ "--video-aspect": `${item.width}/${item.height}` }}
+      className={`te-video-card te-video-card--${orientation}`}
     >
       <div
         className="te-video-card__media"
         style={{
           position: "relative",
-          aspectRatio: fill ? undefined : `${item.width}/${item.height}`,
+          aspectRatio: displayAspect,
           border: "1px solid #2A1E3A",
           background: "#050308",
         }}
@@ -222,56 +223,31 @@ function VideoCard({ item, fill = false }) {
   );
 }
 
-function VideoStack({ items, className = "" }) {
-  return (
-    <div className={`te-video-collage-stack ${className}`.trim()}>
-      {items.map((item) => (
-        <VideoCard key={item.id} item={item} fill={className !== ""} />
-      ))}
-    </div>
-  );
-}
-
-function VideoGrid({ items, showAll = false }) {
-  const byId = new Map(items.map((item) => [item.id, item]));
-  const videos = (...ids) => ids.map((id) => byId.get(id)).filter(Boolean);
+function VideoGrid({ items }) {
+  const landscape = items.filter((item) => item.width / item.height > 1.15);
+  const portrait = items.filter((item) => item.width / item.height <= 1.15);
 
   return (
     <div className="te-video-collage">
-      <div className="te-video-collage-row te-video-collage-row--featured">
-        <VideoCard item={byId.get("v1")} />
-        <VideoStack
-          className="te-video-collage-stack--feature-bottom"
-          items={videos("v3", "v25")}
-        />
-        <VideoStack
-          className="te-video-collage-stack--feature-top"
-          items={videos("v26", "v4")}
-        />
-        <VideoCard item={byId.get("v9")} />
-      </div>
-
-      {showAll ? (
-        <>
-          <div className="te-video-collage-row">
-            <VideoCard item={byId.get("v14")} />
-            <VideoStack items={videos("v5", "v6", "v7")} />
-            <VideoStack
-              className="te-video-collage-stack--mixed"
-              items={videos("v8", "v11")}
-            />
-            <VideoStack items={videos("v10", "v12", "v16")} />
-            <VideoCard item={byId.get("v15")} />
-          </div>
-
-          <div className="te-video-collage-row">
-            <VideoCard item={byId.get("v17")} />
-            <VideoCard item={byId.get("v23")} />
-            <VideoStack items={videos("v19", "v20", "v21")} />
-            <VideoCard item={byId.get("v24")} />
-            <VideoCard item={byId.get("v27")} />
-          </div>
-        </>
+      {landscape.length ? (
+        <div
+          className="te-video-grid te-video-grid--landscape"
+          style={{ "--video-columns": Math.min(3, landscape.length) }}
+        >
+          {landscape.map((item) => (
+            <VideoCard key={item.id} item={item} layout="landscape" />
+          ))}
+        </div>
+      ) : null}
+      {portrait.length ? (
+        <div
+          className="te-video-grid te-video-grid--portrait"
+          style={{ "--video-columns": Math.min(4, portrait.length) }}
+        >
+          {portrait.map((item) => (
+            <VideoCard key={item.id} item={item} layout="portrait" />
+          ))}
+        </div>
       ) : null}
     </div>
   );
@@ -353,7 +329,7 @@ export default function WorkPage({ t, helpers }) {
             onHover={() => setHovered("video")}
             onLeave={() => setHovered(null)}
           />
-          <VideoGrid items={VIDEO_WORK} showAll={expanded === "video"} />
+          <VideoGrid items={expanded === "video" ? VIDEO_WORK : VIDEO_WORK.slice(0, 6)} />
         </section>
       ) : null}
 

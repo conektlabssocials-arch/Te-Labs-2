@@ -371,79 +371,33 @@ button {
   gap: 14px;
 }
 
-/* The film collage follows the alternating portrait/landscape composition
-   used in the art direction. The featured row is four tracks wide; its two
-   centre tracks are 1.5x wider and split 1:2 / 2:1 around v25 and v26. */
+/* Active films are grouped by format. Keeping each band on one consistent
+   ratio gives the portfolio a stable grid even when work.js items are removed. */
 .te-video-collage {
   display: grid;
-  gap: 14px;
+  gap: clamp(28px, 3vw, 42px);
 }
 
-.te-video-collage-row {
+.te-video-grid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  align-items: start;
   gap: 14px;
 }
 
-.te-video-collage-row--featured {
-  grid-template-columns: 1fr 1.5fr 1.5fr 1fr;
-  align-items: stretch;
-  height: 30vw;
-  overflow: hidden;
+.te-video-grid--landscape {
+  grid-template-columns: repeat(var(--video-columns), minmax(0, 1fr));
 }
 
-.te-video-collage-row--featured > .te-video-card,
-.te-video-collage-row--featured > .te-video-card > .te-video-card__media {
-  height: 100%;
-  min-height: 0;
-}
-
-.te-video-collage-row--featured > .te-video-card > .te-video-card__media {
-  aspect-ratio: auto !important;
-}
-
-.te-video-card {
-  width: 100%;
-  min-width: 0;
+.te-video-grid--portrait {
+  grid-template-columns: repeat(var(--video-columns), minmax(0, 1fr));
 }
 
 .te-video-card__media {
   overflow: hidden;
 }
 
-.te-video-card--fill,
-.te-video-card--fill > .te-video-card__media {
-  height: 100%;
-  min-height: 0;
-}
-
-.te-video-card--fill {
-  overflow: hidden;
-}
-
-.te-video-collage-stack {
-  display: grid;
-  gap: 14px;
-  min-width: 0;
-}
-
-.te-video-collage-stack--feature-bottom {
-  grid-template-rows: minmax(0, 1fr) minmax(0, 2fr);
-  height: 100%;
-  min-height: 0;
-}
-
-.te-video-collage-stack--feature-top {
-  grid-template-rows: minmax(0, 2fr) minmax(0, 1fr);
-  height: 100%;
-  min-height: 0;
-}
-
-.te-video-collage-stack--mixed {
-  grid-template-rows: minmax(0, 1fr) minmax(0, 2fr);
-  height: 100%;
-  min-height: 0;
+.te-video-card--square .te-auto-video > video,
+.te-video-card--square .te-video-loading > img {
+  object-fit: contain;
 }
 
 .te-final {
@@ -514,13 +468,16 @@ button {
     opacity: 0.9;
   }
 
-  .te-video-collage-row,
   .te-social-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .te-video-collage-row--featured {
-    grid-template-columns: 1fr 1.5fr 1.5fr 1fr;
+  .te-video-grid--landscape {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .te-video-grid--portrait {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .te-web-grid {
@@ -573,38 +530,16 @@ button {
     font-size: clamp(34px, 12vw, 58px) !important;
   }
 
-  .te-video-collage-row,
   .te-social-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .te-video-collage-row--featured {
+  .te-video-grid--landscape {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .te-video-grid--portrait {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    align-items: start;
-    height: auto;
-    overflow: visible;
-  }
-
-  .te-video-collage-row--featured > .te-video-card,
-  .te-video-collage-row--featured > .te-video-card > .te-video-card__media {
-    height: auto;
-  }
-
-  .te-video-collage-row--featured > .te-video-card > .te-video-card__media {
-    aspect-ratio: var(--video-aspect) !important;
-  }
-
-  .te-video-collage-row--featured .te-video-collage-stack {
-    display: contents;
-  }
-
-  .te-video-collage-row--featured .te-video-card--fill,
-  .te-video-collage-row--featured .te-video-card--fill > .te-video-card__media {
-    height: auto;
-  }
-
-  .te-video-collage-row--featured .te-video-card--fill > .te-video-card__media {
-    aspect-ratio: var(--video-aspect);
   }
 
   .te-web-grid {
