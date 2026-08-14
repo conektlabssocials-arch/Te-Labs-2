@@ -15,9 +15,9 @@ export default function App() {
   const [lang, setLang] = useState(() => {
     try {
       const saved = localStorage.getItem('te-labs-lang')
-      return saved === 'fr' || saved === 'en' ? saved : 'en'
+      return saved === 'fr' || saved === 'en' ? saved : 'fr'
     } catch {
-      return 'en'
+      return 'fr'
     }
   })
   const [expanded, setExpanded] = useState(null)
