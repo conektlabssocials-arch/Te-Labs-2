@@ -34,6 +34,9 @@ export const WEB_WORK = [
   { id: 'w4', title: 'Camorent', thumbnail: '/assets/Project/camorent.webp', url: 'https://www.camorent.com/' },
   { id: 'w5', title: 'Golt', thumbnail: '/assets/Project/golt.webp', url: 'https://play.google.com/store/apps/details?id=com.ajmalca.client' },
   { id: 'w6', title: 'Expenza', thumbnail: '/assets/Project/expenza.webp', url: 'https://play.google.com/store/apps/details?id=com.mohit29kr.expenza' },
+  { id: 'w7', title: 'Nxtgen', thumbnail: '/assets/Project/nxtgenservices.webp', url: 'https://www.nxtgenservices.in/' },
+  { id: 'w8', title: 'Mockit', thumbnail: '/assets/Project/mockit.webp', url: 'https://mockit-interview.vercel.app/' },
+  { id: 'w9', title: 'SuperGem', thumbnail: '/assets/Project/supergem.webp', url: 'https://www.supergem.in/' },
 ];
 
 export const VIDEO_WORK = [
