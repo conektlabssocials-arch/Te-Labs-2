@@ -1,0 +1,26 @@
+# telabs.fr — everything is public and every route is prerendered.
+
+User-agent: *
+Allow: /
+
+# AI crawlers are named explicitly rather than left to the wildcard, so the
+# permission is a deliberate decision on the record instead of an accident.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://www.telabs.fr/sitemap.xml

@@ -66,7 +66,10 @@ export const COPY = {
     tSignoff: "Made in Paris. © 2026 TE Labs.",
     tImmEyebrow: "BEYOND THE FLAT PAGE", tImmA: "Websites people remember,", tImmB: "not just visit.", tSeeMotion: "See it in motion",
     tFaqHint: "Tap a question", tTalk: "Prefer to talk it through?", tTalkCta: "Send us a note",
-    tJump: "Jump to", tWebBadge: "3D & IMMERSIVE"
+    tJump: "Jump to", tWebBadge: "3D & IMMERSIVE",
+    tAltWeb: "website designed and built by TE Labs",
+    tAltSocial: "social content produced by TE Labs",
+    tAltVideo: "brand film produced by TE Labs"
   },
   fr: {
     tHome: "Accueil", tServices: "Services", tWork: "Réalisations", tContact: "Contact", tReel: "Réalisations", tClients: "Clients",
@@ -135,6 +138,9 @@ export const COPY = {
     tSignoff: "Conçu à Paris. © 2026 TE Labs.",
     tImmEyebrow: "LE WEB EN RELIEF", tImmA: "Des sites qu'on retient,", tImmB: "pas seulement qu'on visite.", tSeeMotion: "Voir la démo",
     tFaqHint: "Appuyez sur une question", tTalk: "Vous préférez en parler ?", tTalkCta: "Écrivez-nous",
-    tJump: "Aller à", tWebBadge: "3D & IMMERSIF"
+    tJump: "Aller à", tWebBadge: "3D & IMMERSIF",
+    tAltWeb: "site web conçu et développé par TE Labs",
+    tAltSocial: "contenu social produit par TE Labs",
+    tAltVideo: "film de marque produit par TE Labs"
   }
 }

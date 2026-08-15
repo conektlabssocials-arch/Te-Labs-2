@@ -1,26 +1,26 @@
 import { Logo } from './Media'
+import { linkProps } from '../lib/router'
+import { pathFor } from '../data/routes'
 
 export default function Navbar({ t, nav }) {
-  const { go, setLang, ink, enBg, enFg, frBg, frFg } = nav
+  const { setLang, ink, enBg, enFg, frBg, frFg, lang, navigate, page } = nav
+  const to = (key) => linkProps(key, lang, navigate)
 
   return (
     <header className="te-nav">
-      <button
-        type="button"
-        onClick={() => go('home')}
+      <a
+        {...to('home')}
+        aria-label={t.tHome}
         style={{
           display: 'flex',
           alignItems: 'center',
           gap: 12,
-          background: 'none',
-          border: 0,
-          padding: 0,
-          cursor: 'pointer',
+          textDecoration: 'none',
           color: 'inherit',
         }}
       >
         <Logo height={26} />
-      </button>
+      </a>
 
       <nav className="te-nav-links" aria-label="Primary">
         {[
@@ -29,15 +29,12 @@ export default function Navbar({ t, nav }) {
           ['work', t.tWork],
           ['contact', t.tContact],
         ].map(([key, label]) => (
-          <button
+          <a
             key={key}
-            type="button"
-            onClick={() => go(key)}
+            {...to(key)}
+            aria-current={page === key ? 'page' : undefined}
             style={{
-              background: 'none',
-              border: 0,
-              padding: 0,
-              cursor: 'pointer',
+              textDecoration: 'none',
               font: 'inherit',
               letterSpacing: 'inherit',
               textTransform: 'inherit',
@@ -45,7 +42,7 @@ export default function Navbar({ t, nav }) {
             }}
           >
             {label}
-          </button>
+          </a>
         ))}
       </nav>
 
@@ -58,47 +55,56 @@ export default function Navbar({ t, nav }) {
             letterSpacing: '.12em',
           }}
         >
-          <button
-            type="button"
-            onClick={() => setLang('en')}
+          {/* Real hrefs, so each language version of a page is reachable and
+              linkable rather than hidden behind a state toggle. */}
+          <a
+            href={pathFor(page, 'en')}
+            hrefLang="en"
+            onClick={(e) => {
+              if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return
+              e.preventDefault()
+              setLang('en')
+            }}
             style={{
               background: enBg,
               color: enFg,
-              border: 0,
               padding: '8px 12px',
-              cursor: 'pointer',
+              textDecoration: 'none',
               font: 'inherit',
               letterSpacing: 'inherit',
             }}
           >
             EN
-          </button>
-          <button
-            type="button"
-            onClick={() => setLang('fr')}
+          </a>
+          <a
+            href={pathFor(page, 'fr')}
+            hrefLang="fr"
+            onClick={(e) => {
+              if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return
+              e.preventDefault()
+              setLang('fr')
+            }}
             style={{
               background: frBg,
               color: frFg,
-              border: 0,
               padding: '8px 12px',
-              cursor: 'pointer',
+              textDecoration: 'none',
               font: 'inherit',
               letterSpacing: 'inherit',
             }}
           >
             FR
-          </button>
+          </a>
         </div>
-        <button
-          type="button"
-          onClick={() => go('contact')}
+        <a
+          {...to('contact')}
           style={{
+            textDecoration: 'none',
             display: 'flex',
             alignItems: 'center',
             gap: 9,
             background: '#8B2FF8',
             color: '#fff',
-            border: 0,
             padding: '12px 16px',
             cursor: 'pointer',
             font: "700 12px 'JetBrains Mono', monospace",
@@ -118,7 +124,7 @@ export default function Navbar({ t, nav }) {
           />
           <span className="te-nav-cta-label">{t.tCta}</span>
           <span className="te-nav-cta-label-short">{t.tContact}</span>
-        </button>
+        </a>
       </div>
     </header>
   )

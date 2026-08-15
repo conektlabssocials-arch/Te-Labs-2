@@ -1,5 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { COPY } from './data/copy'
+import { useRoute } from './lib/router'
+import { useHead } from './lib/head'
+import { loadThreeElements } from './lib/three-elements'
 import ProgressBar from './components/ProgressBar'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -10,16 +13,12 @@ import WorkPage from './pages/WorkPage'
 import ContactPage from './pages/ContactPage'
 import { useMotion } from './hooks/useMotion'
 
-export default function App() {
-  const [page, setPage] = useState('home')
-  const [lang, setLang] = useState(() => {
-    try {
-      const saved = localStorage.getItem('te-labs-lang')
-      return saved === 'fr' || saved === 'en' ? saved : 'fr'
-    } catch {
-      return 'fr'
-    }
-  })
+export default function App({ url }) {
+  // The URL is the single source of truth for both page and language. The old
+  // localStorage preference is gone on purpose: a language that lives only in
+  // browser storage has no address, so neither a crawler nor a shared link can
+  // ever reach the English site.
+  const { page, lang, navigate } = useRoute(url)
   const [expanded, setExpanded] = useState(null)
   const [hovered, setHovered] = useState(null)
   const [faq, setFaq] = useState(0)
@@ -33,21 +32,23 @@ export default function App() {
   const rootRef = useRef(null)
   useMotion(rootRef, page)
 
-  useEffect(() => {
-    try {
-      localStorage.setItem('te-labs-lang', lang)
-    } catch {
-      /* ignore */
-    }
-  }, [lang])
+  // Must run after hydration, not at import time — see lib/three-elements.js.
+  useEffect(loadThreeElements, [])
 
   const t = COPY[lang] || COPY.en
   const fr = lang === 'fr'
 
+  useHead(page, lang, t)
+
   const go = (next) => {
-    setPage(next)
     setExpanded(null)
-    window.scrollTo(0, 0)
+    navigate(next, lang)
+  }
+
+  /** Switching language keeps you on the same page, at its other URL. */
+  const setLang = (next) => {
+    setExpanded(null)
+    navigate(page, next, { scroll: false })
   }
 
   const jump = (id) => {
@@ -77,6 +78,7 @@ export default function App() {
       go,
       setLang,
       lang,
+      navigate,
       ink: (p) => (page === p ? '#F4F0FA' : '#A99BBE'),
       enBg: fr ? 'transparent' : '#8B2FF8',
       enFg: fr ? '#A99BBE' : '#ffffff',
@@ -123,6 +125,8 @@ export default function App() {
           go={go}
           faq={faq}
           setFaq={setFaq}
+          lang={lang}
+          navigate={navigate}
         />
       )}
       {page === 'services' && (
@@ -134,10 +138,10 @@ export default function App() {
       )}
 
       {page !== 'contact' && page !== 'services' && (
-        <FinalCta t={t} onContact={() => go('contact')} />
+        <FinalCta t={t} lang={lang} navigate={navigate} />
       )}
 
-      <Footer t={t} go={go} />
+      <Footer t={t} lang={lang} navigate={navigate} />
     </div>
   )
 }

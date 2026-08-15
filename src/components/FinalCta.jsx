@@ -1,9 +1,14 @@
-export default function FinalCta({ t, onContact }) {
+import { linkProps } from '../lib/router'
+
+export default function FinalCta({ t, lang, navigate }) {
   return (
     <div className="te-final">
       <div style={{ minWidth: 0, flex: '1 1 280px' }}>
-        <div
+        {/* A real h2: this was a styled div, so the closing call to action
+            carried no heading weight at all. */}
+        <h2
           style={{
+            margin: 0,
             font: "400 clamp(28px, 4.4vw, 60px)/0.98 Anton, sans-serif",
             color: '#0B0710',
             textTransform: 'uppercase',
@@ -12,7 +17,7 @@ export default function FinalCta({ t, onContact }) {
           {t.tFinalA}
           <br />
           {t.tFinalB}
-        </div>
+        </h2>
         <p
           style={{
             margin: '16px 0 0',
@@ -24,9 +29,9 @@ export default function FinalCta({ t, onContact }) {
           {t.tFinalSub}
         </p>
       </div>
-      <button type="button" className="te-final-btn" onClick={onContact}>
+      <a className="te-final-btn" {...linkProps('contact', lang, navigate)}>
         {t.tFinalCta} →
-      </button>
+      </a>
     </div>
   )
 }

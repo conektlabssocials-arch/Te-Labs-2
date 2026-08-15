@@ -1,4 +1,6 @@
-export default function Faq({ t, faq, setFaq, go }) {
+import { linkProps } from '../lib/router'
+
+export default function Faq({ t, faq, setFaq, lang, navigate }) {
   const items = [
     { q: t.tQ1, a: t.tA1 },
     { q: t.tQ2, a: t.tA2 },
@@ -8,7 +10,7 @@ export default function Faq({ t, faq, setFaq, go }) {
   ]
 
   return (
-    <div style={{ padding: '0 clamp(20px, 4vw, 40px) clamp(48px, 7vw, 84px)' }}>
+    <div id="faq" style={{ padding: '0 clamp(20px, 4vw, 40px) clamp(48px, 7vw, 84px)' }}>
       <div
         style={{
           display: 'flex',
@@ -57,12 +59,15 @@ export default function Faq({ t, faq, setFaq, go }) {
       >
         {items.map((item, idx) => {
           const open = faq === idx + 1
+          const panelId = `te-faq-panel-${idx + 1}`
           return (
             <div key={item.q} style={{ background: '#0B0710' }}>
               <button
                 type="button"
                 className="te-faq-btn"
                 onClick={() => setFaq(open ? 0 : idx + 1)}
+                aria-expanded={open}
+                aria-controls={panelId}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -95,19 +100,31 @@ export default function Faq({ t, faq, setFaq, go }) {
                   {open ? '−' : '+'}
                 </span>
               </button>
-              {open && (
-                <p
-                  style={{
-                    margin: 0,
-                    padding: '0 28px 26px',
-                    maxWidth: 780,
-                    font: "400 13px/1.75 'JetBrains Mono', monospace",
-                    color: '#9C8CB4',
-                  }}
-                >
-                  {item.a}
-                </p>
-              )}
+              {/* Every answer stays in the DOM and is collapsed with CSS rather
+                  than unmounted. All five answers are what the FAQPage schema
+                  declares, and a crawler must be able to find each one in the
+                  served HTML for the markup to be valid. */}
+              <div
+                id={panelId}
+                className={`te-faq-panel${open ? ' te-faq-panel--open' : ''}`}
+              >
+                {/* The clip element carries no padding of its own: a grid track
+                    sized 0fr still cannot shrink below its item's padding, so
+                    padding here would leave the answer permanently peeking out. */}
+                <div className="te-faq-panel__clip">
+                  <p
+                    style={{
+                      margin: 0,
+                      padding: '0 28px 26px',
+                      maxWidth: 780,
+                      font: "400 13px/1.75 'JetBrains Mono', monospace",
+                      color: '#9C8CB4',
+                    }}
+                  >
+                    {item.a}
+                  </p>
+                </div>
+              </div>
             </div>
           )
         })}
@@ -116,22 +133,20 @@ export default function Faq({ t, faq, setFaq, go }) {
         <span style={{ font: "400 13px 'JetBrains Mono', monospace", color: '#BFB2D4' }}>
           {t.tTalk}
         </span>
-        <button
-          type="button"
+        <a
           className="te-talk-cta"
-          onClick={() => go('contact')}
+          {...linkProps('contact', lang, navigate)}
           style={{
-            background: 'none',
             border: '1px solid #8B2FF8',
             color: '#E4DAF5',
             padding: '13px 22px',
-            cursor: 'pointer',
+            textDecoration: 'none',
             font: "700 12px 'JetBrains Mono', monospace",
             letterSpacing: '.14em',
           }}
         >
           {t.tTalkCta} →
-        </button>
+        </a>
       </div>
     </div>
   )

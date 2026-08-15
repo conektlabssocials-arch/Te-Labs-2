@@ -198,6 +198,44 @@ button {
   color: var(--bg);
 }
 
+/*
+ * Collapsed FAQ answers stay in the document instead of being unmounted, so the
+ * FAQPage schema has all five answers to point at in the served HTML. grid-
+ * template-rows animates cleanly from a collapsed row to auto without needing a
+ * hard-coded max-height.
+ */
+.te-faq-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.32s cubic-bezier(0.22, 0.7, 0.25, 1);
+}
+
+.te-faq-panel__clip {
+  overflow: hidden;
+  min-height: 0;
+  /* Collapsed answers stay in the HTML for the FAQPage schema but leave the
+     accessibility tree, so a screen reader hears only the open answer —
+     matching what a sighted user sees. */
+  visibility: hidden;
+  transition: visibility 0s linear 0.32s;
+}
+
+.te-faq-panel--open {
+  grid-template-rows: 1fr;
+}
+
+.te-faq-panel--open .te-faq-panel__clip {
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .te-faq-panel,
+  .te-faq-panel__clip {
+    transition: none;
+  }
+}
+
 /* ——— Layout helpers ——— */
 .te-nav {
   display: grid;
@@ -438,11 +476,13 @@ button {
 }
 
 .te-final-btn {
+  display: inline-block;
   background: #0b0710;
   color: #fff;
   border: 0;
   padding: clamp(18px, 3vw, 26px) clamp(22px, 4vw, 40px);
   cursor: pointer;
+  text-decoration: none;
   font: 700 clamp(13px, 2.2vw, 16px) 'JetBrains Mono', monospace;
   letter-spacing: 0.16em;
   white-space: nowrap;

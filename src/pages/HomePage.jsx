@@ -2,6 +2,7 @@ import { Tower3D, Mini3D, CountStat, SectionLabel, AutoVideo } from '../componen
 import ClientsMarquee from '../components/ClientsMarquee'
 import Faq from '../components/Faq'
 import { REEL_SLOTS } from '../data/work'
+import { linkProps } from '../lib/router'
 
 // How many films ride the marquee before it repeats.
 const REEL_COUNT = 6
@@ -30,11 +31,13 @@ const CLIENTS = [
   },
 ]
 
-export default function HomePage({ t, go, faq, setFaq }) {
+export default function HomePage({ t, go, faq, setFaq, lang, navigate }) {
+  // `hash` deep-links each card to its own section on the services page, so the
+  // three cards stop pointing at one undifferentiated destination.
   const lanes = [
-    { n: '01', kind: 'reel', title: t.tVideo, pitch: t.tVideoPitch },
-    { n: '02', kind: 'globe', title: t.tSocial, pitch: t.tSocialPitch },
-    { n: '03', kind: 'screen', title: t.tWeb, pitch: t.tWebPitch },
+    { n: '01', kind: 'reel', hash: 'video', title: t.tVideo, pitch: t.tVideoPitch },
+    { n: '02', kind: 'globe', hash: 'social', title: t.tSocial, pitch: t.tSocialPitch },
+    { n: '03', kind: 'screen', hash: 'web', title: t.tWeb, pitch: t.tWebPitch },
   ]
 
   const steps = [
@@ -130,36 +133,35 @@ export default function HomePage({ t, go, faq, setFaq }) {
               {t.tHeroSub}
             </p>
             <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', alignItems: 'center' }}>
-              <button
-                type="button"
-                onClick={() => go('contact')}
+              {/* The two primary CTAs are anchors, not buttons — these are the
+                  strongest internal links on the site and were passing no
+                  signal at all while they were state handlers. */}
+              <a
+                {...linkProps('contact', lang, navigate)}
                 style={{
                   background: '#F4F0FA',
                   color: '#0B0710',
-                  border: 0,
                   padding: '16px 22px',
-                  cursor: 'pointer',
+                  textDecoration: 'none',
                   font: "700 13px 'JetBrains Mono', monospace",
                   letterSpacing: '.14em',
                 }}
               >
                 {t.tHeroCta} →
-              </button>
-              <button
-                type="button"
-                onClick={() => go('work')}
+              </a>
+              <a
+                {...linkProps('work', lang, navigate)}
                 style={{
                   border: '1px solid #4A2E70',
-                  background: 'none',
                   color: '#DCCBFF',
                   padding: '16px 22px',
-                  cursor: 'pointer',
+                  textDecoration: 'none',
                   font: "700 13px 'JetBrains Mono', monospace",
                   letterSpacing: '.14em',
                 }}
               >
                 {t.tSeeWork}
-              </button>
+              </a>
             </div>
           </div>
           <div className="te-hero-stage">
@@ -300,18 +302,18 @@ export default function HomePage({ t, go, faq, setFaq }) {
                   {lane.pitch}
                 </p>
               </div>
-              <button
-                type="button"
+              <a
+                {...linkProps('services', lang, navigate, lane.hash)}
                 onClick={(e) => {
                   e.stopPropagation()
-                  go('services')
+                  linkProps('services', lang, navigate, lane.hash).onClick(e)
                 }}
+                aria-label={`${t.tMore} — ${lane.title}`}
                 style={{
-                  background: 'none',
-                  border: 0,
+                  display: 'block',
                   borderTop: '1px solid #241933',
                   padding: '16px 0 0',
-                  cursor: 'pointer',
+                  textDecoration: 'none',
                   font: "500 11px 'JetBrains Mono', monospace",
                   letterSpacing: '.16em',
                   color: '#C6A0FF',
@@ -320,7 +322,7 @@ export default function HomePage({ t, go, faq, setFaq }) {
                 }}
               >
                 {t.tMore} →
-              </button>
+              </a>
             </div>
           ))}
         </div>
@@ -352,22 +354,20 @@ export default function HomePage({ t, go, faq, setFaq }) {
               <span style={{ color: '#C6A0FF' }}>{t.tRecentWorkB}</span>
             </h2>
           </div>
-          <button
-            type="button"
-            onClick={() => go('work')}
+          <a
+            {...linkProps('work', lang, navigate)}
             style={{
-              background: 'none',
               border: '1px solid #4A2E70',
               color: '#DCCBFF',
               padding: '14px 22px',
-              cursor: 'pointer',
+              textDecoration: 'none',
               font: "700 12px 'JetBrains Mono', monospace",
               letterSpacing: '.14em',
               whiteSpace: 'nowrap',
             }}
           >
             {t.tAllWork} →
-          </button>
+          </a>
         </div>
         <div
           style={{
@@ -405,7 +405,7 @@ export default function HomePage({ t, go, faq, setFaq }) {
         </div>
       </div>
 
-      <div style={{ padding: '0 clamp(20px, 4vw, 40px) clamp(48px, 7vw, 84px)' }}>
+      <div id="process" style={{ padding: '0 clamp(20px, 4vw, 40px) clamp(48px, 7vw, 84px)' }}>
         <div
           style={{
             display: 'flex',
@@ -490,7 +490,7 @@ export default function HomePage({ t, go, faq, setFaq }) {
         <ClientsMarquee clients={CLIENTS} />
       </div>
 
-      <Faq t={t} faq={faq} setFaq={setFaq} go={go} />
+      <Faq t={t} faq={faq} setFaq={setFaq} lang={lang} navigate={navigate} />
     </div>
   )
 }

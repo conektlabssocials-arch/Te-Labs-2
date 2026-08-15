@@ -99,7 +99,7 @@ function ProjectImage({ src, alt, placeholder }) {
   );
 }
 
-function SocialGrid({ items }) {
+function SocialGrid({ items, t }) {
   return (
     <div className="te-social-grid">
       {items.map((item) => (
@@ -108,7 +108,11 @@ function SocialGrid({ items }) {
             {item.videoSrc ? (
               <ProjectVideo src={item.videoSrc} title={item.title || item.label} />
             ) : (
-              <ProjectImage src={item.src} alt={item.title} placeholder="Reel" />
+              <ProjectImage
+              src={item.src}
+              alt={`${item.title} — ${t.tAltSocial}`}
+              placeholder="Reel"
+            />
             )}
           </div>
           <div
@@ -127,7 +131,7 @@ function SocialGrid({ items }) {
   );
 }
 
-function WebGrid({ items }) {
+function WebGrid({ items, t }) {
   return (
     <div className="te-web-grid">
       {items.map((item) => {
@@ -154,7 +158,7 @@ function WebGrid({ items }) {
               <div style={{ aspectRatio: "16/9" }}>
                 <ProjectImage
                   src={item.thumbnail || item.src}
-                  alt={title}
+                  alt={`${title} — ${t.tAltWeb}`}
                   placeholder="Project thumbnail"
                 />
               </div>
@@ -387,10 +391,10 @@ export default function WorkPage({ t, helpers }) {
             onHover={() => setHovered("social")}
             onLeave={() => setHovered(null)}
           />
-          <SocialGrid items={SOCIAL_WORK.slice(0, 4)} />
+          <SocialGrid items={SOCIAL_WORK.slice(0, 4)} t={t} />
           {expanded === "social" ? (
             <div style={{ marginTop: 14 }}>
-              <SocialGrid items={SOCIAL_WORK.slice(4)} />
+              <SocialGrid items={SOCIAL_WORK.slice(4)} t={t} />
             </div>
           ) : null}
         </section>
@@ -408,10 +412,10 @@ export default function WorkPage({ t, helpers }) {
             onHover={() => setHovered("web")}
             onLeave={() => setHovered(null)}
           />
-          <WebGrid items={WEB_WORK.slice(0, 3)} />
+          <WebGrid items={WEB_WORK.slice(0, 3)} t={t} />
           {expanded === "web" ? (
             <div style={{ marginTop: 14 }}>
-              <WebGrid items={WEB_WORK.slice(3)} />
+              <WebGrid items={WEB_WORK.slice(3)} t={t} />
             </div>
           ) : null}
         </section>

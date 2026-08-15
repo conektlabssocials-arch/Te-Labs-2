@@ -87,11 +87,10 @@ export function AutoVideo({ src, title, width, style }) {
 }
 
 export const Tower3D = forwardRef(function Tower3D({ subjectX, style }, ref) {
-  const [x, setX] = useState(() => {
-    if (subjectX != null) return subjectX
-    if (typeof window !== 'undefined' && window.innerWidth < 960) return '0.5'
-    return '0.74'
-  })
+  // The first render must match the prerendered HTML byte for byte, so it
+  // cannot read window.innerWidth. The responsive value is applied in the
+  // effect below, which runs after hydration.
+  const [x, setX] = useState(subjectX ?? '0.74')
 
   useEffect(() => {
     if (subjectX != null) {

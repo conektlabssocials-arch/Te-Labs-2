@@ -1,6 +1,9 @@
 import { Logo } from './Media'
+import { linkProps } from '../lib/router'
 
-export default function Footer({ t, go }) {
+export default function Footer({ t, lang, navigate }) {
+  const to = (key) => linkProps(key, lang, navigate)
+
   return (
     <>
       <div
@@ -55,29 +58,31 @@ export default function Footer({ t, go }) {
             <div style={{ color: '#C6A0FF', letterSpacing: '.16em', marginBottom: 8 }}>
               {t.tServices}
             </div>
-            <button type="button" onClick={() => go('services')} style={linkBtn}>
-              {t.tSocialShort}
-            </button>
-            <button type="button" onClick={() => go('services')} style={linkBtn}>
-              {t.tWeb}
-            </button>
-            <button type="button" onClick={() => go('services')} style={linkBtn}>
-              {t.tVideo}
-            </button>
+            {/* Each service deep-links to its own section, so the three links
+                no longer share one destination and one blob of anchor text. */}
+            {[
+              ['social', t.tSocialShort],
+              ['web', t.tWeb],
+              ['video', t.tVideo],
+            ].map(([hash, label]) => (
+              <a key={hash} {...linkProps('services', lang, navigate, hash)} style={footerLink}>
+                {label}
+              </a>
+            ))}
           </div>
           <div>
             <div style={{ color: '#C6A0FF', letterSpacing: '.16em', marginBottom: 8 }}>
               {t.tStudio}
             </div>
-            <button type="button" onClick={() => go('work')} style={linkBtn}>
+            <a {...to('work')} style={footerLink}>
               {t.tWork}
-            </button>
-            <button type="button" onClick={() => go('home')} style={linkBtn}>
+            </a>
+            <a {...linkProps('home', lang, navigate, 'process')} style={footerLink}>
               {t.tProcess}
-            </button>
-            <button type="button" onClick={() => go('contact')} style={linkBtn}>
+            </a>
+            <a {...to('contact')} style={footerLink}>
               {t.tContact}
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -102,12 +107,9 @@ export default function Footer({ t, go }) {
   )
 }
 
-const linkBtn = {
+const footerLink = {
   display: 'block',
-  background: 'none',
-  border: 0,
-  padding: 0,
-  cursor: 'pointer',
+  textDecoration: 'none',
   font: 'inherit',
   color: 'inherit',
 }
