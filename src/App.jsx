@@ -11,6 +11,8 @@ import HomePage from './pages/HomePage'
 import ServicesPage from './pages/ServicesPage'
 import WorkPage from './pages/WorkPage'
 import ContactPage from './pages/ContactPage'
+import NotFoundPage from './pages/NotFoundPage'
+import { NOT_FOUND } from './data/routes'
 import { useMotion } from './hooks/useMotion'
 
 export default function App({ url }) {
@@ -45,9 +47,14 @@ export default function App({ url }) {
     navigate(next, lang)
   }
 
-  /** Switching language keeps you on the same page, at its other URL. */
+  /**
+   * Switching language keeps you on the same page, at its other URL — except
+   * on the error page, which has no URL in either language. From there the
+   * toggle goes home, which is where pathFor already points its href.
+   */
   const setLang = (next) => {
     setExpanded(null)
+    if (page === NOT_FOUND) return navigate('home', next)
     navigate(page, next, { scroll: false })
   }
 
@@ -136,8 +143,11 @@ export default function App({ url }) {
       {page === 'contact' && (
         <ContactPage t={t} form={form} setForm={setForm} send={send} />
       )}
+      {page === NOT_FOUND && <NotFoundPage t={t} lang={lang} navigate={navigate} />}
 
-      {page !== 'contact' && page !== 'services' && (
+      {/* The 404 page is already a list of ways out; the closing pitch would
+          only compete with them. */}
+      {page !== 'contact' && page !== 'services' && page !== NOT_FOUND && (
         <FinalCta t={t} lang={lang} navigate={navigate} />
       )}
 

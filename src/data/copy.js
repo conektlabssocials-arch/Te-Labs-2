@@ -69,7 +69,11 @@ export const COPY = {
     tJump: "Jump to", tWebBadge: "3D & IMMERSIVE",
     tAltWeb: "website designed and built by TE Labs",
     tAltSocial: "social content produced by TE Labs",
-    tAltVideo: "brand film produced by TE Labs"
+    tAltVideo: "brand film produced by TE Labs",
+    t404Eyebrow: "ERROR 404", t404A: "PAGE NOT", t404B: "FOUND.",
+    t404Sub: "The page you were after has moved, or never existed. Nothing is broken on your side — here is everywhere else worth going.",
+    t404Home: "Back to home", t404Index: "Where to go instead",
+    t404Lost: "Still stuck? Tell us what you were looking for and we'll point you at it."
   },
   fr: {
     tHome: "Accueil", tServices: "Services", tWork: "Réalisations", tContact: "Contact", tReel: "Réalisations", tClients: "Clients",
@@ -141,6 +145,10 @@ export const COPY = {
     tJump: "Aller à", tWebBadge: "3D & IMMERSIF",
     tAltWeb: "site web conçu et développé par TE Labs",
     tAltSocial: "contenu social produit par TE Labs",
-    tAltVideo: "film de marque produit par TE Labs"
+    tAltVideo: "film de marque produit par TE Labs",
+    t404Eyebrow: "ERREUR 404", t404A: "PAGE", t404B: "INTROUVABLE.",
+    t404Sub: "La page que vous cherchez a été déplacée, ou n'a jamais existé. Rien de cassé de votre côté — voici où aller à la place.",
+    t404Home: "Retour à l'accueil", t404Index: "Où aller à la place",
+    t404Lost: "Toujours bloqué ? Dites-nous ce que vous cherchiez, on vous y emmène."
   }
 }

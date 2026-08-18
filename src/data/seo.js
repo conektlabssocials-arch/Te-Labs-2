@@ -7,7 +7,7 @@
  * mismatch where the crawler and the browser see different metadata.
  */
 
-import { SITE_URL, urlFor } from './routes'
+import { NOT_FOUND, SITE_URL, urlFor } from './routes'
 
 export const ORG_NAME = 'TE Labs'
 export const ORG_EMAIL = 'tahinaelisa@telabs.fr'
@@ -38,6 +38,11 @@ export const META = {
       description:
         "Quelques lignes suffisent. Écrivez à tahinaelisa@telabs.fr ou au +33 6 13 34 43 39 — une vraie personne vous répond, souvent le jour même. Studio basé à Paris.",
     },
+    notfound: {
+      title: 'Page introuvable (404) | TE Labs',
+      description:
+        "Cette page n'existe pas ou a été déplacée. Retrouvez les services, les réalisations et le contact du studio TE Labs.",
+    },
   },
   en: {
     home: {
@@ -59,6 +64,11 @@ export const META = {
       title: 'Contact — Tell Us About Your Brand | TE Labs',
       description:
         'A few lines is plenty. Email tahinaelisa@telabs.fr or call +33 6 13 34 43 39 — a real person replies, usually the same day. Creative studio based in Paris.',
+    },
+    notfound: {
+      title: 'Page Not Found (404) | TE Labs',
+      description:
+        'This page does not exist or has moved. Find the services, the work and the contact details of the TE Labs studio.',
     },
   },
 }
@@ -184,6 +194,9 @@ export function breadcrumbSchema(page, lang, t) {
 
 /** Everything a given route should publish, as an array of JSON-LD objects. */
 export function schemasFor(page, lang, t) {
+  // The error page asserts nothing. It has no canonical URL for an @id to point
+  // at and no place in a breadcrumb trail, and it ships noindex anyway.
+  if (page === NOT_FOUND) return []
   const base = [organizationSchema(lang), websiteSchema(lang)]
   if (page === 'home') return [...base, faqSchema(t, lang), howToSchema(t, lang)]
   return [...base, breadcrumbSchema(page, lang, t)]

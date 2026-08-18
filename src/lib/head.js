@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { ALL_ROUTES, urlFor } from '../data/routes'
+import { ALL_ROUTES, NOT_FOUND, urlFor } from '../data/routes'
 import { OG_IMAGE, metaFor, schemasFor } from '../data/seo'
 
 /**
@@ -13,24 +13,31 @@ import { OG_IMAGE, metaFor, schemasFor } from '../data/seo'
 export function useHead(page, lang, t) {
   useEffect(() => {
     const { title, description } = metaFor(page, lang)
-    const canonical = urlFor(page, lang)
+    const error = page === NOT_FOUND
+    // An error page is served at whatever URL was mistyped, so it has no
+    // canonical address to claim and no translated twin to point hreflang at.
+    // It gets noindex instead — and the tags a real page left behind get
+    // cleared, or a client-side navigation would leave the previous page's
+    // canonical sitting on a URL that does not exist.
+    const canonical = error ? null : urlFor(page, lang)
 
     document.title = title
     document.documentElement.lang = lang === 'fr' ? 'fr-FR' : 'en'
 
     setMeta('name', 'description', description)
+    setMeta('name', 'robots', error ? 'noindex, follow' : 'index, follow')
     setLink('canonical', canonical)
 
     setMeta('property', 'og:title', title)
     setMeta('property', 'og:description', description)
-    setMeta('property', 'og:url', canonical)
+    setMeta('property', 'og:url', canonical ?? urlFor('home', lang))
     setMeta('property', 'og:image', OG_IMAGE)
     setMeta('property', 'og:locale', lang === 'fr' ? 'fr_FR' : 'en_GB')
     setMeta('name', 'twitter:title', title)
     setMeta('name', 'twitter:description', description)
     setMeta('name', 'twitter:image', OG_IMAGE)
 
-    syncAlternates(page)
+    syncAlternates(error ? null : page)
     syncSchema(schemasFor(page, lang, t))
   }, [page, lang, t])
 }
@@ -45,8 +52,13 @@ function setMeta(attr, key, content) {
   el.setAttribute('content', content)
 }
 
+/** A null href removes the link entirely rather than pointing it at nothing. */
 function setLink(rel, href) {
   let el = document.head.querySelector(`link[rel="${rel}"]:not([hreflang])`)
+  if (href == null) {
+    if (el) el.remove()
+    return
+  }
   if (!el) {
     el = document.createElement('link')
     el.setAttribute('rel', rel)
@@ -58,6 +70,7 @@ function setLink(rel, href) {
 /** Reciprocal hreflang for the current page across both languages. */
 function syncAlternates(page) {
   document.head.querySelectorAll('link[rel="alternate"][hreflang]').forEach((el) => el.remove())
+  if (page == null) return
   const rows = ALL_ROUTES.filter((r) => r.page === page).map((r) => [r.lang, r.url])
   rows.push(['x-default', urlFor(page, 'fr')])
   for (const [hreflang, href] of rows) {
