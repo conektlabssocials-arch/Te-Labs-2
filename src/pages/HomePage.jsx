@@ -165,7 +165,7 @@ export default function HomePage({ t, go, faq, setFaq, lang, navigate }) {
             </div>
           </div>
           <div className="te-hero-stage">
-            <div className="te-hero-hint">
+            {/* <div className="te-hero-hint">
               <span
                 style={{
                   width: 26,
@@ -182,7 +182,7 @@ export default function HomePage({ t, go, faq, setFaq, lang, navigate }) {
                 ↻
               </span>
               <span>{t.tDragHint}</span>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

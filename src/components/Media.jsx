@@ -35,10 +35,10 @@ export function Logo({ height = 26, style }) {
  * once and mobile Safari, which allows only a handful of inline decoders,
  * stalls most of them on a black frame.
  */
-export function AutoVideo({ src, title, width, style }) {
+export function AutoVideo({ src, title, style }) {
   const ref = useRef(null)
   const [isPlaying, setIsPlaying] = useState(false)
-  const poster = videoPoster(src, width)
+  const poster = videoPoster(src)
 
   useEffect(() => {
     setIsPlaying(false)
@@ -62,7 +62,7 @@ export function AutoVideo({ src, title, width, style }) {
     <div className="te-auto-video" style={style}>
       <video
         ref={ref}
-        src={videoSrc(src, width)}
+        src={videoSrc(src)}
         poster={poster}
         aria-label={title}
         playsInline

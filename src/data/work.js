@@ -1,19 +1,27 @@
 /**
- * Cloudinary re-encodes on delivery, so we never ship the master.
- * No grid shows a film wider than ~380 CSS px, and 540 keeps that 1.5x
- * oversampled — the originals run 25-39 MB, these land around 5-7 MB.
- * Anything hosted elsewhere (the Framer reels) passes through untouched.
+ * The films are served from this repo, not from a CDN.
+ *
+ * They used to come from Cloudinary under a `w_540,q_auto` transformation —
+ * that account was suspended and took every URL down with it, so the same
+ * resize now happens once, ahead of time, in scripts/encode-videos.mjs. The
+ * reasoning it encoded is unchanged: no grid shows a film wider than ~380 CSS
+ * px, so 540 keeps it 1.5x oversampled. All sixteen land at 19 MB together.
+ *
+ * Anything still hosted elsewhere (the Framer social reels) passes through
+ * untouched and simply has no poster, exactly as before.
  */
-const CLD = '/video/upload/';
+const LOCAL = '/assets/video/';
 
-export const videoSrc = (src, width = 540) =>
-  src && src.includes(CLD) ? src.replace(CLD, `${CLD}w_${width},q_auto/`) : src;
+/** Local files are already at delivery size, so there is nothing to rewrite. */
+export const videoSrc = (src) => src;
 
-/** A still of the first frame, so a tile paints before a byte of video moves. */
-export const videoPoster = (src, width = 540) =>
-  src && src.includes(CLD)
-    ? src.replace(CLD, `${CLD}w_${width},q_auto,so_0/`).replace(/\.mp4$/, '.jpg')
-    : undefined;
+/**
+ * A still of the first frame, so a tile paints before a byte of video moves.
+ * Every local film has a `.jpg` sibling written by the encode script; the
+ * remote ones have none, and undefined is what <AutoVideo> expects for those.
+ */
+export const videoPoster = (src) =>
+  src && src.startsWith(LOCAL) ? src.replace(/\.mp4$/, '.jpg') : undefined;
 
 /** Portfolio items — swap `src` when you have real stills / films. */
 export const SOCIAL_WORK = [
@@ -43,7 +51,7 @@ export const VIDEO_WORK = [
   {
     id: 'v24',
     label: 'IMG 4782',
-    videoSrc: 'https://res.cloudinary.com/do1w46bzr/video/upload/v1785830261/IMG_4782_1_a1luo5.mp4',
+    videoSrc: '/assets/video/img-4782.mp4',
     width: 1080,
     height: 1920,
   },
@@ -58,7 +66,7 @@ export const VIDEO_WORK = [
   {
     id: 'v23',
     label: 'Arveen Perfume',
-    videoSrc: 'https://res.cloudinary.com/do1w46bzr/video/upload/v1785830266/Arveen_Perfume_wfh2lb.mp4',
+    videoSrc: '/assets/video/arveen-perfume.mp4',
     width: 1080,
     height: 1920,
   },
@@ -88,21 +96,21 @@ export const VIDEO_WORK = [
   {
     id: 'v25',
     label: 'IMG 4782',
-    videoSrc: 'https://res.cloudinary.com/do1w46bzr/video/upload/v1786082351/bici_jkhwdp.mp4',
+    videoSrc: '/assets/video/bici.mp4',
     width: 1920,
     height: 1080,
   },
   {
     id: 'v1',
     label: 'WhatsApp Video 01',
-    videoSrc: 'https://res.cloudinary.com/do1w46bzr/video/upload/v1785830356/WhatsApp_Video_2026-07-01_at_6.33.30_PM_zkjvem.mp4',
+    videoSrc: '/assets/video/whatsapp-video-01.mp4',
     width: 1080,
     height: 1920,
   },
   {
     id: 'v26',
     label: 'IMG 4782',
-    videoSrc: 'https://res.cloudinary.com/do1w46bzr/video/upload/v1786082361/2nd_Trial_gf8mn5.mp4',
+    videoSrc: '/assets/video/2nd-trial.mp4',
     width: 1920,
     height: 1080,
   },
@@ -110,14 +118,14 @@ export const VIDEO_WORK = [
   {
     id: 'v7',
     label: 'WhatsApp Video 03',
-    videoSrc: 'https://res.cloudinary.com/do1w46bzr/video/upload/v1785830326/WhatsApp_Video_2026-07-01_at_6.34.08_PM_luvm2q.mp4',
+    videoSrc: '/assets/video/whatsapp-video-03.mp4',
     width: 1024,
     height: 576,
   },
   {
     id: 'v8',
     label: 'WhatsApp Video 04',
-    videoSrc: 'https://res.cloudinary.com/do1w46bzr/video/upload/v1785830326/WhatsApp_Video_2026-07-01_at_6.34.03_PM_tikbep.mp4',
+    videoSrc: '/assets/video/whatsapp-video-04.mp4',
     width: 1024,
     height: 576,
   },
@@ -125,7 +133,7 @@ export const VIDEO_WORK = [
   {
     id: 'v6',
     label: 'WhatsApp Video 02',
-    videoSrc: 'https://res.cloudinary.com/do1w46bzr/video/upload/v1785830327/WhatsApp_Video_2026-07-01_at_6.34.09_PM_lbg50q.mp4',
+    videoSrc: '/assets/video/whatsapp-video-02.mp4',
     width: 864,
     height: 496,
   },
@@ -140,14 +148,14 @@ export const VIDEO_WORK = [
   {
     id: 'v11',
     label: 'Video 938',
-    videoSrc: 'https://res.cloudinary.com/do1w46bzr/video/upload/v1785830321/Video-938_bh3l4n.mp4',
+    videoSrc: '/assets/video/video-938.mp4',
     width: 1920,
     height: 1080,
   },
   {
     id: 'v12',
     label: 'Video 680',
-    videoSrc: 'https://res.cloudinary.com/do1w46bzr/video/upload/v1785830320/Video-680_wcdkml.mp4',
+    videoSrc: '/assets/video/video-680.mp4',
     width: 1268,
     height: 720,
   },
@@ -161,28 +169,28 @@ export const VIDEO_WORK = [
   {
     id: 'v14',
     label: 'Paris Panini',
-    videoSrc: 'https://res.cloudinary.com/do1w46bzr/video/upload/v1785830310/paris_panini_nmf6ok.mp4',
+    videoSrc: '/assets/video/paris-panini.mp4',
     width: 1080,
     height: 1938,
   },
   {
     id: 'v15',
     label: 'AI Film 01',
-    videoSrc: 'https://res.cloudinary.com/do1w46bzr/video/upload/v1785830307/hf_20260207_103020_648c7540-620a-4197-ad27-4d5ffc906909_pokczj.mp4',
+    videoSrc: '/assets/video/ai-film-01.mp4',
     width: 1076,
     height: 1928,
   },
   {
     id: 'v16',
     label: "Marki's Advertisement",
-    videoSrc: 'https://res.cloudinary.com/do1w46bzr/video/upload/v1785830300/MARKI_s_advertisement_tipedh.mp4',
+    videoSrc: '/assets/video/markis-advertisement.mp4',
     width: 1920,
     height: 1080,
   },
   {
     id: 'v17',
     label: 'AI Film 02',
-    videoSrc: 'https://res.cloudinary.com/do1w46bzr/video/upload/v1785830293/hf_20260207_073652_de7f4965-6c37-447e-a466-a77726abf560_q0wpgo.mp4',
+    videoSrc: '/assets/video/ai-film-02.mp4',
     width: 1076,
     height: 1928,
   },
@@ -203,14 +211,14 @@ export const VIDEO_WORK = [
   {
     id: 'v20',
     label: 'Lakmé Ad',
-    videoSrc: 'https://res.cloudinary.com/do1w46bzr/video/upload/v1785830282/Lakme_AD_zywnep.mp4',
+    videoSrc: '/assets/video/lakme-ad.mp4',
     width: 1920,
     height: 1080,
   },
   {
     id: 'v21',
     label: 'Lenskart',
-    videoSrc: 'https://res.cloudinary.com/do1w46bzr/video/upload/v1785830277/Lenskart_namwt0.mp4',
+    videoSrc: '/assets/video/lenskart.mp4',
     width: 1920,
     height: 1080,
   },
