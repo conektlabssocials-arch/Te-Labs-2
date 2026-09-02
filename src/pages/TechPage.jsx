@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { ImageSlot } from '../components/Media'
 import { APP_WORK, CASE_STUDIES, SOFTWARE_WORK, WEBSITE_WORK } from '../data/work'
+import { linkProps } from '../lib/router'
 
 function ProjectImage({ src, alt, placeholder }) {
   return (
@@ -96,7 +97,7 @@ function SectionHeader({ n, title, count, expanded, hovered, onOpen, onHover, on
   )
 }
 
-function ProjectGrid({ items, type, t }) {
+function ProjectGrid({ items, type, t, lang, navigate }) {
   const isApp = type === 'app'
   const isSoftware = type === 'software'
   const isCaseStudy = type === 'case-study'
@@ -147,22 +148,48 @@ function ProjectGrid({ items, type, t }) {
               />
             </div>
           </div>
-          <div
-            style={{
-              marginTop: 10,
-              display: 'flex',
-              justifyContent: 'space-between',
-              gap: 12,
-              font: "500 11px 'JetBrains Mono', monospace",
-              letterSpacing: '.1em',
-              color: '#BFB2D4',
-            }}
-          >
-            <span>{item.title}</span>
-            {item.url ? <span style={{ color: '#C6A0FF' }}>↗</span> : null}
-          </div>
+            <div style={{ marginTop: 10 }}>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  gap: 12,
+                  font: "500 11px 'JetBrains Mono', monospace",
+                  letterSpacing: '.1em',
+                  color: '#BFB2D4',
+                }}
+              >
+                <span>{item.title}</span>
+                {item.url || item.page ? <span style={{ color: '#C6A0FF' }}>↗</span> : null}
+              </div>
+              {item.descriptionKey ? (
+                <p
+                  style={{
+                    margin: '8px 0 0',
+                    font: "400 11px/1.65 'JetBrains Mono', monospace",
+                    color: '#7F7096',
+                    letterSpacing: 0,
+                  }}
+                >
+                  {t[item.descriptionKey]}
+                </p>
+              ) : null}
+            </div>
           </>
         )
+
+        if (item.page) {
+          return (
+            <a
+              key={item.id}
+              className="te-work-lift"
+              {...linkProps(item.page, lang, navigate)}
+              aria-label={`${item.title} — ${t.tOpenProject}`}
+            >
+              {card}
+            </a>
+          )
+        }
 
         return item.url ? (
           <a
@@ -185,7 +212,7 @@ function ProjectGrid({ items, type, t }) {
   )
 }
 
-export default function TechPage({ t, lang }) {
+export default function TechPage({ t, lang, navigate }) {
   const [expanded, setExpanded] = useState(null)
   const [hovered, setHovered] = useState(null)
   const show = (key) => expanded === null || expanded === key
@@ -267,10 +294,10 @@ export default function TechPage({ t, lang }) {
             onHover={() => setHovered('websites')}
             onLeave={() => setHovered(null)}
           />
-          <ProjectGrid items={WEBSITE_WORK.slice(0, 3)} type="website" t={t} />
+          <ProjectGrid items={WEBSITE_WORK.slice(0, 3)} type="website" t={t} lang={lang} navigate={navigate} />
           {expanded === 'websites' ? (
             <div style={{ marginTop: 14 }}>
-              <ProjectGrid items={WEBSITE_WORK.slice(3)} type="website" t={t} />
+              <ProjectGrid items={WEBSITE_WORK.slice(3)} type="website" t={t} lang={lang} navigate={navigate} />
             </div>
           ) : null}
         </section>
@@ -295,10 +322,10 @@ export default function TechPage({ t, lang }) {
             onHover={() => setHovered('apps')}
             onLeave={() => setHovered(null)}
           />
-          <ProjectGrid items={APP_WORK.slice(0, 3)} type="app" t={t} />
+          <ProjectGrid items={APP_WORK.slice(0, 3)} type="app" t={t} lang={lang} navigate={navigate} />
           {expanded === 'apps' ? (
             <div style={{ marginTop: 14 }}>
-              <ProjectGrid items={APP_WORK.slice(3)} type="app" t={t} />
+              <ProjectGrid items={APP_WORK.slice(3)} type="app" t={t} lang={lang} navigate={navigate} />
             </div>
           ) : null}
         </section>
@@ -323,7 +350,7 @@ export default function TechPage({ t, lang }) {
             onHover={() => setHovered('software')}
             onLeave={() => setHovered(null)}
           />
-          <ProjectGrid items={SOFTWARE_WORK} type="software" t={t} />
+          <ProjectGrid items={SOFTWARE_WORK} type="software" t={t} lang={lang} navigate={navigate} />
         </section>
       ) : null}
 
@@ -343,10 +370,10 @@ export default function TechPage({ t, lang }) {
             onHover={() => setHovered('case-studies')}
             onLeave={() => setHovered(null)}
           />
-          <ProjectGrid items={CASE_STUDIES.slice(0, 3)} type="case-study" t={t} />
+          <ProjectGrid items={CASE_STUDIES.slice(0, 3)} type="case-study" t={t} lang={lang} navigate={navigate} />
           {expanded === 'case-studies' ? (
             <div style={{ marginTop: 14 }}>
-              <ProjectGrid items={CASE_STUDIES.slice(3)} type="case-study" t={t} />
+              <ProjectGrid items={CASE_STUDIES.slice(3)} type="case-study" t={t} lang={lang} navigate={navigate} />
             </div>
           ) : null}
         </section>

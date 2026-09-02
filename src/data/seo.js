@@ -38,6 +38,11 @@ export const META = {
       description:
         "Découvrez les sites web, applications, logiciels et études de cas de TE Labs : des expériences rapides, soignées et pensées pour convertir.",
     },
+    conektAds: {
+      title: "ConektAds — logiciel de gestion d'affichage extérieur | TE Labs",
+      description:
+        "Découvrez ConektAds, une plateforme qui centralise l'inventaire de panneaux, la recherche cartographique, les demandes clients, les devis et les plans média.",
+    },
     contact: {
       title: 'Contact — parlez-nous de votre marque | TE Labs',
       description:
@@ -69,6 +74,11 @@ export const META = {
       title: 'Tech — Websites, Apps & Software | TE Labs',
       description:
         'Explore websites, apps, software and case studies from TE Labs: fast, polished digital products shaped around users and business results.',
+    },
+    conektAds: {
+      title: 'ConektAds — Outdoor Advertising Management Software | TE Labs',
+      description:
+        'Discover ConektAds, a platform that brings billboard inventory, map discovery, customer inquiries, quotes and media plans into one connected workflow.',
     },
     contact: {
       title: 'Contact — Tell Us About Your Brand | TE Labs',
@@ -196,6 +206,7 @@ export function breadcrumbSchema(page, lang, t) {
     services: t.tServices,
     work: t.tCreative,
     tech: t.tTech,
+    conektAds: 'ConektAds',
     contact: t.tContact,
   }
   return {

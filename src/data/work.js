@@ -58,10 +58,13 @@ export const APP_WORK = [
 ];
 
 export const SOFTWARE_WORK = [
-  { id: 'sw1', title: 'Conekt Ads' },
+  { id: 'sw1', title: 'ConektAds', thumbnail: '/assets/Project/Conekt_Ads.webp', page: 'conektAds', descriptionKey: 'tConektCard' },
   { id: 'sw2', title: 'Taqtona' },
   { id: 'sw3', title: 'The Global Scholarship' },
 ];
+
+// Add the public video path here when the ConektAds walkthrough is ready.
+export const CONEKT_ADS_VIDEO = 'https://caasiefrontendstatic.s3.ap-southeast-1.amazonaws.com/CAASieWebsite/Videos/MapDemo_241205.mp4';
 
 export const CASE_STUDIES = [
   { id: 'cs1', title: 'Spectral Point — Outbound AI Agency System', thumbnail: '/assets/case-studies/page-02.webp', url: '/assets/case-studies/page-02.webp' },

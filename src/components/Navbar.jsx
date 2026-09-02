@@ -35,13 +35,18 @@ export default function Navbar({ t, nav }) {
           <a
             key={id}
             {...to(targetPage, hash)}
-            aria-current={!hash && page === targetPage ? 'page' : undefined}
+            aria-current={!hash && (page === targetPage || (targetPage === 'tech' && page === 'conektAds')) ? 'page' : undefined}
             style={{
               textDecoration: 'none',
               font: 'inherit',
               letterSpacing: 'inherit',
               textTransform: 'inherit',
-              color: hash ? '#A99BBE' : ink(targetPage),
+              color:
+                targetPage === 'tech' && page === 'conektAds'
+                  ? '#F4F0FA'
+                  : hash
+                    ? '#A99BBE'
+                    : ink(targetPage),
             }}
           >
             {label}
