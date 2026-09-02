@@ -43,12 +43,21 @@ function InfoPanel({ index, title, body }) {
   )
 }
 
-export default function ConektAdsPage({ t, lang, navigate }) {
+export function SoftwareDetailPage({
+  t,
+  lang,
+  navigate,
+  copyPrefix,
+  imageSrc,
+  videoSrc,
+  externalUrl,
+}) {
+  const copy = (key) => t[`t${copyPrefix}${key}`]
   const benefits = [
-    [t.tConektBenefit1, t.tConektBenefit1Body],
-    [t.tConektBenefit2, t.tConektBenefit2Body],
-    [t.tConektBenefit3, t.tConektBenefit3Body],
-    [t.tConektBenefit4, t.tConektBenefit4Body],
+    [copy('Benefit1'), copy('Benefit1Body')],
+    [copy('Benefit2'), copy('Benefit2Body')],
+    [copy('Benefit3'), copy('Benefit3Body')],
+    [copy('Benefit4'), copy('Benefit4Body')],
   ]
 
   return (
@@ -82,7 +91,7 @@ export default function ConektAdsPage({ t, lang, navigate }) {
             color: '#8B2FF8',
           }}
         >
-          {t.tConektEyebrow}
+          {copy('Eyebrow')}
         </div>
         <h1
           style={{
@@ -92,9 +101,9 @@ export default function ConektAdsPage({ t, lang, navigate }) {
             textTransform: 'uppercase',
           }}
         >
-          {t.tConektHeroA}
+          {copy('HeroA')}
           <br />
-          <span style={{ color: '#C6A0FF' }}>{t.tConektHeroB}</span>
+          <span style={{ color: '#C6A0FF' }}>{copy('HeroB')}</span>
         </h1>
         <p
           style={{
@@ -104,8 +113,27 @@ export default function ConektAdsPage({ t, lang, navigate }) {
             color: '#BFB2D4',
           }}
         >
-          {t.tConektIntro}
+          {copy('Intro')}
         </p>
+        {externalUrl ? (
+          <a
+            href={externalUrl}
+            target="_blank"
+            rel="noreferrer"
+            style={{
+              display: 'inline-block',
+              marginTop: 24,
+              border: '1px solid #4A2E70',
+              padding: '12px 16px',
+              color: '#DCCBFF',
+              font: "500 11px 'JetBrains Mono', monospace",
+              letterSpacing: '.14em',
+              textDecoration: 'none',
+            }}
+          >
+            {t.tVisitWebsite} ↗
+          </a>
+        ) : null}
       </section>
 
       {/* <section
@@ -123,8 +151,8 @@ export default function ConektAdsPage({ t, lang, navigate }) {
           }}
         >
           <img
-            src="/assets/Project/Conekt_Ads.webp"
-            alt={t.tConektImageAlt}
+            src={imageSrc}
+            alt={copy('ImageAlt')}
             width="1600"
             height="901"
             style={{ display: 'block', width: '100%', height: 'auto' }}
@@ -150,16 +178,19 @@ export default function ConektAdsPage({ t, lang, navigate }) {
           >
             <span style={{ color: '#8B2FF8' }}>VIDEO</span>
             <span style={{ flex: 1, height: 1, background: '#241933' }} />
-            <span>{t.tConektVideo}</span>
+            <span>{copy('Video')}</span>
           </div>
 
-          {CONEKT_ADS_VIDEO ? (
+          {videoSrc ? (
             <video
-              controls
+              controls={false}
+              autoPlay
+              loop
+              muted
               playsInline
               preload="metadata"
-              poster="/assets/Project/Conekt_Ads.webp"
-              aria-label={t.tConektVideo}
+              poster={imageSrc}
+              aria-label={copy('Video')}
               style={{
                 display: 'block',
                 width: '100%',
@@ -168,11 +199,11 @@ export default function ConektAdsPage({ t, lang, navigate }) {
                 background: '#050308',
               }}
             >
-              <source src={CONEKT_ADS_VIDEO} />
+              <source src={videoSrc} />
             </video>
           ) : (
             <div
-              aria-label={t.tConektVideoPlaceholder}
+              aria-label={copy('VideoPlaceholder')}
               style={{
                 aspectRatio: '16/9',
                 display: 'grid',
@@ -206,7 +237,7 @@ export default function ConektAdsPage({ t, lang, navigate }) {
                     color: '#8B7BA3',
                   }}
                 >
-                  {t.tConektVideoPlaceholder}
+                  {copy('VideoPlaceholder')}
                 </span>
               </div>
             </div>
@@ -223,8 +254,8 @@ export default function ConektAdsPage({ t, lang, navigate }) {
           paddingTop: 'clamp(52px, 7vw, 84px)',
         }}
       >
-        <InfoPanel index="01" title={t.tConektProblem} body={t.tConektProblemBody} />
-        <InfoPanel index="02" title={t.tConektSolution} body={t.tConektSolutionBody} />
+        <InfoPanel index="01" title={copy('Problem')} body={copy('ProblemBody')} />
+        <InfoPanel index="02" title={copy('Solution')} body={copy('SolutionBody')} />
       </section>
 
       <section
@@ -257,7 +288,7 @@ export default function ConektAdsPage({ t, lang, navigate }) {
               textTransform: 'uppercase',
             }}
           >
-            {t.tConektHelpful}
+            {copy('Helpful')}
           </h2>
         </div>
 
@@ -312,10 +343,21 @@ export default function ConektAdsPage({ t, lang, navigate }) {
             color: '#9C8CB4',
           }}
         >
-          <span style={{ color: '#C6A0FF' }}>{t.tConektBuiltFor}: </span>
-          {t.tConektBuiltForBody}
+          <span style={{ color: '#C6A0FF' }}>{copy('BuiltFor')}: </span>
+          {copy('BuiltForBody')}
         </div>
       </section>
     </main>
+  )
+}
+
+export default function ConektAdsPage(props) {
+  return (
+    <SoftwareDetailPage
+      {...props}
+      copyPrefix="Conekt"
+      imageSrc="/assets/Project/Conekt_Ads.webp"
+      videoSrc={CONEKT_ADS_VIDEO}
+    />
   )
 }

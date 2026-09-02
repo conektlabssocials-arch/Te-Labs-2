@@ -43,6 +43,16 @@ export const META = {
       description:
         "Découvrez ConektAds, une plateforme qui centralise l'inventaire de panneaux, la recherche cartographique, les demandes clients, les devis et les plans média.",
     },
+    taqtona: {
+      title: "Taqtona — l'IA pour la production industrielle | TE Labs",
+      description:
+        "Découvrez Taqtona, une suite IA qui automatise l'inspection des plans, le pilotage de production, la programmation CNC et bientôt le chiffrage DFM.",
+    },
+    globalScholarship: {
+      title: 'The Global Scholarship — recherche et alertes de bourses | TE Labs',
+      description:
+        "Découvrez une plateforme qui centralise les opportunités étudiantes, les rapproche du profil de chacun et envoie des alertes pour agir avant les échéances.",
+    },
     contact: {
       title: 'Contact — parlez-nous de votre marque | TE Labs',
       description:
@@ -79,6 +89,16 @@ export const META = {
       title: 'ConektAds — Outdoor Advertising Management Software | TE Labs',
       description:
         'Discover ConektAds, a platform that brings billboard inventory, map discovery, customer inquiries, quotes and media plans into one connected workflow.',
+    },
+    taqtona: {
+      title: 'Taqtona — AI for Manufacturing | TE Labs',
+      description:
+        'Discover Taqtona, an AI manufacturing suite for automated drawing inspection, production and inventory control, CNC programming and upcoming DFM costing.',
+    },
+    globalScholarship: {
+      title: 'The Global Scholarship — Opportunity Matching Platform | TE Labs',
+      description:
+        'Discover a platform that brings student opportunities into one place, matches them to each profile and sends timely alerts before application deadlines.',
     },
     contact: {
       title: 'Contact — Tell Us About Your Brand | TE Labs',
@@ -207,6 +227,8 @@ export function breadcrumbSchema(page, lang, t) {
     work: t.tCreative,
     tech: t.tTech,
     conektAds: 'ConektAds',
+    taqtona: 'Taqtona',
+    globalScholarship: 'The Global Scholarship',
     contact: t.tContact,
   }
   return {

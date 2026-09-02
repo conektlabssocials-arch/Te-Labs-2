@@ -12,6 +12,8 @@ import ServicesPage from './pages/ServicesPage'
 import WorkPage from './pages/WorkPage'
 import TechPage from './pages/TechPage'
 import ConektAdsPage from './pages/ConektAdsPage'
+import TaqtonaPage from './pages/TaqtonaPage'
+import GlobalScholarshipPage from './pages/GlobalScholarshipPage'
 import ContactPage from './pages/ContactPage'
 import NotFoundPage from './pages/NotFoundPage'
 import { NOT_FOUND } from './data/routes'
@@ -144,6 +146,8 @@ export default function App({ url }) {
       {page === 'work' && <WorkPage t={t} helpers={workHelpers} />}
       {page === 'tech' && <TechPage t={t} lang={lang} navigate={navigate} />}
       {page === 'conektAds' && <ConektAdsPage t={t} lang={lang} navigate={navigate} />}
+      {page === 'taqtona' && <TaqtonaPage t={t} lang={lang} navigate={navigate} />}
+      {page === 'globalScholarship' && <GlobalScholarshipPage t={t} lang={lang} navigate={navigate} />}
       {page === 'contact' && (
         <ContactPage t={t} form={form} setForm={setForm} send={send} />
       )}

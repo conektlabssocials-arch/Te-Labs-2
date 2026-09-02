@@ -35,14 +35,14 @@ export default function Navbar({ t, nav }) {
           <a
             key={id}
             {...to(targetPage, hash)}
-            aria-current={!hash && (page === targetPage || (targetPage === 'tech' && page === 'conektAds')) ? 'page' : undefined}
+            aria-current={!hash && (page === targetPage || (targetPage === 'tech' && ['conektAds', 'taqtona', 'globalScholarship'].includes(page))) ? 'page' : undefined}
             style={{
               textDecoration: 'none',
               font: 'inherit',
               letterSpacing: 'inherit',
               textTransform: 'inherit',
               color:
-                targetPage === 'tech' && page === 'conektAds'
+                targetPage === 'tech' && ['conektAds', 'taqtona', 'globalScholarship'].includes(page)
                   ? '#F4F0FA'
                   : hash
                     ? '#A99BBE'
