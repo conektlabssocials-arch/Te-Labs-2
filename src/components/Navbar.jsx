@@ -4,7 +4,15 @@ import { pathFor } from '../data/routes'
 
 export default function Navbar({ t, nav }) {
   const { setLang, ink, enBg, enFg, frBg, frFg, lang, navigate, page } = nav
-  const to = (key) => linkProps(key, lang, navigate)
+  const to = (key, hash = '') => linkProps(key, lang, navigate, hash)
+
+  const links = [
+    { id: 'home', page: 'home', label: t.tHome },
+    { id: 'services', page: 'services', label: t.tServices },
+    { id: 'creative', page: 'work', label: t.tCreative },
+    { id: 'tech', page: 'tech', label: t.tTech },
+    { id: 'contact', page: 'contact', label: t.tContact },
+  ]
 
   return (
     <header className="te-nav">
@@ -23,22 +31,17 @@ export default function Navbar({ t, nav }) {
       </a>
 
       <nav className="te-nav-links" aria-label="Primary">
-        {[
-          ['home', t.tHome],
-          ['services', t.tServices],
-          ['work', t.tWork],
-          ['contact', t.tContact],
-        ].map(([key, label]) => (
+        {links.map(({ id, page: targetPage, hash, label }) => (
           <a
-            key={key}
-            {...to(key)}
-            aria-current={page === key ? 'page' : undefined}
+            key={id}
+            {...to(targetPage, hash)}
+            aria-current={!hash && page === targetPage ? 'page' : undefined}
             style={{
               textDecoration: 'none',
               font: 'inherit',
               letterSpacing: 'inherit',
               textTransform: 'inherit',
-              color: ink(key),
+              color: hash ? '#A99BBE' : ink(targetPage),
             }}
           >
             {label}

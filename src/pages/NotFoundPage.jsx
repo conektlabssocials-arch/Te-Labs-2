@@ -9,12 +9,13 @@ import { linkProps } from '../lib/router'
  * below the headline is a way back out.
  */
 export default function NotFoundPage({ t, lang, navigate }) {
-  // The three destinations that are not home, each with the line the page
+  // The main destinations that are not home, each with the line the page
   // itself leads with — so the choice is made on substance, not on a bare slug.
   const destinations = [
     { n: '01', page: 'services', label: t.tServices, blurb: `${t.tServicesHeroA} ${t.tServicesHeroB}` },
-    { n: '02', page: 'work', label: t.tWork, blurb: `${t.tWorkHeroA} ${t.tWorkHeroB}` },
-    { n: '03', page: 'contact', label: t.tContact, blurb: t.tHeroReassure },
+    { n: '02', page: 'work', label: t.tCreative, blurb: `${t.tWorkHeroA} ${t.tWorkHeroB}` },
+    { n: '03', page: 'tech', label: t.tTech, blurb: `${t.tTechHeroA} ${t.tTechHeroB}` },
+    { n: '04', page: 'contact', label: t.tContact, blurb: t.tHeroReassure },
   ]
 
   return (

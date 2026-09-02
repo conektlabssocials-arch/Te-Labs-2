@@ -10,6 +10,7 @@ import FinalCta from './components/FinalCta'
 import HomePage from './pages/HomePage'
 import ServicesPage from './pages/ServicesPage'
 import WorkPage from './pages/WorkPage'
+import TechPage from './pages/TechPage'
 import ContactPage from './pages/ContactPage'
 import NotFoundPage from './pages/NotFoundPage'
 import { NOT_FOUND } from './data/routes'
@@ -140,6 +141,7 @@ export default function App({ url }) {
         <ServicesPage t={t} go={go} jump={jump} />
       )}
       {page === 'work' && <WorkPage t={t} helpers={workHelpers} />}
+      {page === 'tech' && <TechPage t={t} lang={lang} />}
       {page === 'contact' && (
         <ContactPage t={t} form={form} setForm={setForm} send={send} />
       )}

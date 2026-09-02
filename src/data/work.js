@@ -35,16 +35,19 @@ export const SOCIAL_WORK = [
   { id: 's8', title: 'Meetha Bharath', videoSrc: 'https://framerusercontent.com/assets/rbeCBVQSGNz14Hac8RGmbwVRiM.mp4' },
 ];
 
-export const WEB_WORK = [
+export const WEBSITE_WORK = [
   { id: 'w1', title: 'Blckole', thumbnail: '/assets/Project/blckole.webp', url: 'https://www.blckole.com/' },
   { id: 'w2', title: 'Kamat Annaleela', thumbnail: '/assets/Project/kamatannaleela.webp', url: 'https://www.kamatannaleela.com/' },
   { id: 'w3', title: 'Sourberry', thumbnail: '/assets/Project/sourberry.webp', url: 'https://www.sourberryentertainment.com/' },
   { id: 'w4', title: 'Camorent', thumbnail: '/assets/Project/camorent.webp', url: 'https://www.camorent.com/' },
-  { id: 'w5', title: 'Golt', thumbnail: '/assets/Project/golt.webp', url: 'https://play.google.com/store/apps/details?id=com.ajmalca.client' },
-  { id: 'w6', title: 'Expenza', thumbnail: '/assets/Project/expenza.webp', url: 'https://play.google.com/store/apps/details?id=com.mohit29kr.expenza' },
   { id: 'w7', title: 'Nxtgen', thumbnail: '/assets/Project/nxtgenservices.webp', url: 'https://www.nxtgenservices.in/' },
   { id: 'w8', title: 'Mockit', thumbnail: '/assets/Project/mockit.webp', url: 'https://mockit-interview.vercel.app/' },
   { id: 'w9', title: 'SuperGem', thumbnail: '/assets/Project/supergem.webp', url: 'https://www.supergem.in/' },
+];
+
+export const APP_WORK = [
+  { id: 'a1', title: 'Golt', thumbnail: '/assets/Project/golt.webp', url: 'https://play.google.com/store/apps/details?id=com.ajmalca.client' },
+  { id: 'a2', title: 'Expenza', thumbnail: '/assets/Project/expenza.webp', url: 'https://play.google.com/store/apps/details?id=com.mohit29kr.expenza' },
 ];
 
 export const VIDEO_WORK = [

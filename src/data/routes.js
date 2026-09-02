@@ -9,7 +9,7 @@
 export const SITE_URL = 'https://www.telabs.fr'
 export const DEFAULT_LANG = 'fr'
 export const LANGS = ['fr', 'en']
-export const PAGES = ['home', 'services', 'work', 'contact']
+export const PAGES = ['home', 'services', 'work', 'tech', 'contact']
 
 /**
  * The error page. Deliberately not in PAGES: it has no canonical URL, earns no
@@ -27,8 +27,8 @@ export const NOT_FOUND = 'notfound'
  * users actually search for; "work" earns nothing on a French query.
  */
 const SLUGS = {
-  fr: { home: '', services: 'services', work: 'realisations', contact: 'contact' },
-  en: { home: '', services: 'services', work: 'work', contact: 'contact' },
+  fr: { home: '', services: 'services', work: 'realisations', tech: 'tech', contact: 'contact' },
+  en: { home: '', services: 'services', work: 'work', tech: 'tech', contact: 'contact' },
 }
 
 /** Canonical path for a page in a language, e.g. ('work','fr') -> '/realisations'. */

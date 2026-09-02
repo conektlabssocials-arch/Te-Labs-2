@@ -75,7 +75,10 @@ export default function Footer({ t, lang, navigate }) {
               {t.tStudio}
             </div>
             <a {...to('work')} style={footerLink}>
-              {t.tWork}
+              {t.tCreative}
+            </a>
+            <a {...to('tech')} style={footerLink}>
+              {t.tTech}
             </a>
             <a {...linkProps('home', lang, navigate, 'process')} style={footerLink}>
               {t.tProcess}

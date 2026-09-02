@@ -29,9 +29,14 @@ export const META = {
         "Trois services qui se renforcent : gestion des réseaux sociaux, création de sites web 3D et immersifs, et films produits par IA. Bilingue FR / EN, à Paris depuis 2024.",
     },
     work: {
-      title: 'Réalisations — sites web, films IA & social | TE Labs',
+      title: 'Créatif — films IA & contenus sociaux | TE Labs',
       description:
-        "Nos réalisations récentes par service : sites web et applications, films de marque produits par IA, et contenus sociaux. Découvrez le travail livré par le studio TE Labs.",
+        "Nos réalisations créatives récentes : films de marque produits par IA et contenus pour les réseaux sociaux. Découvrez le travail livré par le studio TE Labs.",
+    },
+    tech: {
+      title: 'Tech — sites web & applications | TE Labs',
+      description:
+        "Découvrez les sites web et applications conçus et développés par TE Labs : expériences rapides, soignées et pensées pour convertir.",
     },
     contact: {
       title: 'Contact — parlez-nous de votre marque | TE Labs',
@@ -56,9 +61,14 @@ export const META = {
         'Three services that hold each other up: social media management, immersive 3D website development, and cinematic films produced with AI. Bilingual FR / EN, Paris since 2024.',
     },
     work: {
-      title: 'Selected Work — Websites, AI Films & Social | TE Labs',
+      title: 'Creative — AI Films & Social Content | TE Labs',
       description:
-        'Recent work grouped by service: websites and apps, AI-produced brand films, and social content. See what the TE Labs studio has shipped for ambitious brands.',
+        'Recent creative work grouped by service: AI-produced brand films and social content. See what the TE Labs studio has delivered for ambitious brands.',
+    },
+    tech: {
+      title: 'Tech — Websites & Apps | TE Labs',
+      description:
+        'Explore websites and apps designed and developed by TE Labs: fast, polished digital products shaped around users and business results.',
     },
     contact: {
       title: 'Contact — Tell Us About Your Brand | TE Labs',
@@ -117,6 +127,7 @@ export function organizationSchema(lang) {
       itemListElement: [
         lang === 'fr' ? 'Gestion des réseaux sociaux' : 'Social media management',
         lang === 'fr' ? 'Création de sites web' : 'Website development',
+        lang === 'fr' ? "Développement d'applications" : 'App development',
         lang === 'fr' ? 'Vidéo IA' : 'AI video production',
       ].map((name) => ({
         '@type': 'Offer',
@@ -181,7 +192,12 @@ export function howToSchema(t, lang) {
 }
 
 export function breadcrumbSchema(page, lang, t) {
-  const labels = { services: t.tServices, work: t.tWork, contact: t.tContact }
+  const labels = {
+    services: t.tServices,
+    work: t.tCreative,
+    tech: t.tTech,
+    contact: t.tContact,
+  }
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',

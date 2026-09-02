@@ -1,5 +1,5 @@
 import { AutoVideo, ImageSlot } from '../components/Media'
-import { SOCIAL_WORK, VIDEO_WORK, WEB_WORK } from '../data/work'
+import { SOCIAL_WORK, VIDEO_WORK } from '../data/work'
 
 function SectionHeader({ n, title, count, expanded, hovered, onOpen, onHover, onLeave }) {
   const active = hovered || expanded;
@@ -127,74 +127,6 @@ function SocialGrid({ items, t }) {
           </div>
         </div>
       ))}
-    </div>
-  );
-}
-
-function WebGrid({ items, t }) {
-  return (
-    <div className="te-web-grid">
-      {items.map((item) => {
-        const title = item.title || item.label;
-        const card = (
-          <>
-            <div style={{ border: "1px solid #2A1E3A" }}>
-              <div
-                style={{
-                  display: "flex",
-                  gap: 5,
-                  padding: "10px 12px",
-                  borderBottom: "1px solid #2A1E3A",
-                  background: "#150C20",
-                }}
-              >
-                <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#3A2E4C" }} />
-                <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#3A2E4C" }} />
-                <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#8B2FF8" }} />
-              </div>
-              {/* 16/9 matches the source mockups (1672x941) exactly, so
-                  object-fit: cover has nothing to crop. Any other ratio eats
-                  the wordmark, which sits at the left edge of every one. */}
-              <div style={{ aspectRatio: "16/9" }}>
-                <ProjectImage
-                  src={item.thumbnail || item.src}
-                  alt={`${title} — ${t.tAltWeb}`}
-                  placeholder="Project thumbnail"
-                />
-              </div>
-            </div>
-            <div
-              style={{
-                marginTop: 10,
-                display: "flex",
-                justifyContent: "space-between",
-                gap: 12,
-                font: "500 11px 'JetBrains Mono', monospace",
-                letterSpacing: ".1em",
-                color: "#BFB2D4",
-              }}
-            >
-              <span>{title}</span>
-              {item.url ? <span style={{ color: "#C6A0FF" }}>↗</span> : null}
-            </div>
-          </>
-        );
-
-        return item.url ? (
-          <a
-            key={item.id}
-            className="te-work-lift"
-            href={item.url}
-            target="_blank"
-            rel="noreferrer"
-            aria-label={`${title} — open project`}
-          >
-            {card}
-          </a>
-        ) : (
-          <div key={item.id}>{card}</div>
-        );
-      })}
     </div>
   );
 }
@@ -329,7 +261,7 @@ export default function WorkPage({ t, helpers }) {
               color: "#8B2FF8",
             }}
           >
-            {t.tWork}
+            {t.tCreative}
           </span>
           {expanded ? (
             <button
@@ -364,7 +296,13 @@ export default function WorkPage({ t, helpers }) {
       </section>
 
       {show("video") ? (
-        <section className="te-work-pad-x" style={{ paddingTop: "clamp(40px, 6vw, 60px)" }}>
+        <section
+          className="te-work-pad-x"
+          style={{
+            paddingTop: "clamp(40px, 6vw, 60px)",
+            paddingBottom: expanded === "video" ? 84 : 0,
+          }}
+        >
           <SectionHeader
             n="01"
             title={t.tVideo}
@@ -380,7 +318,10 @@ export default function WorkPage({ t, helpers }) {
       ) : null}
 
       {show("social") ? (
-        <section className="te-work-pad-x" style={{ paddingTop: "clamp(40px, 6vw, 60px)" }}>
+        <section
+          className="te-work-pad-x"
+          style={{ paddingTop: "clamp(40px, 6vw, 60px)", paddingBottom: 84 }}
+        >
           <SectionHeader
             n="02"
             title={t.tSocial}
@@ -400,26 +341,6 @@ export default function WorkPage({ t, helpers }) {
         </section>
       ) : null}
 
-      {show("web") ? (
-        <section className="te-work-pad-x" style={{ paddingTop: 60, paddingBottom: 84 }}>
-          <SectionHeader
-            n="03"
-            title={t.tWeb}
-            count={countLabel(Math.min(3, WEB_WORK.length), WEB_WORK.length)}
-            expanded={expanded === "web"}
-            hovered={hovered === "web"}
-            onOpen={() => openWork("web")}
-            onHover={() => setHovered("web")}
-            onLeave={() => setHovered(null)}
-          />
-          <WebGrid items={WEB_WORK.slice(0, 3)} t={t} />
-          {expanded === "web" ? (
-            <div style={{ marginTop: 14 }}>
-              <WebGrid items={WEB_WORK.slice(3)} t={t} />
-            </div>
-          ) : null}
-        </section>
-      ) : null}
     </div>
   );
 }
