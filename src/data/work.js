@@ -57,6 +57,12 @@ export const APP_WORK = [
 
 ];
 
+export const SOFTWARE_WORK = [
+  { id: 'sw1', title: 'Conekt Ads' },
+  { id: 'sw2', title: 'Taqtona' },
+  { id: 'sw3', title: 'The Global Scholarship' },
+];
+
 export const VIDEO_WORK = [
   {
     id: 'v24',

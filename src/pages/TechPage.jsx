@@ -1,26 +1,28 @@
 import { useState } from 'react'
 import { ImageSlot } from '../components/Media'
-import { APP_WORK, WEBSITE_WORK } from '../data/work'
+import { APP_WORK, SOFTWARE_WORK, WEBSITE_WORK } from '../data/work'
 
-function ProjectImage({ src, alt }) {
+function ProjectImage({ src, alt, placeholder }) {
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-      <ImageSlot placeholder="Project thumbnail" />
-      <img
-        src={src}
-        alt={alt}
-        loading="lazy"
-        onError={(event) => {
-          event.currentTarget.style.display = 'none'
-        }}
-        style={{
-          position: 'absolute',
-          inset: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-        }}
-      />
+      <ImageSlot placeholder={placeholder} />
+      {src ? (
+        <img
+          src={src}
+          alt={alt}
+          loading="lazy"
+          onError={(event) => {
+            event.currentTarget.style.display = 'none'
+          }}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+          }}
+        />
+      ) : null}
     </div>
   )
 }
@@ -96,19 +98,14 @@ function SectionHeader({ n, title, count, expanded, hovered, onOpen, onHover, on
 
 function ProjectGrid({ items, type, t }) {
   const isApp = type === 'app'
+  const isSoftware = type === 'software'
 
   return (
     <div className="te-web-grid">
-      {items.map((item) => (
-        <a
-          key={item.id}
-          className="te-work-lift"
-          href={item.url}
-          target="_blank"
-          rel="noreferrer"
-          aria-label={`${item.title} — ${t.tOpenProject}`}
-        >
-          <div style={{ border: '1px solid #2A1E3A', background: '#050308' }}>
+      {items.map((item) => {
+        const card = (
+          <>
+            <div style={{ border: '1px solid #2A1E3A', background: '#050308' }}>
             <div
               style={{
                 display: 'flex',
@@ -132,13 +129,14 @@ function ProjectGrid({ items, type, t }) {
                   color: '#8B7BA3',
                 }}
               >
-                {isApp ? t.tAppBadge : t.tWebsiteBadge}
+                {isSoftware ? t.tSoftwareBadge : isApp ? t.tAppBadge : t.tWebsiteBadge}
               </span>
             </div>
             <div style={{ aspectRatio: '16/9' }}>
               <ProjectImage
                 src={item.thumbnail}
-                alt={`${item.title} — ${isApp ? t.tAltApp : t.tAltWeb}`}
+                alt={`${item.title} — ${isSoftware ? t.tAltSoftware : isApp ? t.tAltApp : t.tAltWeb}`}
+                placeholder={item.title}
               />
             </div>
           </div>
@@ -154,10 +152,28 @@ function ProjectGrid({ items, type, t }) {
             }}
           >
             <span>{item.title}</span>
-            <span style={{ color: '#C6A0FF' }}>↗</span>
+            {item.url ? <span style={{ color: '#C6A0FF' }}>↗</span> : null}
           </div>
-        </a>
-      ))}
+          </>
+        )
+
+        return item.url ? (
+          <a
+            key={item.id}
+            className="te-work-lift"
+            href={item.url}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={`${item.title} — ${t.tOpenProject}`}
+          >
+            {card}
+          </a>
+        ) : (
+          <div key={item.id} className="te-work-lift">
+            {card}
+          </div>
+        )
+      })}
     </div>
   )
 }
@@ -257,7 +273,10 @@ export default function TechPage({ t, lang }) {
         <section
           id="apps"
           className="te-work-pad-x"
-          style={{ paddingTop: 'clamp(40px, 6vw, 60px)', paddingBottom: 84 }}
+          style={{
+            paddingTop: 'clamp(40px, 6vw, 60px)',
+            paddingBottom: expanded === 'apps' ? 84 : 0,
+          }}
         >
           <SectionHeader
             n="02"
@@ -275,6 +294,26 @@ export default function TechPage({ t, lang }) {
               <ProjectGrid items={APP_WORK.slice(3)} type="app" t={t} />
             </div>
           ) : null}
+        </section>
+      ) : null}
+
+      {show('software') ? (
+        <section
+          id="software"
+          className="te-work-pad-x"
+          style={{ paddingTop: 'clamp(40px, 6vw, 60px)', paddingBottom: 84 }}
+        >
+          <SectionHeader
+            n="03"
+            title={t.tSoftware}
+            count={count(SOFTWARE_WORK.length, SOFTWARE_WORK.length)}
+            expanded={expanded === 'software'}
+            hovered={hovered === 'software'}
+            onOpen={() => open('software')}
+            onHover={() => setHovered('software')}
+            onLeave={() => setHovered(null)}
+          />
+          <ProjectGrid items={SOFTWARE_WORK} type="software" t={t} />
         </section>
       ) : null}
     </div>

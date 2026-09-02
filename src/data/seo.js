@@ -34,9 +34,9 @@ export const META = {
         "Nos réalisations créatives récentes : films de marque produits par IA et contenus pour les réseaux sociaux. Découvrez le travail livré par le studio TE Labs.",
     },
     tech: {
-      title: 'Tech — sites web & applications | TE Labs',
+      title: 'Tech — sites web, applications & logiciels | TE Labs',
       description:
-        "Découvrez les sites web et applications conçus et développés par TE Labs : expériences rapides, soignées et pensées pour convertir.",
+        "Découvrez les sites web, applications et logiciels conçus et développés par TE Labs : expériences rapides, soignées et pensées pour convertir.",
     },
     contact: {
       title: 'Contact — parlez-nous de votre marque | TE Labs',
@@ -66,9 +66,9 @@ export const META = {
         'Recent creative work grouped by service: AI-produced brand films and social content. See what the TE Labs studio has delivered for ambitious brands.',
     },
     tech: {
-      title: 'Tech — Websites & Apps | TE Labs',
+      title: 'Tech — Websites, Apps & Software | TE Labs',
       description:
-        'Explore websites and apps designed and developed by TE Labs: fast, polished digital products shaped around users and business results.',
+        'Explore websites, apps and software designed and developed by TE Labs: fast, polished digital products shaped around users and business results.',
     },
     contact: {
       title: 'Contact — Tell Us About Your Brand | TE Labs',
