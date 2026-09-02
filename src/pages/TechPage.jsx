@@ -262,14 +262,19 @@ export default function TechPage({ t, lang }) {
           <SectionHeader
             n="02"
             title={t.tApps}
-            count={count(APP_WORK.length, APP_WORK.length)}
+            count={count(Math.min(3, APP_WORK.length), APP_WORK.length)}
             expanded={expanded === 'apps'}
             hovered={hovered === 'apps'}
             onOpen={() => open('apps')}
             onHover={() => setHovered('apps')}
             onLeave={() => setHovered(null)}
           />
-          <ProjectGrid items={APP_WORK} type="app" t={t} />
+          <ProjectGrid items={APP_WORK.slice(0, 3)} type="app" t={t} />
+          {expanded === 'apps' ? (
+            <div style={{ marginTop: 14 }}>
+              <ProjectGrid items={APP_WORK.slice(3)} type="app" t={t} />
+            </div>
+          ) : null}
         </section>
       ) : null}
     </div>
