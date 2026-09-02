@@ -63,6 +63,21 @@ export const SOFTWARE_WORK = [
   { id: 'sw3', title: 'The Global Scholarship' },
 ];
 
+export const CASE_STUDIES = [
+  { id: 'cs1', title: 'Spectral Point — Outbound AI Agency System', thumbnail: '/assets/case-studies/page-02.webp', url: '/assets/case-studies/page-02.webp' },
+  { id: 'cs2', title: 'Unsliced — AI Course Assistant', thumbnail: '/assets/case-studies/page-03.webp', url: '/assets/case-studies/page-03.webp' },
+  { id: 'cs3', title: 'Cueclip — Customer-Finding System', thumbnail: '/assets/case-studies/page-04.webp', url: '/assets/case-studies/page-04.webp' },
+  { id: 'cs4', title: 'Cueclip — System Workflow', thumbnail: '/assets/case-studies/page-05.webp', url: '/assets/case-studies/page-05.webp' },
+  { id: 'cs5', title: 'Usectl — Customer Pipeline', thumbnail: '/assets/case-studies/page-06.webp', url: '/assets/case-studies/page-06.webp' },
+  { id: 'cs6', title: 'Revibe World — Live Assistant Demo', thumbnail: '/assets/case-studies/page-07.webp', url: '/assets/case-studies/page-07.webp' },
+  { id: 'cs7', title: 'Good Eye Society — Content Assistant', thumbnail: '/assets/case-studies/page-08.webp', url: '/assets/case-studies/page-08.webp' },
+  { id: 'cs8', title: 'Edge Equity Capital — Content Machine', thumbnail: '/assets/case-studies/page-09.webp', url: '/assets/case-studies/page-09.webp' },
+  { id: 'cs9', title: 'Edge Equity Capital — System Map', thumbnail: '/assets/case-studies/page-10.webp', url: '/assets/case-studies/page-10.webp' },
+  { id: 'cs10', title: 'Upti.my — Sales Automation', thumbnail: '/assets/case-studies/page-11.webp', url: '/assets/case-studies/page-11.webp' },
+  { id: 'cs11', title: 'Morphcast — Executive Outreach', thumbnail: '/assets/case-studies/page-12.webp', url: '/assets/case-studies/page-12.webp' },
+  { id: 'cs12', title: 'Flinto Labs — AI School Assistant', thumbnail: '/assets/case-studies/page-13.webp', url: '/assets/case-studies/page-13.webp' },
+];
+
 export const VIDEO_WORK = [
   {
     id: 'v24',

@@ -36,7 +36,7 @@ export const META = {
     tech: {
       title: 'Tech — sites web, applications & logiciels | TE Labs',
       description:
-        "Découvrez les sites web, applications et logiciels conçus et développés par TE Labs : expériences rapides, soignées et pensées pour convertir.",
+        "Découvrez les sites web, applications, logiciels et études de cas de TE Labs : des expériences rapides, soignées et pensées pour convertir.",
     },
     contact: {
       title: 'Contact — parlez-nous de votre marque | TE Labs',
@@ -68,7 +68,7 @@ export const META = {
     tech: {
       title: 'Tech — Websites, Apps & Software | TE Labs',
       description:
-        'Explore websites, apps and software designed and developed by TE Labs: fast, polished digital products shaped around users and business results.',
+        'Explore websites, apps, software and case studies from TE Labs: fast, polished digital products shaped around users and business results.',
     },
     contact: {
       title: 'Contact — Tell Us About Your Brand | TE Labs',
