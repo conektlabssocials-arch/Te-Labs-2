@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useState } from 'react'
 import { ImageSlot } from '../components/Media'
 import { APP_WORK, CASE_STUDIES, SOFTWARE_WORK, WEBSITE_WORK } from '../data/work'
 import { linkProps } from '../lib/router'
@@ -7,6 +7,7 @@ const PROJECT_SECTION_STYLE = {
   paddingTop: 'clamp(40px, 6vw, 60px)',
   paddingBottom: 0,
 }
+const PREVIEW_COUNT = 3
 
 function ProjectImage({ src, alt, placeholder }) {
   return (
@@ -33,7 +34,7 @@ function ProjectImage({ src, alt, placeholder }) {
   )
 }
 
-function SectionHeader({ n, title, count }) {
+function SectionHeader({ n, title, count, visibleCount }) {
   return (
     <div
       style={{
@@ -74,58 +75,20 @@ function SectionHeader({ n, title, count }) {
           whiteSpace: 'nowrap',
         }}
       >
-        {String(count).padStart(2, '0')}
+        {String(visibleCount).padStart(2, '0')} / {String(count).padStart(2, '0')}
       </span>
-      <span aria-hidden="true" style={{ color: '#C6A0FF', fontSize: 20 }}>→</span>
     </div>
   )
 }
 
-function ProjectGrid({ items, type, t, lang, navigate, label }) {
-  const railRef = useRef(null)
+function ProjectGrid({ id, items, type, t, lang, navigate }) {
   const isApp = type === 'app'
   const isSoftware = type === 'software'
   const isCaseStudy = type === 'case-study'
   const actionLabel = isCaseStudy ? t.tOpenCaseStudy : t.tOpenProject
 
-  useEffect(() => {
-    const rail = railRef.current
-    if (!rail) return undefined
-
-    const handleWheel = (event) => {
-      // Trackpads already provide native horizontal movement. Translate only
-      // a primarily vertical wheel gesture when this rail can move further.
-      if (!event.deltaY || Math.abs(event.deltaX) > Math.abs(event.deltaY)) return
-
-      const maxScrollLeft = rail.scrollWidth - rail.clientWidth
-      const movingForward = event.deltaY > 0
-      const canMove = movingForward
-        ? rail.scrollLeft < maxScrollLeft - 1
-        : rail.scrollLeft > 1
-
-      if (!canMove) return
-
-      event.preventDefault()
-      const deltaScale = event.deltaMode === 1
-        ? 24
-        : event.deltaMode === 2
-          ? rail.clientWidth
-          : 1
-      rail.scrollLeft += event.deltaY * deltaScale
-    }
-
-    rail.addEventListener('wheel', handleWheel, { passive: false })
-    return () => rail.removeEventListener('wheel', handleWheel)
-  }, [])
-
   return (
-    <div
-      ref={railRef}
-      className="te-tech-rail"
-      role="region"
-      aria-label={label}
-      tabIndex="0"
-    >
+    <div id={id} className="te-web-grid">
       {items.map((item) => {
         const card = (
           <>
@@ -239,7 +202,37 @@ function ProjectGrid({ items, type, t, lang, navigate, label }) {
   )
 }
 
+function SectionMoreButton({ sectionId, expanded, hiddenCount, onToggle, t }) {
+  if (hiddenCount <= 0) return null
+
+  return (
+    <div className="te-tech-section-more">
+      <button
+        type="button"
+        className="te-tech-show-more__button"
+        aria-controls={`${sectionId}-projects`}
+        aria-expanded={expanded}
+        onClick={onToggle}
+      >
+        <span>{expanded ? t.tShowFewerProjects : t.tShowMoreProjects}</span>
+        <span aria-hidden="true">{expanded ? '−' : `+${hiddenCount}`}</span>
+      </button>
+    </div>
+  )
+}
+
 export default function TechPage({ t, lang, navigate }) {
+  const [expandedSections, setExpandedSections] = useState({})
+  const isExpanded = (sectionId) => Boolean(expandedSections[sectionId])
+  const visibleItems = (sectionId, items) =>
+    isExpanded(sectionId) ? items : items.slice(0, PREVIEW_COUNT)
+  const toggleSection = (sectionId) => {
+    setExpandedSections((current) => ({
+      ...current,
+      [sectionId]: !current[sectionId],
+    }))
+  }
+
   return (
     <div>
       <section
@@ -275,23 +268,44 @@ export default function TechPage({ t, lang, navigate }) {
       </section>
 
       <section id="software" className="te-work-pad-x" style={PROJECT_SECTION_STYLE}>
-        <SectionHeader n="03" title={t.tSoftware} count={SOFTWARE_WORK.length} />
-        <ProjectGrid items={SOFTWARE_WORK} type="software" t={t} lang={lang} navigate={navigate} label={t.tSoftware} />
+        <SectionHeader n="03" title={t.tSoftware} count={SOFTWARE_WORK.length} visibleCount={SOFTWARE_WORK.length} />
+        <ProjectGrid id="software-projects" items={SOFTWARE_WORK} type="software" t={t} lang={lang} navigate={navigate} />
       </section>
 
       <section id="apps" className="te-work-pad-x" style={PROJECT_SECTION_STYLE}>
-        <SectionHeader n="02" title={t.tApps} count={APP_WORK.length} />
-        <ProjectGrid items={APP_WORK} type="app" t={t} lang={lang} navigate={navigate} label={t.tApps} />
+        <SectionHeader n="02" title={t.tApps} count={APP_WORK.length} visibleCount={visibleItems('apps', APP_WORK).length} />
+        <ProjectGrid id="apps-projects" items={visibleItems('apps', APP_WORK)} type="app" t={t} lang={lang} navigate={navigate} />
+        <SectionMoreButton
+          sectionId="apps"
+          expanded={isExpanded('apps')}
+          hiddenCount={APP_WORK.length - PREVIEW_COUNT}
+          onToggle={() => toggleSection('apps')}
+          t={t}
+        />
       </section>
 
       <section id="case-studies" className="te-work-pad-x" style={PROJECT_SECTION_STYLE}>
-        <SectionHeader n="04" title={t.tCaseStudies} count={CASE_STUDIES.length} />
-        <ProjectGrid items={CASE_STUDIES} type="case-study" t={t} lang={lang} navigate={navigate} label={t.tCaseStudies} />
+        <SectionHeader n="04" title={t.tCaseStudies} count={CASE_STUDIES.length} visibleCount={visibleItems('case-studies', CASE_STUDIES).length} />
+        <ProjectGrid id="case-studies-projects" items={visibleItems('case-studies', CASE_STUDIES)} type="case-study" t={t} lang={lang} navigate={navigate} />
+        <SectionMoreButton
+          sectionId="case-studies"
+          expanded={isExpanded('case-studies')}
+          hiddenCount={CASE_STUDIES.length - PREVIEW_COUNT}
+          onToggle={() => toggleSection('case-studies')}
+          t={t}
+        />
       </section>
 
       <section id="websites" className="te-work-pad-x" style={PROJECT_SECTION_STYLE}>
-        <SectionHeader n="01" title={t.tWebsites} count={WEBSITE_WORK.length} />
-        <ProjectGrid items={WEBSITE_WORK} type="website" t={t} lang={lang} navigate={navigate} label={t.tWebsites} />
+        <SectionHeader n="01" title={t.tWebsites} count={WEBSITE_WORK.length} visibleCount={visibleItems('websites', WEBSITE_WORK).length} />
+        <ProjectGrid id="websites-projects" items={visibleItems('websites', WEBSITE_WORK)} type="website" t={t} lang={lang} navigate={navigate} />
+        <SectionMoreButton
+          sectionId="websites"
+          expanded={isExpanded('websites')}
+          hiddenCount={WEBSITE_WORK.length - PREVIEW_COUNT}
+          onToggle={() => toggleSection('websites')}
+          t={t}
+        />
       </section>
     </div>
   )

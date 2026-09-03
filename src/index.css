@@ -409,27 +409,6 @@ button {
   gap: 14px;
 }
 
-.te-tech-rail {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: calc((100% - 28px) / 3);
-  gap: 14px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding: 4px 2px 14px;
-  scroll-snap-type: inline mandatory;
-  scroll-padding-inline: 2px;
-  overscroll-behavior-inline: contain;
-  scrollbar-width: thin;
-  scrollbar-color: var(--accent) #1b1027;
-  -webkit-overflow-scrolling: touch;
-}
-
-.te-tech-rail > * {
-  min-width: 0;
-  scroll-snap-align: start;
-}
-
 .te-tech-card {
   cursor: pointer;
   text-decoration: none;
@@ -485,16 +464,40 @@ button {
   transform: translateX(3px);
 }
 
-.te-tech-rail::-webkit-scrollbar {
-  height: 5px;
+.te-tech-section-more {
+  display: flex;
+  justify-content: center;
+  padding-top: clamp(34px, 5vw, 52px);
 }
 
-.te-tech-rail::-webkit-scrollbar-track {
-  background: #1b1027;
+.te-tech-show-more__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  min-width: min(100%, 280px);
+  border: 1px solid #5f318d;
+  background: #100917;
+  color: #dccbff;
+  padding: 14px 20px;
+  cursor: pointer;
+  font: 600 10px 'JetBrains Mono', monospace;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
-.te-tech-rail::-webkit-scrollbar-thumb {
+.te-tech-show-more__button:hover,
+.te-tech-show-more__button:focus-visible {
+  border-color: var(--accent);
   background: var(--accent);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.te-tech-show-more__button:focus-visible {
+  outline: 2px solid #c6a0ff;
+  outline-offset: 3px;
 }
 
 /* Portrait films frame two wide films in each feature row. The remaining
@@ -661,9 +664,6 @@ button {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .te-tech-rail {
-    grid-auto-columns: calc((100% - 14px) / 2);
-  }
 }
 
 @media (max-width: 720px) {
@@ -723,9 +723,6 @@ button {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .te-tech-rail {
-    grid-auto-columns: min(86vw, 360px);
-  }
 }
 
 @media (max-width: 480px) {
