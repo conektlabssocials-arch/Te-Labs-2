@@ -36,9 +36,9 @@ export const SOCIAL_WORK = [
 ];
 
 export const WEBSITE_WORK = [
-  {id: 'w5', title: '4th Revolution Media', thumbnail: '/assets/Project/4threvolutionmedia.webp', url: 'https://www.4threvolutionmedia.com/' },
-  { id: 'w1', title: 'Blckole', thumbnail: '/assets/Project/blckole.webp', url: 'https://www.blckole.com/' },
-  { id: 'w2', title: 'Kamat Annaleela', thumbnail: '/assets/Project/kamatannaleela.webp', url: 'https://www.kamatannaleela.com/' },
+  { id: 'w5', title: '4th Revolution Media', thumbnail: '/assets/Project/4threvolutionmedia.webp', url: 'https://www.4threvolutionmedia.com/', descriptionKey: 'tFourthRevolutionCard' },
+  { id: 'w1', title: 'Blckole', thumbnail: '/assets/Project/blckole.webp', url: 'https://www.blckole.com/', descriptionKey: 'tBlckoleCard' },
+  { id: 'w2', title: 'Kamat Annaleela', thumbnail: '/assets/Project/kamatannaleela.webp', url: 'https://www.kamatannaleela.com/', descriptionKey: 'tKamatAnnaleelaCard' },
   { id: 'w3', title: 'Sourberry', thumbnail: '/assets/Project/sourberry.webp', url: 'https://www.sourberryentertainment.com/' },
   { id: 'w4', title: 'Camorent', thumbnail: '/assets/Project/camorent.webp', url: 'https://www.camorent.com/' },
   { id: 'w7', title: 'Nxtgen', thumbnail: '/assets/Project/nxtgenservices.webp', url: 'https://www.nxtgenservices.in/' },
@@ -47,9 +47,9 @@ export const WEBSITE_WORK = [
 ];
 
 export const APP_WORK = [
-  { id: 'a1', title: 'Golt', thumbnail: '/assets/Project/golt.webp', url: 'https://play.google.com/store/apps/details?id=com.ajmalca.client' },
-  { id: 'a2', title: 'Expenza', thumbnail: '/assets/Project/expenza.webp', url: 'https://play.google.com/store/apps/details?id=com.mohit29kr.expenza' },
-  { id: 'a3', title: 'GymBro', thumbnail: '/assets/Project/gymbro.webp', url: 'https://play.google.com/store/apps/details?id=com.binarybite.gymbro' },
+  { id: 'a1', title: 'Golt', thumbnail: '/assets/Project/golt.webp', url: 'https://play.google.com/store/apps/details?id=com.ajmalca.client', descriptionKey: 'tGoltCard' },
+  { id: 'a2', title: 'Expenza', thumbnail: '/assets/Project/expenza.webp', url: 'https://play.google.com/store/apps/details?id=com.mohit29kr.expenza', descriptionKey: 'tExpenzaCard' },
+  { id: 'a3', title: 'GymBro', thumbnail: '/assets/Project/gymbro.webp', url: 'https://play.google.com/store/apps/details?id=com.binarybite.gymbro', descriptionKey: 'tGymBroCard' },
   { id: 'a4', title: 'Andolan News', thumbnail: '/assets/Project/andolan-news.webp', url: 'https://play.google.com/store/apps/details?id=com.andolan.news.giantwheel' },
   { id: 'a5', title: 'Ai Insights', thumbnail: '/assets/Project/ai-insights.webp', url: 'https://play.google.com/store/apps/details?id=com.ai.insights' },
   { id: 'a6', title: 'Marathwada News', thumbnail: '/assets/Project/marathwada-news.webp', url: 'https://play.google.com/store/apps/details?id=com.marathwada.news' },

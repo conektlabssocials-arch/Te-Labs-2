@@ -99,6 +99,21 @@ function ProjectImage({ src, alt, placeholder }) {
   );
 }
 
+function SectionIntro({ children }) {
+  return (
+    <p
+      style={{
+        maxWidth: 760,
+        margin: "0 0 28px",
+        color: "#A99BBE",
+        font: "400 13px/1.8 'JetBrains Mono', monospace",
+      }}
+    >
+      {children}
+    </p>
+  );
+}
+
 function SocialGrid({ items, t }) {
   return (
     <div className="te-social-grid">
@@ -313,6 +328,7 @@ export default function WorkPage({ t, helpers }) {
             onHover={() => setHovered("video")}
             onLeave={() => setHovered(null)}
           />
+          <SectionIntro>{t.tCreativeVideoIntro}</SectionIntro>
           <VideoGrid items={expanded === "video" ? VIDEO_WORK : VIDEO_WORK.slice(0, 6)} />
         </section>
       ) : null}
@@ -332,6 +348,7 @@ export default function WorkPage({ t, helpers }) {
             onHover={() => setHovered("social")}
             onLeave={() => setHovered(null)}
           />
+          <SectionIntro>{t.tCreativeSocialIntro}</SectionIntro>
           <SocialGrid items={SOCIAL_WORK.slice(0, 4)} t={t} />
           {expanded === "social" ? (
             <div style={{ marginTop: 14 }}>
