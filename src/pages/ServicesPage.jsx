@@ -11,6 +11,17 @@ export default function ServicesPage({ t, go, jump }) {
     t.tSocial8,
   ]
   const webItems = [t.tWeb1, t.tWeb2, t.tWeb3, t.tWeb4, t.tWeb5, t.tWeb6, t.tWeb7, t.tWeb8]
+  const appItems = [t.tApp1, t.tApp2, t.tApp3, t.tApp4, t.tApp5, t.tApp6, t.tApp7, t.tApp8]
+  const softwareItems = [
+    t.tSoftware1,
+    t.tSoftware2,
+    t.tSoftware3,
+    t.tSoftware4,
+    t.tSoftware5,
+    t.tSoftware6,
+    t.tSoftware7,
+    t.tSoftware8,
+  ]
 
   return (
     <div>
@@ -64,6 +75,8 @@ export default function ServicesPage({ t, go, jump }) {
             ['video', t.tVideo],
             ['social', t.tSocialShort],
             ['web', t.tWeb],
+            ['apps', t.tAppDevelopment],
+            ['software', t.tSoftwareDevelopment],
           ].map(([id, label]) => (
             <button
               key={id}
@@ -95,7 +108,13 @@ export default function ServicesPage({ t, go, jump }) {
         items={socialItems}
       />
 
-      <div id="web" style={{ padding: 'clamp(44px, 6vw, 74px) clamp(20px, 4vw, 40px)' }}>
+      <div
+        id="web"
+        style={{
+          padding: 'clamp(44px, 6vw, 74px) clamp(20px, 4vw, 40px)',
+          borderBottom: '1px solid #241933',
+        }}
+      >
         <div>
           <div
             style={{
@@ -180,6 +199,21 @@ export default function ServicesPage({ t, go, jump }) {
           </button>
         </div>
       </div>
+
+      <ServiceBlock
+        id="apps"
+        index="04"
+        title={t.tAppDevelopment}
+        body={t.tAppLong}
+        items={appItems}
+      />
+      <ServiceBlock
+        id="software"
+        index="05"
+        title={t.tSoftwareDevelopment}
+        body={t.tSoftwareLong}
+        items={softwareItems}
+      />
 
       <div className="te-final">
         <div

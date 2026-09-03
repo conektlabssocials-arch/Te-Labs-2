@@ -24,9 +24,9 @@ export const META = {
         "Studio de création et de technologie à Paris. Identité de marque, sites web, films sublimés par l'IA et réseaux sociaux — une seule équipe pour tous vos points de contact.",
     },
     services: {
-      title: 'Services : réseaux sociaux, sites web & vidéo IA | TE Labs',
+      title: 'Services : web, apps, logiciels, social & vidéo IA | TE Labs',
       description:
-        "Trois services qui se renforcent : gestion des réseaux sociaux, création de sites web 3D et immersifs, et films produits par IA. Bilingue FR / EN, à Paris depuis 2024.",
+        "Sites web, applications mobiles, logiciels sur mesure, réseaux sociaux et films produits par IA. Une équipe bilingue FR / EN basée à Paris.",
     },
     work: {
       title: 'Créatif — films IA & contenus sociaux | TE Labs',
@@ -71,9 +71,9 @@ export const META = {
         'A Paris-based creative technology studio building brands that get noticed, content that is remembered and digital experiences that convert. One team, every touchpoint.',
     },
     services: {
-      title: 'Services: Social Media, Websites & AI Video | TE Labs',
+      title: 'Services: Web, Apps, Software, Social & AI Video | TE Labs',
       description:
-        'Three services that hold each other up: social media management, immersive 3D website development, and cinematic films produced with AI. Bilingual FR / EN, Paris since 2024.',
+        'Websites, mobile apps, custom software, social media and AI-produced films from one bilingual creative technology team based in Paris.',
     },
     work: {
       title: 'Creative — AI Films & Social Content | TE Labs',
@@ -158,6 +158,7 @@ export function organizationSchema(lang) {
         lang === 'fr' ? 'Gestion des réseaux sociaux' : 'Social media management',
         lang === 'fr' ? 'Création de sites web' : 'Website development',
         lang === 'fr' ? "Développement d'applications" : 'App development',
+        lang === 'fr' ? 'Développement logiciel sur mesure' : 'Custom software development',
         lang === 'fr' ? 'Vidéo IA' : 'AI video production',
       ].map((name) => ({
         '@type': 'Offer',

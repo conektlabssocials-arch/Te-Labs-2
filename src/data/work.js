@@ -36,24 +36,25 @@ export const SOCIAL_WORK = [
 ];
 
 export const WEBSITE_WORK = [
+  { id: 'w3', title: 'Sourberry', thumbnail: '/assets/Project/sourberry.webp', url: 'https://www.sourberryentertainment.com/', descriptionKey: 'tSourberryCard' },
+  { id: 'w9', title: 'SuperGem', thumbnail: '/assets/Project/supergem.webp', url: 'https://www.supergem.in/', descriptionKey: 'tSuperGemCard' },
+  { id: 'w7', title: 'Nxtgen', thumbnail: '/assets/Project/nxtgenservices.webp', url: 'https://www.nxtgenservices.in/', descriptionKey: 'tNxtgenCard' },
+  { id: 'w4', title: 'Camorent', thumbnail: '/assets/Project/camorent.webp', url: 'https://www.camorent.com/', descriptionKey: 'tCamorentWebCard' },
   { id: 'w5', title: '4th Revolution Media', thumbnail: '/assets/Project/4threvolutionmedia.webp', url: 'https://www.4threvolutionmedia.com/', descriptionKey: 'tFourthRevolutionCard' },
   { id: 'w1', title: 'Blckole', thumbnail: '/assets/Project/blckole.webp', url: 'https://www.blckole.com/', descriptionKey: 'tBlckoleCard' },
   { id: 'w2', title: 'Kamat Annaleela', thumbnail: '/assets/Project/kamatannaleela.webp', url: 'https://www.kamatannaleela.com/', descriptionKey: 'tKamatAnnaleelaCard' },
-  { id: 'w3', title: 'Sourberry', thumbnail: '/assets/Project/sourberry.webp', url: 'https://www.sourberryentertainment.com/' },
-  { id: 'w4', title: 'Camorent', thumbnail: '/assets/Project/camorent.webp', url: 'https://www.camorent.com/' },
-  { id: 'w7', title: 'Nxtgen', thumbnail: '/assets/Project/nxtgenservices.webp', url: 'https://www.nxtgenservices.in/' },
-  { id: 'w8', title: 'Mockit', thumbnail: '/assets/Project/mockit.webp', url: 'https://mockit-interview.vercel.app/' },
-  { id: 'w9', title: 'SuperGem', thumbnail: '/assets/Project/supergem.webp', url: 'https://www.supergem.in/' },
+  { id: 'w8', title: 'Mockit', thumbnail: '/assets/Project/mockit.webp', url: 'https://mockit-interview.vercel.app/', descriptionKey: 'tMockitCard' },
+  { id: 'w6', title: 'Ied india', thumbnail: '/assets/Project/iedindiaofficial.webp', url: 'https://www.iedindiaofficial.com/', descriptionKey: 'tIedIndiaCard' },
 ];
 
 export const APP_WORK = [
+  { id: 'a7', title: 'Camorent', thumbnail: '/assets/Project/camorent_app.webp', url: 'https://apps.apple.com/in/app/camorent-shoots-in-minutes/id6761368659', descriptionKey: 'tCamorentAppCard' },
+  { id: 'a5', title: 'Ai Insights', thumbnail: '/assets/Project/ai-insights.webp', url: 'https://play.google.com/store/apps/details?id=com.ai.insights', descriptionKey: 'tAiInsightsCard' },
   { id: 'a1', title: 'Golt', thumbnail: '/assets/Project/golt.webp', url: 'https://play.google.com/store/apps/details?id=com.ajmalca.client', descriptionKey: 'tGoltCard' },
   { id: 'a2', title: 'Expenza', thumbnail: '/assets/Project/expenza.webp', url: 'https://play.google.com/store/apps/details?id=com.mohit29kr.expenza', descriptionKey: 'tExpenzaCard' },
   { id: 'a3', title: 'GymBro', thumbnail: '/assets/Project/gymbro.webp', url: 'https://play.google.com/store/apps/details?id=com.binarybite.gymbro', descriptionKey: 'tGymBroCard' },
-  { id: 'a4', title: 'Andolan News', thumbnail: '/assets/Project/andolan-news.webp', url: 'https://play.google.com/store/apps/details?id=com.andolan.news.giantwheel' },
-  { id: 'a5', title: 'Ai Insights', thumbnail: '/assets/Project/ai-insights.webp', url: 'https://play.google.com/store/apps/details?id=com.ai.insights' },
-  { id: 'a6', title: 'Marathwada News', thumbnail: '/assets/Project/marathwada-news.webp', url: 'https://play.google.com/store/apps/details?id=com.marathwada.news' },
-  { id: 'a7', title: 'Camorent', thumbnail: '/assets/Project/camorent_app.webp', url: 'https://apps.apple.com/in/app/camorent-shoots-in-minutes/id6761368659' },
+  { id: 'a4', title: 'Andolan News', thumbnail: '/assets/Project/andolan-news.webp', url: 'https://play.google.com/store/apps/details?id=com.andolan.news.giantwheel', descriptionKey: 'tAndolanNewsCard' },
+  { id: 'a6', title: 'Marathwada News', thumbnail: '/assets/Project/marathwada-news.webp', url: 'https://play.google.com/store/apps/details?id=com.marathwada.news', descriptionKey: 'tMarathwadaNewsCard' },
 
 ];
 
@@ -69,10 +70,10 @@ export const TAQTONA_VIDEO = '/assets/Project/taqtona-brand-film-16x9.mp4';
 export const GLOBAL_SCHOLARSHIP_VIDEO = '/assets/Project/the-global-scholarship-brand-film-16x9 (1).mp4';
 
 export const CASE_STUDIES = [
-  { id: 'cs2', title: 'Unsliced — AI Course Assistant', thumbnail: '/assets/Project/unsliecd.webp', url: '/assets/case-studies/page-03.webp' },
-  { id: 'cs5', title: 'Usectl — Customer Pipeline', thumbnail: '/assets/Project/usectl.webp', url: '/assets/case-studies/page-06.webp' },
-  { id: 'cs7', title: 'Good Eye Society — Content Assistant', thumbnail: '/assets/Project/good_eye_society.webp', url: '/assets/case-studies/page-08.webp' },
-  { id: 'cs11', title: 'Morphcast — Executive Outreach', thumbnail: '/assets/Project/morphcast.webp', url: '/assets/case-studies/page-12.webp' },
+  { id: 'cs2', title: 'Unsliced — AI Course Assistant', thumbnail: '/assets/Project/unsliecd.webp', url: '/assets/case-studies/page-03.webp', descriptionKey: 'tUnslicedCard' },
+  { id: 'cs5', title: 'Usectl — Customer Pipeline', thumbnail: '/assets/Project/usectl.webp', url: '/assets/case-studies/page-06.webp', descriptionKey: 'tUsectlCard' },
+  { id: 'cs7', title: 'Good Eye Society — Content Assistant', thumbnail: '/assets/Project/good_eye_society.webp', url: '/assets/case-studies/page-08.webp', descriptionKey: 'tGoodEyeSocietyCard' },
+  { id: 'cs11', title: 'Morphcast — Executive Outreach', thumbnail: '/assets/Project/morphcast.webp', url: '/assets/case-studies/page-12.webp', descriptionKey: 'tMorphcastCard' },
 ];
 
 export const VIDEO_WORK = [
