@@ -66,7 +66,7 @@ export const SOFTWARE_WORK = [
 // Add the public video path here when the ConektAds walkthrough is ready.
 export const CONEKT_ADS_VIDEO = 'https://caasiefrontendstatic.s3.ap-southeast-1.amazonaws.com/CAASieWebsite/Videos/MapDemo_241205.mp4';
 export const TAQTONA_VIDEO = '/assets/Project/taqtona-brand-film-16x9.mp4';
-export const GLOBAL_SCHOLARSHIP_VIDEO = '/assets/Project/the-global-scholarship-brand-film-16x9.mp4';
+export const GLOBAL_SCHOLARSHIP_VIDEO = '/assets/Project/the-global-scholarship-brand-film-16x9 (1).mp4';
 
 export const CASE_STUDIES = [
   { id: 'cs2', title: 'Unsliced — AI Course Assistant', thumbnail: '/assets/Project/unsliecd.webp', url: '/assets/case-studies/page-03.webp' },

@@ -1,7 +1,12 @@
-import { useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { ImageSlot } from '../components/Media'
 import { APP_WORK, CASE_STUDIES, SOFTWARE_WORK, WEBSITE_WORK } from '../data/work'
 import { linkProps } from '../lib/router'
+
+const PROJECT_SECTION_STYLE = {
+  paddingTop: 'clamp(40px, 6vw, 60px)',
+  paddingBottom: 0,
+}
 
 function ProjectImage({ src, alt, placeholder }) {
   return (
@@ -28,28 +33,17 @@ function ProjectImage({ src, alt, placeholder }) {
   )
 }
 
-function SectionHeader({ n, title, count, expanded, hovered, onOpen, onHover, onLeave }) {
-  const active = hovered || expanded
-
+function SectionHeader({ n, title, count }) {
   return (
-    <button
-      type="button"
-      className="te-work-press"
-      onClick={onOpen}
-      onMouseEnter={onHover}
-      onMouseLeave={onLeave}
+    <div
       style={{
         display: 'flex',
         alignItems: 'center',
         gap: 18,
         width: '100%',
-        background: 'none',
-        border: 0,
         borderBottom: '1px solid #241933',
         padding: '0 0 18px',
         marginBottom: 26,
-        cursor: 'pointer',
-        textAlign: 'left',
       }}
     >
       <span
@@ -66,22 +60,11 @@ function SectionHeader({ n, title, count, expanded, hovered, onOpen, onHover, on
           margin: 0,
           font: '400 clamp(24px, 3.2vw, 36px) Anton, sans-serif',
           textTransform: 'uppercase',
-          color: hovered ? '#FFFFFF' : '#F4F0FA',
+          color: '#F4F0FA',
         }}
       >
         {title}
       </h2>
-      <span
-        style={{
-          font: '400 30px Anton, sans-serif',
-          color: '#C6A0FF',
-          opacity: active ? 1 : 0,
-          transform: `translateX(${active ? '0px' : '-14px'})`,
-          transition: 'opacity .18s ease, transform .18s ease',
-        }}
-      >
-        →
-      </span>
       <span style={{ flex: 1, minWidth: 20, height: 1, background: '#241933' }} />
       <span
         style={{
@@ -91,23 +74,62 @@ function SectionHeader({ n, title, count, expanded, hovered, onOpen, onHover, on
           whiteSpace: 'nowrap',
         }}
       >
-        {count}
+        {String(count).padStart(2, '0')}
       </span>
-    </button>
+      <span aria-hidden="true" style={{ color: '#C6A0FF', fontSize: 20 }}>→</span>
+    </div>
   )
 }
 
-function ProjectGrid({ items, type, t, lang, navigate }) {
+function ProjectGrid({ items, type, t, lang, navigate, label }) {
+  const railRef = useRef(null)
   const isApp = type === 'app'
   const isSoftware = type === 'software'
   const isCaseStudy = type === 'case-study'
+  const actionLabel = isCaseStudy ? t.tOpenCaseStudy : t.tOpenProject
+
+  useEffect(() => {
+    const rail = railRef.current
+    if (!rail) return undefined
+
+    const handleWheel = (event) => {
+      // Trackpads already provide native horizontal movement. Translate only
+      // a primarily vertical wheel gesture when this rail can move further.
+      if (!event.deltaY || Math.abs(event.deltaX) > Math.abs(event.deltaY)) return
+
+      const maxScrollLeft = rail.scrollWidth - rail.clientWidth
+      const movingForward = event.deltaY > 0
+      const canMove = movingForward
+        ? rail.scrollLeft < maxScrollLeft - 1
+        : rail.scrollLeft > 1
+
+      if (!canMove) return
+
+      event.preventDefault()
+      const deltaScale = event.deltaMode === 1
+        ? 24
+        : event.deltaMode === 2
+          ? rail.clientWidth
+          : 1
+      rail.scrollLeft += event.deltaY * deltaScale
+    }
+
+    rail.addEventListener('wheel', handleWheel, { passive: false })
+    return () => rail.removeEventListener('wheel', handleWheel)
+  }, [])
 
   return (
-    <div className="te-web-grid">
+    <div
+      ref={railRef}
+      className="te-tech-rail"
+      role="region"
+      aria-label={label}
+      tabIndex="0"
+    >
       {items.map((item) => {
         const card = (
           <>
-            <div style={{ border: '1px solid #2A1E3A', background: '#050308' }}>
+            <div className="te-tech-card__frame" style={{ border: '1px solid #2A1E3A', background: '#050308' }}>
             <div
               style={{
                 display: 'flex',
@@ -160,7 +182,12 @@ function ProjectGrid({ items, type, t, lang, navigate }) {
                 }}
               >
                 <span>{item.title}</span>
-                {item.url || item.page ? <span style={{ color: '#C6A0FF' }}>↗</span> : null}
+                {item.url || item.page ? (
+                  <span className="te-tech-card__action">
+                    {actionLabel}
+                    <span aria-hidden="true">{item.page ? '→' : '↗'}</span>
+                  </span>
+                ) : null}
               </div>
               {item.descriptionKey ? (
                 <p
@@ -182,7 +209,7 @@ function ProjectGrid({ items, type, t, lang, navigate }) {
           return (
             <a
               key={item.id}
-              className="te-work-lift"
+              className="te-work-lift te-tech-card"
               {...linkProps(item.page, lang, navigate)}
               aria-label={`${item.title} — ${t.tOpenProject}`}
             >
@@ -194,7 +221,7 @@ function ProjectGrid({ items, type, t, lang, navigate }) {
         return item.url ? (
           <a
             key={item.id}
-            className="te-work-lift"
+            className="te-work-lift te-tech-card"
             href={item.url}
             target="_blank"
             rel="noreferrer"
@@ -213,16 +240,6 @@ function ProjectGrid({ items, type, t, lang, navigate }) {
 }
 
 export default function TechPage({ t, lang, navigate }) {
-  const [expanded, setExpanded] = useState(null)
-  const [hovered, setHovered] = useState(null)
-  const show = (key) => expanded === null || expanded === key
-  const open = (key) => {
-    setExpanded(key)
-    window.scrollTo(0, 0)
-  }
-  const count = (visible, total) =>
-    expanded ? `${total} / ${total}` : `${visible} ${lang === 'fr' ? 'sur' : 'of'} ${total}`
-
   return (
     <div>
       <section
@@ -233,7 +250,7 @@ export default function TechPage({ t, lang, navigate }) {
           borderBottom: '1px solid #241933',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: 18, marginBottom: 20, flexWrap: 'wrap' }}>
+        <div style={{ marginBottom: 20 }}>
           <span
             style={{
               font: "500 12px 'JetBrains Mono', monospace",
@@ -243,24 +260,6 @@ export default function TechPage({ t, lang, navigate }) {
           >
             {t.tTech}
           </span>
-          {expanded ? (
-            <button
-              type="button"
-              className="te-work-press"
-              onClick={() => setExpanded(null)}
-              style={{
-                background: 'none',
-                border: '1px solid #4A2E70',
-                color: '#DCCBFF',
-                padding: '8px 14px',
-                cursor: 'pointer',
-                font: "500 10px 'JetBrains Mono', monospace",
-                letterSpacing: '.16em',
-              }}
-            >
-              ← {t.tAllTech}
-            </button>
-          ) : null}
         </div>
         <h1
           style={{
@@ -275,109 +274,25 @@ export default function TechPage({ t, lang, navigate }) {
         </h1>
       </section>
 
-      {show('websites') ? (
-        <section
-          id="websites"
-          className="te-work-pad-x"
-          style={{
-            paddingTop: 'clamp(40px, 6vw, 60px)',
-            paddingBottom: expanded === 'websites' ? 84 : 0,
-          }}
-        >
-          <SectionHeader
-            n="01"
-            title={t.tWebsites}
-            count={count(Math.min(3, WEBSITE_WORK.length), WEBSITE_WORK.length)}
-            expanded={expanded === 'websites'}
-            hovered={hovered === 'websites'}
-            onOpen={() => open('websites')}
-            onHover={() => setHovered('websites')}
-            onLeave={() => setHovered(null)}
-          />
-          <ProjectGrid items={WEBSITE_WORK.slice(0, 3)} type="website" t={t} lang={lang} navigate={navigate} />
-          {expanded === 'websites' ? (
-            <div style={{ marginTop: 14 }}>
-              <ProjectGrid items={WEBSITE_WORK.slice(3)} type="website" t={t} lang={lang} navigate={navigate} />
-            </div>
-          ) : null}
-        </section>
-      ) : null}
+      <section id="software" className="te-work-pad-x" style={PROJECT_SECTION_STYLE}>
+        <SectionHeader n="03" title={t.tSoftware} count={SOFTWARE_WORK.length} />
+        <ProjectGrid items={SOFTWARE_WORK} type="software" t={t} lang={lang} navigate={navigate} label={t.tSoftware} />
+      </section>
 
-      {show('apps') ? (
-        <section
-          id="apps"
-          className="te-work-pad-x"
-          style={{
-            paddingTop: 'clamp(40px, 6vw, 60px)',
-            paddingBottom: expanded === 'apps' ? 84 : 0,
-          }}
-        >
-          <SectionHeader
-            n="02"
-            title={t.tApps}
-            count={count(Math.min(3, APP_WORK.length), APP_WORK.length)}
-            expanded={expanded === 'apps'}
-            hovered={hovered === 'apps'}
-            onOpen={() => open('apps')}
-            onHover={() => setHovered('apps')}
-            onLeave={() => setHovered(null)}
-          />
-          <ProjectGrid items={APP_WORK.slice(0, 3)} type="app" t={t} lang={lang} navigate={navigate} />
-          {expanded === 'apps' ? (
-            <div style={{ marginTop: 14 }}>
-              <ProjectGrid items={APP_WORK.slice(3)} type="app" t={t} lang={lang} navigate={navigate} />
-            </div>
-          ) : null}
-        </section>
-      ) : null}
+      <section id="apps" className="te-work-pad-x" style={PROJECT_SECTION_STYLE}>
+        <SectionHeader n="02" title={t.tApps} count={APP_WORK.length} />
+        <ProjectGrid items={APP_WORK} type="app" t={t} lang={lang} navigate={navigate} label={t.tApps} />
+      </section>
 
-      {show('software') ? (
-        <section
-          id="software"
-          className="te-work-pad-x"
-          style={{
-            paddingTop: 'clamp(40px, 6vw, 60px)',
-            paddingBottom: expanded === 'software' ? 84 : 0,
-          }}
-        >
-          <SectionHeader
-            n="03"
-            title={t.tSoftware}
-            count={count(SOFTWARE_WORK.length, SOFTWARE_WORK.length)}
-            expanded={expanded === 'software'}
-            hovered={hovered === 'software'}
-            onOpen={() => open('software')}
-            onHover={() => setHovered('software')}
-            onLeave={() => setHovered(null)}
-          />
-          <ProjectGrid items={SOFTWARE_WORK} type="software" t={t} lang={lang} navigate={navigate} />
-        </section>
-      ) : null}
+      <section id="case-studies" className="te-work-pad-x" style={PROJECT_SECTION_STYLE}>
+        <SectionHeader n="04" title={t.tCaseStudies} count={CASE_STUDIES.length} />
+        <ProjectGrid items={CASE_STUDIES} type="case-study" t={t} lang={lang} navigate={navigate} label={t.tCaseStudies} />
+      </section>
 
-      {show('case-studies') ? (
-        <section
-          id="case-studies"
-          className="te-work-pad-x"
-          style={{ paddingTop: 'clamp(40px, 6vw, 60px)', paddingBottom: 84 }}
-        >
-          <SectionHeader
-            n="04"
-            title={t.tCaseStudies}
-            count={count(Math.min(3, CASE_STUDIES.length), CASE_STUDIES.length)}
-            expanded={expanded === 'case-studies'}
-            hovered={hovered === 'case-studies'}
-            onOpen={() => open('case-studies')}
-            onHover={() => setHovered('case-studies')}
-            onLeave={() => setHovered(null)}
-          />
-          <ProjectGrid items={CASE_STUDIES.slice(0, 3)} type="case-study" t={t} lang={lang} navigate={navigate} />
-          {expanded === 'case-studies' ? (
-            <div style={{ marginTop: 14 }}>
-              <ProjectGrid items={CASE_STUDIES.slice(3)} type="case-study" t={t} lang={lang} navigate={navigate} />
-            </div>
-          ) : null}
-        </section>
-      ) : null}
+      <section id="websites" className="te-work-pad-x" style={PROJECT_SECTION_STYLE}>
+        <SectionHeader n="01" title={t.tWebsites} count={WEBSITE_WORK.length} />
+        <ProjectGrid items={WEBSITE_WORK} type="website" t={t} lang={lang} navigate={navigate} label={t.tWebsites} />
+      </section>
     </div>
   )
 }

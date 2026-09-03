@@ -409,6 +409,94 @@ button {
   gap: 14px;
 }
 
+.te-tech-rail {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 28px) / 3);
+  gap: 14px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 4px 2px 14px;
+  scroll-snap-type: inline mandatory;
+  scroll-padding-inline: 2px;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) #1b1027;
+  -webkit-overflow-scrolling: touch;
+}
+
+.te-tech-rail > * {
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+.te-tech-card {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.te-tech-card__frame {
+  overflow: hidden;
+  transition: box-shadow 0.22s ease, transform 0.22s ease;
+}
+
+.te-tech-card__frame img {
+  transition: transform 0.32s cubic-bezier(0.22, 0.7, 0.25, 1), filter 0.22s ease;
+}
+
+.te-tech-card__action {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-left: auto;
+  padding-bottom: 2px;
+  border-bottom: 1px solid rgba(198, 160, 255, 0.45);
+  color: #c6a0ff;
+  font: 600 9px 'JetBrains Mono', monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.te-tech-card__action > span {
+  transition: transform 0.2s ease;
+}
+
+.te-tech-card:hover .te-tech-card__frame,
+.te-tech-card:focus-visible .te-tech-card__frame {
+  box-shadow: 0 0 0 1px var(--accent), 0 16px 36px rgba(139, 47, 248, 0.14);
+}
+
+.te-tech-card:hover .te-tech-card__frame img,
+.te-tech-card:focus-visible .te-tech-card__frame img {
+  transform: scale(1.018);
+  filter: brightness(1.06);
+}
+
+.te-tech-card:hover .te-tech-card__action,
+.te-tech-card:focus-visible .te-tech-card__action {
+  border-color: #fff;
+  color: #fff;
+}
+
+.te-tech-card:hover .te-tech-card__action > span,
+.te-tech-card:focus-visible .te-tech-card__action > span {
+  transform: translateX(3px);
+}
+
+.te-tech-rail::-webkit-scrollbar {
+  height: 5px;
+}
+
+.te-tech-rail::-webkit-scrollbar-track {
+  background: #1b1027;
+}
+
+.te-tech-rail::-webkit-scrollbar-thumb {
+  background: var(--accent);
+}
+
 /* Portrait films frame two wide films in each feature row. The remaining
    work continues as a four-column landscape grid. */
 .te-video-collage {
@@ -468,6 +556,7 @@ button {
 .te-final {
   background: var(--accent);
   padding: clamp(36px, 6vw, 60px) var(--pad-x);
+  margin-top: clamp(40px, 6vw, 60px);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -571,6 +660,10 @@ button {
   .te-web-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .te-tech-rail {
+    grid-auto-columns: calc((100% - 14px) / 2);
+  }
 }
 
 @media (max-width: 720px) {
@@ -628,6 +721,10 @@ button {
 
   .te-web-grid {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .te-tech-rail {
+    grid-auto-columns: min(86vw, 360px);
   }
 }
 
