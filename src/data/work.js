@@ -48,9 +48,9 @@ export const APP_WORK = [
 ];
 
 export const SOFTWARE_WORK = [
-  { id: 'sw1', title: 'ConektAds', thumbnail: '/assets/Project/Conekt_Ads.webp', page: 'conektAds', descriptionKey: 'tConektCard' },
-  { id: 'sw2', title: 'Taqtona', thumbnail: '/assets/Project/taqtona.webp', page: 'taqtona', descriptionKey: 'tTaqtonaCard' },
-  { id: 'sw3', title: 'The Global Scholarship', thumbnail: '/assets/Project/global-scholarship.webp', page: 'globalScholarship', descriptionKey: 'tGlobalScholarshipCard' },
+  { id: 'sw1', title: 'ConektAds', thumbnail: '/assets/Project/Conekt_Ads.webp', descriptionKey: 'tConektCard' },
+  { id: 'sw2', title: 'Taqtona', thumbnail: '/assets/Project/taqtona.webp', descriptionKey: 'tTaqtonaCard' },
+  { id: 'sw3', title: 'The Global Scholarship', thumbnail: '/assets/Project/global-scholarship.webp', descriptionKey: 'tGlobalScholarshipCard' },
 ];
 
 // Add the public video path here when the ConektAds walkthrough is ready.
