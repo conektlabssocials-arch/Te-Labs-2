@@ -143,7 +143,9 @@ export default function App({ url }) {
       {page === 'services' && (
         <ServicesPage t={t} go={go} jump={jump} />
       )}
-      {page === 'work' && <WorkPage t={t} helpers={workHelpers} />}
+      {page === 'work' && (
+        <WorkPage t={t} helpers={workHelpers} lang={lang} navigate={navigate} />
+      )}
       {page === 'tech' && <TechPage t={t} lang={lang} navigate={navigate} />}
       {page === 'conektAds' && <ConektAdsPage t={t} lang={lang} navigate={navigate} />}
       {page === 'taqtona' && <TaqtonaPage t={t} lang={lang} navigate={navigate} />}

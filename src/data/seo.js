@@ -29,14 +29,14 @@ export const META = {
         "Sites web, applications mobiles, logiciels sur mesure, réseaux sociaux et films produits par IA. Une équipe bilingue FR / EN basée à Paris.",
     },
     work: {
-      title: 'Créatif — films IA & contenus sociaux | TE Labs',
+      title: 'Créatif — sites web, films IA & contenus sociaux | TE Labs',
       description:
-        "Nos réalisations créatives récentes : films de marque produits par IA et contenus pour les réseaux sociaux. Découvrez le travail livré par le studio TE Labs.",
+        "Nos réalisations créatives récentes : sites web, films de marque produits par IA et contenus pour les réseaux sociaux. Découvrez le travail livré par le studio TE Labs.",
     },
     tech: {
-      title: 'Tech — sites web, applications & logiciels | TE Labs',
+      title: 'Tech — applications, logiciels & automatisation IA | TE Labs',
       description:
-        "Découvrez les sites web, applications, logiciels et études de cas de TE Labs : des expériences rapides, soignées et pensées pour convertir.",
+        "Découvrez les applications, logiciels sur mesure et automatisations IA de TE Labs : des produits simples, soignés et pensés pour des résultats concrets.",
     },
     conektAds: {
       title: "ConektAds — logiciel de gestion d'affichage extérieur | TE Labs",
@@ -76,14 +76,14 @@ export const META = {
         'Websites, mobile apps, custom software, social media and AI-produced films from one bilingual creative technology team based in Paris.',
     },
     work: {
-      title: 'Creative — AI Films & Social Content | TE Labs',
+      title: 'Creative — Websites, AI Films & Social Content | TE Labs',
       description:
-        'Recent creative work grouped by service: AI-produced brand films and social content. See what the TE Labs studio has delivered for ambitious brands.',
+        'Recent creative work grouped by service: websites, AI-produced brand films and social content. See what the TE Labs studio has delivered for ambitious brands.',
     },
     tech: {
-      title: 'Tech — Websites, Apps & Software | TE Labs',
+      title: 'Tech — Apps, Software & AI Automation | TE Labs',
       description:
-        'Explore websites, apps, software and case studies from TE Labs: fast, polished digital products shaped around users and business results.',
+        'Explore apps, custom software and AI automation from TE Labs: simple, polished digital products shaped around users and measurable business results.',
     },
     conektAds: {
       title: 'ConektAds — Outdoor Advertising Management Software | TE Labs',

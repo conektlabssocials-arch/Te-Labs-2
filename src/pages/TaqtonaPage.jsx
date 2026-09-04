@@ -8,7 +8,6 @@ export default function TaqtonaPage(props) {
       copyPrefix="Taqtona"
       imageSrc="/assets/Project/taqtona.webp"
       videoSrc={TAQTONA_VIDEO}
-      externalUrl="https://taqtona.com/"
     />
   )
 }

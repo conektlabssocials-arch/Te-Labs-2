@@ -1,5 +1,6 @@
 import { AutoVideo, ImageSlot } from '../components/Media'
-import { SOCIAL_WORK, VIDEO_WORK } from '../data/work'
+import ProjectGrid from '../components/ProjectGrid'
+import { SOCIAL_WORK, VIDEO_WORK, WEBSITE_WORK } from '../data/work'
 
 function SectionHeader({ n, title, count, expanded, hovered, onOpen, onHover, onLeave }) {
   const active = hovered || expanded;
@@ -246,7 +247,7 @@ function VideoGrid({ items }) {
   );
 }
 
-export default function WorkPage({ t, helpers }) {
+export default function WorkPage({ t, helpers, lang, navigate }) {
   // App owns this state and hands it down as `helpers`; alias it to the names used below.
   const {
     expanded,
@@ -355,6 +356,33 @@ export default function WorkPage({ t, helpers }) {
               <SocialGrid items={SOCIAL_WORK.slice(4)} t={t} />
             </div>
           ) : null}
+        </section>
+      ) : null}
+
+      {show("websites") ? (
+        <section
+          className="te-work-pad-x"
+          style={{ paddingTop: "clamp(40px, 6vw, 60px)", paddingBottom: 84 }}
+        >
+          <SectionHeader
+            n="01"
+            title={t.tWebsites}
+            count={countLabel(WEBSITE_WORK.length, WEBSITE_WORK.length)}
+            expanded={expanded === "websites"}
+            hovered={hovered === "websites"}
+            onOpen={() => openWork("websites")}
+            onHover={() => setHovered("websites")}
+            onLeave={() => setHovered(null)}
+          />
+          <SectionIntro>{t.tWebsitesIntro}</SectionIntro>
+          <ProjectGrid
+            id="website-projects"
+            items={WEBSITE_WORK}
+            type="website"
+            t={t}
+            lang={lang}
+            navigate={navigate}
+          />
         </section>
       ) : null}
 

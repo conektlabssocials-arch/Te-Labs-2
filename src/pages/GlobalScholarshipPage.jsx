@@ -8,7 +8,6 @@ export default function GlobalScholarshipPage(props) {
       copyPrefix="GlobalScholarship"
       imageSrc="/assets/Project/global-scholarship.webp"
       videoSrc={GLOBAL_SCHOLARSHIP_VIDEO}
-      externalUrl="https://www.theglobalscholarship.org/"
     />
   )
 }

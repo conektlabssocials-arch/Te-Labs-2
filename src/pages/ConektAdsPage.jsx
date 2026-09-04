@@ -343,8 +343,10 @@ export function SoftwareDetailPage({
             color: '#9C8CB4',
           }}
         >
-          <span style={{ color: '#C6A0FF' }}>{copy('BuiltFor')}: </span>
-          {copy('BuiltForBody')}
+          <span style={{ color: '#C6A0FF' }}>{copy('BuiltFor')}</span>
+          {copy('BuiltForBody')
+            ? `${lang === 'fr' ? ' : ' : ': '}${copy('BuiltForBody')}`
+            : null}
         </div>
       </section>
     </main>
