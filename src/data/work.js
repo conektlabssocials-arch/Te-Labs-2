@@ -48,7 +48,7 @@ export const APP_WORK = [
 ];
 
 export const SOFTWARE_WORK = [
-  { id: 'sw1', title: 'ConektAds', thumbnail: '/assets/Project/Conekt_Ads.webp', descriptionKey: 'tConektCard' },
+  { id: 'sw1', title: 'ConektAds', thumbnail: '/assets/Project/Conekt_Ads.webp', url: 'https://caasiefrontendstatic.s3.ap-southeast-1.amazonaws.com/CAASieWebsite/Videos/MapDemo_241205.mp4', descriptionKey: 'tConektCard' },
   { id: 'sw2', title: 'Taqtona', thumbnail: '/assets/Project/taqtona.webp', url: 'https://taqtona.com/', descriptionKey: 'tTaqtonaCard' },
   { id: 'sw3', title: 'The Global Scholarship', thumbnail: '/assets/Project/global-scholarship.webp', url: 'https://www.theglobalscholarship.org/', descriptionKey: 'tGlobalScholarshipCard' },
 ];
