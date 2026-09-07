@@ -45,7 +45,12 @@ export default function ProjectGrid({ id, items, type, t, lang, navigate }) {
               ? t.tAltApp
               : t.tAltWeb
 
-        const action = item.contact ? (
+        const action = item.url || item.page ? (
+          <span className="te-tech-card__action">
+            {actionLabel}
+            <span aria-hidden="true">{item.page ? '→' : '↗'}</span>
+          </span>
+        ) : item.contact ? (
           <a
             className="te-tech-card__action"
             href={CONTACT_URL}
@@ -54,11 +59,6 @@ export default function ProjectGrid({ id, items, type, t, lang, navigate }) {
             {t.tPortfolioContact}
             <span aria-hidden="true">→</span>
           </a>
-        ) : item.url || item.page ? (
-          <span className="te-tech-card__action">
-            {actionLabel}
-            <span aria-hidden="true">{item.page ? '→' : '↗'}</span>
-          </span>
         ) : null
 
         const card = (
