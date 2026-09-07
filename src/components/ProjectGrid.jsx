@@ -166,6 +166,21 @@ export default function ProjectGrid({ id, items, type, t, lang, navigate }) {
           )
         }
 
+        if (item.contact) {
+          return (
+            <article key={item.id} className="te-work-lift te-tech-card te-tech-card--split">
+              <a
+                className="te-tech-card__card-link"
+                href={item.caseStudy || item.thumbnail}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`${item.title} — ${t.tOpenCaseStudy}`}
+              />
+              {card}
+            </article>
+          )
+        }
+
         return (
           <article key={item.id} className="te-work-lift te-tech-card te-tech-card--static">
             {card}

@@ -419,6 +419,21 @@ button {
   cursor: default;
 }
 
+.te-tech-card--split {
+  position: relative;
+}
+
+.te-tech-card__card-link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.te-tech-card--split .te-tech-card__action {
+  position: relative;
+  z-index: 2;
+}
+
 .te-tech-card__frame {
   overflow: hidden;
   transition: box-shadow 0.22s ease, transform 0.22s ease;

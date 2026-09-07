@@ -59,9 +59,9 @@ export const TAQTONA_VIDEO = '/assets/Project/taqtona-brand-film-16x9.mp4';
 export const GLOBAL_SCHOLARSHIP_VIDEO = '/assets/Project/the-global-scholarship-brand-film-16x9 (1).mp4';
 
 export const CASE_STUDIES = [
-  { id: 'cs2', title: 'Unsliced', thumbnail: '/assets/Project/unsliecd.webp', descriptionKey: 'tUnslicedCard', contact: true },
-  { id: 'cs5', title: 'Usectl', thumbnail: '/assets/Project/usectl.webp', descriptionKey: 'tUsectlCard', contact: true },
-  { id: 'cs11', title: 'MorphCast', thumbnail: '/assets/Project/morphcast.webp', descriptionKey: 'tMorphcastCard', contact: true },
+  { id: 'cs2', title: 'Unsliced', thumbnail: '/assets/Project/unsliecd.webp', caseStudy: '/assets/case-studies/page-03.webp', descriptionKey: 'tUnslicedCard', contact: true },
+  { id: 'cs5', title: 'Usectl', thumbnail: '/assets/Project/usectl.webp', caseStudy: '/assets/case-studies/page-06.webp', descriptionKey: 'tUsectlCard', contact: true },
+  { id: 'cs11', title: 'MorphCast', thumbnail: '/assets/Project/morphcast.webp', caseStudy: '/assets/case-studies/page-12.webp', descriptionKey: 'tMorphcastCard', contact: true },
 ];
 
 export const VIDEO_WORK = [
