@@ -42,15 +42,15 @@ export const WEBSITE_WORK = [
 ];
 
 export const APP_WORK = [
-  { id: 'a5', title: 'AI Insights', thumbnail: '/assets/Project/ai-insights.webp', descriptionKey: 'tAiInsightsCard', contact: true },
-  { id: 'a7', title: 'Camorent', thumbnail: '/assets/Project/camorent_app.webp', descriptionKey: 'tCamorentAppCard', contact: true },
-  { id: 'a2', title: 'Expenza', thumbnail: '/assets/Project/expenza.webp', descriptionKey: 'tExpenzaCard', contact: true },
+  { id: 'a5', title: 'AI Insights', thumbnail: '/assets/Project/ai-insights.webp', url: 'https://play.google.com/store/apps/details?id=com.ai.insights', descriptionKey: 'tAiInsightsCard', contact: true },
+  { id: 'a7', title: 'Camorent', thumbnail: '/assets/Project/camorent_app.webp', url: 'https://apps.apple.com/in/app/camorent-shoots-in-minutes/id6761368659', descriptionKey: 'tCamorentAppCard', contact: true },
+  { id: 'a2', title: 'Expenza', thumbnail: '/assets/Project/expenza.webp', url: 'https://play.google.com/store/apps/details?id=com.mohit29kr.expenza', descriptionKey: 'tExpenzaCard', contact: true },
 ];
 
 export const SOFTWARE_WORK = [
   { id: 'sw1', title: 'ConektAds', thumbnail: '/assets/Project/Conekt_Ads.webp', descriptionKey: 'tConektCard' },
-  { id: 'sw2', title: 'Taqtona', thumbnail: '/assets/Project/taqtona.webp', descriptionKey: 'tTaqtonaCard' },
-  { id: 'sw3', title: 'The Global Scholarship', thumbnail: '/assets/Project/global-scholarship.webp', descriptionKey: 'tGlobalScholarshipCard' },
+  { id: 'sw2', title: 'Taqtona', thumbnail: '/assets/Project/taqtona.webp', url: 'https://taqtona.com/', descriptionKey: 'tTaqtonaCard' },
+  { id: 'sw3', title: 'The Global Scholarship', thumbnail: '/assets/Project/global-scholarship.webp', url: 'https://www.theglobalscholarship.org/', descriptionKey: 'tGlobalScholarshipCard' },
 ];
 
 // Add the public video path here when the ConektAds walkthrough is ready.
